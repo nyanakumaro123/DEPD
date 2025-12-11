@@ -11,9 +11,7 @@
                 <span class="text-white drop-shadow-md" style="-webkit-text-stroke: 1px #888;">P</span><span class="text-gray-500">ath</span><span class="text-yellow-400 drop-shadow-sm" style="-webkit-text-stroke: 1px #b89200;">Loka</span>
             </h1>
             <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2b4c8c] leading-tight">
-                A place <br>
-                to find your <br>
-                career path
+                A place <br> to find your <br> career path
             </h2>
         </div>
 
@@ -24,18 +22,16 @@
                     Login - <span class="text-yellow-400">UMKM</span>
                 </h3>
 
-                <form action="" class="space-y-6">
+                <form action="{{ route('process.umkm') }}" method="POST" class="space-y-6">
+                    @csrf
                     
                     <div>
                         <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Email</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-                                    <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
                             </div>
-                            <input type="email" placeholder="UMKMName@outlook.com" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input type="email" name="email" placeholder="UMKMName@outlook.com" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                         </div>
                     </div>
 
@@ -43,12 +39,10 @@
                         <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Password</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 relative transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
                             </div>
                             
-                            <input id="login_password" type="password" placeholder="********" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input id="login_password" type="password" name="password" placeholder="********" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                             
                             <button type="button" onclick="togglePassword()" class="pr-3 text-gray-400 hover:text-[#355dad] focus:outline-none transition-colors">
                                 <svg id="eye_open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
@@ -64,10 +58,10 @@
 
                     <div class="text-sm text-white pt-2">
                         Don't have an account? 
-                        <a href="/register-umkm" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Register</a>
+                        <a href="{{ route('register.umkm') }}" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Register</a>
                     </div>
 
-                    <button type="button" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">
+                    <button type="submit" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">
                         Login
                     </button>
                 </form>

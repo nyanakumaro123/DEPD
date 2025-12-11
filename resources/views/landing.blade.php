@@ -17,11 +17,11 @@
             </h2>
 
             <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start mt-10">
-                <a href="/login-pelamar" class="px-8 py-4 bg-[#8da4d0] hover:bg-[#a0b6e0] text-white font-bold text-xl rounded-2xl shadow-lg transform transition hover:scale-105 text-center w-full sm:w-auto border border-white/30 backdrop-blur-sm">
+                <a href="{{ route('login.pelamar') }}" class="px-8 py-4 bg-[#8da4d0] hover:bg-[#a0b6e0] text-white font-bold text-xl rounded-2xl shadow-lg transform transition hover:scale-105 text-center w-full sm:w-auto border border-white/30 backdrop-blur-sm">
                     Job Seeker
                 </a>
 
-                <a href="/login-umkm" class="px-8 py-4 bg-[#8da4d0] hover:bg-[#a0b6e0] text-white font-bold text-xl rounded-2xl shadow-lg transform transition hover:scale-105 text-center w-full sm:w-auto border border-white/30 backdrop-blur-sm">
+                <a href="{{ route('login.umkm') }}" class="px-8 py-4 bg-[#8da4d0] hover:bg-[#a0b6e0] text-white font-bold text-xl rounded-2xl shadow-lg transform transition hover:scale-105 text-center w-full sm:w-auto border border-white/30 backdrop-blur-sm">
                     UMKM Owner
                 </a>
             </div>

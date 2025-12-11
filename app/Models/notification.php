@@ -13,7 +13,6 @@ class notification extends Model
     protected $table = 'attendances';
 
     protected $fillable = [
-        'notification_id',
         'user_id',
         'description',
     ];
