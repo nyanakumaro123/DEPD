@@ -64,7 +64,7 @@
 
                     <div class="text-sm text-white pt-2">
                         Don't have an account? 
-                        <a href="/register" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Register</a>
+                        <a href="/register-pelamar" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Register</a>
                     </div>
 
                     <button type="button" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">

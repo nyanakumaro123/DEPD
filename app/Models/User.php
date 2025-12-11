@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'isUMKM', // Pelamar atau UMKM
+        'UMKM_name'
     ];
 
     /**
@@ -41,8 +43,10 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            //'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
+
+    // ====== Relationship ======
 }
