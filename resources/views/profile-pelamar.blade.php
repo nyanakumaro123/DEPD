@@ -42,7 +42,7 @@
             
             <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div class="h-64 w-64 lg:h-80 lg:w-80 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                    <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('imag/user_profile.webp') }}" 
                          alt="Profile Picture" 
                          class="h-full w-full object-cover">
                 </div>

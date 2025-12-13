@@ -16,7 +16,10 @@ class PelamarProfileController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        return view('profile-pelamar', compact('profile'));
+        return view('profile-pelamar', [
+            'profile' => $profile,
+            'headerTitle' => $profile->user->name . " Profile"
+        ]);
     }
 
     public function edit($userId)
@@ -31,7 +34,11 @@ class PelamarProfileController extends Controller
 
         $majors = Major::orderBy('name')->get();
 
-        return view('edit-profile-pelamar', compact('profile', 'majors'));
+        return view('edit-profile-pelamar', [
+            'profile' => $profile,
+            'majors' => $majors,
+            'headerTitle' => 'Edit Profile'
+        ]);
     }
 
     public function update(Request $request, $userId)
@@ -43,7 +50,8 @@ class PelamarProfileController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
-            'portfolio' => 'nullable|file|mimes:pdf|max:2048', // optional PDF upload
+            'profile_photo' => 'nullable|image|max:5120',
+            'portfolio' => 'nullable|file|mimes:pdf|max:5120', // optional PDF upload
         ]);
 
         $profile = PelamarProfile::where('user_id', $userId)->firstOrFail();
@@ -57,6 +65,19 @@ class PelamarProfileController extends Controller
 
         // Update major_id
         $profile->update(['major_id' => $validated['major_id'] ?? $profile->major_id]);
+
+        // Handle profile photo upload (if present)
+        if ($request->hasFile('profile_photo')) {
+            $file = $request->file('profile_photo');
+            $filename = time().'_'.$file->getClientOriginalName();
+            
+            // Save to storage/app/public/profile_pictures
+            $file->storeAs('public/profile_pictures', $filename);
+            
+            // Update user profile
+            $user->update(['profile' => $filename]);
+        }
+
 
         // Handle PDF upload (if present)
         if ($request->hasFile('portfolio')) {

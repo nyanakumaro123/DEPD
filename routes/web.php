@@ -3,13 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PelamarProfileController;
-
-
+use App\Http\Controllers\MainController;
 
 // --- 1. LANDING PAGE ---
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [MainController::class, 'landing']);
 
 // --- 2. JALUR PELAMAR (JOB SEEKER) ---
 // Halaman Login & Register

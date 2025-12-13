@@ -41,7 +41,7 @@
                 
                 <div class="lg:col-span-4 flex flex-col items-center">
                     <div class="h-64 w-64 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white mb-6 relative group">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                        <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('img/user_profile.webp') }}" 
                              alt="Profile Picture" 
                              class="h-full w-full object-cover group-hover:opacity-75 transition">
                         
@@ -50,9 +50,11 @@
                         </div>
                     </div>
 
-                    <button type="button" class="bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-2 px-6 rounded-lg shadow-md transition w-full max-w-[200px]">
+                    <label for="profilePhotoInput" class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-2 px-6 rounded-lg shadow-md transition w-full max-w-[200px] text-center">
                         Edit Profile Photo
-                    </button>
+                    </label>
+                    <input type="file" name="profile_photo" id="profilePhotoInput" class="hidden" accept="image/*">
+
                 </div>
 
                 <div class="lg:col-span-8 space-y-6">
@@ -121,6 +123,21 @@ document.getElementById('portfolioInput').addEventListener('change', function ()
         fileNameSpan.textContent = 'No file selected';
     }
 });
+</script>
+
+<script>
+    const profileInput = document.getElementById('profilePhotoInput');
+    const profileImg = document.querySelector('.group img');
+
+    profileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profileImg.src = e.target.result;
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
 </script>
 
 @endsection
