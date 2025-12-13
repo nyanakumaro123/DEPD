@@ -23,9 +23,9 @@ class PelamarProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function major_id(): BelongsTo
+    public function major(): BelongsTo
     {
-        return $this->belongsTo(Major::class);
+        return $this->belongsTo(Major::class, 'major_id');
     }
 
 }

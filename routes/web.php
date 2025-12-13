@@ -29,9 +29,8 @@ Route::get('/home-pelamar', function () {
 Route::get('/profile-pelamar/{userId}', [PelamarProfileController::class, 'show'])
     ->name('profile.pelamar');
 
-Route::get('/edit-profile-pelamar', function () {
-    return view('edit-profile-pelamar');
-})->name('edit-profile.pelamar');
+Route::get('/edit-profile-pelamar/{userId}', [PelamarProfileController::class, 'edit'])
+    ->name('edit-profile.pelamar');
 // --- JALUR PELAMAR (JOB SEEKER) ---
 
 // PROSES FORM (LOGIKA DUMMY)
@@ -40,9 +39,8 @@ Route::post('/process-pelamar', function () {
     return redirect()->route('home.pelamar');
 })->name('process.pelamar');
 
-Route::post('/save-profile-pelamar', function () {
-    return redirect()->route('profile.pelamar');
-})->name('save.profile.pelamar');
+Route::post('/save-profile-pelamar/{userId}', [PelamarProfileController::class, 'update'])
+    ->name('save-profile.pelamar');
 
 
 // --- 3. JALUR UMKM (OWNER) ---

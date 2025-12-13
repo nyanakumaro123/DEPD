@@ -35,7 +35,7 @@
         
         <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Edit Profile</h1>
 
-        <form action="{{ route('save.profile.pelamar') }}" method="POST" enctype="multipart/form-data"> @csrf
+        <form action="{{ route('save-profile.pelamar', $profile->user->id) }}" method="POST" enctype="multipart/form-data"> @csrf
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 
@@ -59,24 +59,32 @@
                     
                     <div class="space-y-2">
                         <label class="block text-[#355dad] font-bold text-xl">Name</label>
-                        <input type="text" value="KucingMauMakan" 
+                        <input type="text" name="name" value="{{ $profile->user->name }}" 
                                class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad] placeholder-blue-300">
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="space-y-2">
                             <label class="block text-[#355dad] font-bold text-xl">Major</label>
-                            <input type="text" value="VCD / DKV" 
-                                   class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
+                            <select name="major_id"
+                                    class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
+                                <option value="">-- Select Major --</option>
+                                @foreach ($majors as $major)
+                                    <option value="{{ $major->id }}"
+                                        {{ $profile->major_id == $major->id ? 'selected' : '' }}>
+                                        {{ $major->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="space-y-2">
                             <label class="block text-[#355dad] font-bold text-xl">Contact</label>
-                            <input type="text" value="08126523895" 
+                            <input type="text" name="contact" value="08126523895" 
                                    class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
                         </div>
                         <div class="space-y-2">
                             <label class="block text-[#355dad] font-bold text-xl">Email</label>
-                            <input type="email" value="Kucing@gmail.com" 
+                            <input type="email" name="email" value="{{ $profile->user->email }}" 
                                    class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
                         </div>
                     </div>
@@ -84,10 +92,10 @@
                     <div class="pt-4 flex items-center gap-4">
                         <label class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6 rounded-lg shadow-md transition transform active:scale-95">
                             Upload Portofolio (PDF)
-                            <input type="file" class="hidden" accept=".pdf">
+                            <input type="file" name="portfolio" id="portfolioInput" class="hidden" accept=".pdf">
                         </label>
                         
-                        <span class="text-[#c4a484] font-bold text-lg">Nkkkdendd.pdf</span>
+                        <span id="portfolioName" class="text-[#c4a484] font-bold text-lg">No File Selected</span>
                     </div>
 
                 </div>
@@ -102,4 +110,17 @@
         </form>
     </div>
 </div>
+
+<script>
+document.getElementById('portfolioInput').addEventListener('change', function () {
+    const fileNameSpan = document.getElementById('portfolioName');
+
+    if (this.files && this.files.length > 0) {
+        fileNameSpan.textContent = this.files[0].name;
+    } else {
+        fileNameSpan.textContent = 'No file selected';
+    }
+});
+</script>
+
 @endsection

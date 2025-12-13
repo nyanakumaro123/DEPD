@@ -14,7 +14,7 @@
             <div class="hidden md:flex space-x-8 text-white font-bold text-lg">
                 <a href="{{ route('home.pelamar') }}" class="hover:text-yellow-400 transition underline decoration-2 underline-offset-4">Home</a>
                 
-                <a href="{{ route('profile.pelamar') }}" class="hover:text-yellow-400 transition">Profile</a>
+                <a href="{{ route('profile.pelamar', 1) }}" class="hover:text-yellow-400 transition">Profile</a>
                 
                 <a href="#" class="hover:text-yellow-400 transition">Explore</a>
                 <a href="#" class="hover:text-yellow-400 transition">Workspace</a>
@@ -30,7 +30,7 @@
                     </div>
                 </button>
 
-                <a href="{{ route('profile.pelamar') }}" class="h-10 w-10 rounded-full overflow-hidden border-2 border-white cursor-pointer hover:border-yellow-400 transition">
+                <a href="{{ route('profile.pelamar', 1) }}" class="h-10 w-10 rounded-full overflow-hidden border-2 border-white cursor-pointer hover:border-yellow-400 transition">
                     <img src="https://i.pravatar.cc/150?img=5" alt="User Profile" class="h-full w-full object-cover">
                 </a>
             </div>
