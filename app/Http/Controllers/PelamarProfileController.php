@@ -18,7 +18,8 @@ class PelamarProfileController extends Controller
 
         return view('profile-pelamar', [
             'profile' => $profile,
-            'headerTitle' => $profile->user->name . " Profile"
+            'headerTitle' => $profile->user->name . " Profile",
+            'user' => User::find($userId)
         ]);
     }
 
@@ -37,7 +38,8 @@ class PelamarProfileController extends Controller
         return view('edit-profile-pelamar', [
             'profile' => $profile,
             'majors' => $majors,
-            'headerTitle' => 'Edit Profile'
+            'headerTitle' => 'Edit Profile',
+            'user' => User::find($userId)
         ]);
     }
 

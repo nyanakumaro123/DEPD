@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PelamarProfileController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UMKMProfileController;
 
 // --- 1. LANDING PAGE ---
 Route::get('/', [MainController::class, 'landing']);
@@ -19,9 +20,8 @@ Route::get('/register-pelamar', function () {
 })->name('register.pelamar');
 
 // Halaman Home & Profile
-Route::get('/home-pelamar', function () {
-    return view('home-pelamar');
-})->name('home.pelamar');
+Route::get('/home-pelamar', [MainController::class, 'pelamarHome'])
+    ->name('home.pelamar');
 
 Route::get('/profile-pelamar/{userId}', [PelamarProfileController::class, 'show'])
     ->name('profile.pelamar');
@@ -51,13 +51,14 @@ Route::get('/register-umkm', function () {
 })->name('register.umkm');
 
 // Halaman Home & Profile
-Route::get('/home-umkm', function () {
-    return view('home-umkm');
-})->name('home.umkm');
+Route::get('/home-umkm', [MainController::class, 'umkmHome'])
+    ->name('home.umkm');
 
-Route::get('/profile-umkm', function () {
-    return view('profile-umkm');
-})->name('profile.umkm');
+Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
+    ->name('profile.umkm');
+
+// Route::get('/edit-profile-pelamar/{userId}', [PelamarProfileController::class, 'edit'])
+//     ->name('edit-profile.pelamar');
 
 Route::get('/edit-profile-umkm', function () {
     return view('edit-profile-umkm');
