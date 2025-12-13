@@ -51,13 +51,13 @@
             <div class="lg:col-span-8 space-y-8">
                 
                 <div>
-                    <h2 class="text-5xl font-bold text-[#355dad] mb-6 font-serif">KucingMauMakan</h2>
+                    <h2 class="text-5xl font-bold text-[#355dad] mb-6 font-serif"> {{ $profile->user->name ?? 'Nama' }} </h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                         <div class="space-y-1">
                             <label class="text-[#355dad] font-bold text-lg">Major</label>
                             <div class="bg-[#e0e7ff] text-[#355dad] font-semibold py-3 px-4 rounded-lg shadow-sm border border-blue-100">
-                                VCD / DKV
+                                {{ $profile->major_id->name ?? 'No Major' }}
                             </div>
                         </div>
                         <div class="space-y-1">
@@ -69,7 +69,7 @@
                         <div class="space-y-1">
                             <label class="text-[#355dad] font-bold text-lg">Email</label>
                             <div class="bg-[#e0e7ff] text-[#355dad] font-semibold py-3 px-4 rounded-lg shadow-sm border border-blue-100 truncate">
-                                Kucing@gmail.com
+                                {{ $profile->user->email ?? 'No Email' }}
                             </div>
                         </div>
                     </div>

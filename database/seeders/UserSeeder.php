@@ -14,21 +14,21 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Pelamar = false
-        User::factory()->create([
+        User::create([
             'name' => 'NamaMahasiswa',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'role' => false,
-            'profile' => 'cat.png'
+            'profile' => 'cat.jpg'
         ]);
 
         // UMKM = true
-        User::factory()->create([
+        User::create([
             'name' => 'Restomie',
             'email' => 'restomie@example.com',
             'password' => bcrypt('passworda'),
             'role' => true,
-            'profile' => 'cat.png'
+            'profile' => 'cat.jpg'
         ]);
     }
 }

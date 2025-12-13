@@ -24,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role', // Pelamar atau UMKM
-        'profile'
+        'profile', // avatar / image
     ];
 
     /**

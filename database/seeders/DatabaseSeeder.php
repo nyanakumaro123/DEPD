@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         // Untuk panggil seluruh seed
         $this->call([
             UserSeeder::class,
+            MajorSeeder::class,
             PelamarProfileSeeder::class,
         ]);
     }

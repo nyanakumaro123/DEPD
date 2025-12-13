@@ -14,14 +14,18 @@ class PelamarProfile extends Model
 
     protected $fillable = [
         'user_id',
-        'major',
+        'major_id',
         'portfolio',
-        'certificate'
+        //'certificate'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function major_id(): BelongsTo
+    {
+        return $this->belongsTo(Major::class);
     }
 
 }

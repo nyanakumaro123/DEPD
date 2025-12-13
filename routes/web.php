@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PelamarProfileController;
+
+
+
 // --- 1. LANDING PAGE ---
 Route::get('/', function () {
     return view('landing');
@@ -22,9 +26,8 @@ Route::get('/home-pelamar', function () {
     return view('home-pelamar');
 })->name('home.pelamar');
 
-Route::get('/profile-pelamar', function () {
-    return view('profile-pelamar');
-})->name('profile.pelamar');
+Route::get('/profile-pelamar/{userId}', [PelamarProfileController::class, 'show'])
+    ->name('profile.pelamar');
 
 Route::get('/edit-profile-pelamar', function () {
     return view('edit-profile-pelamar');
