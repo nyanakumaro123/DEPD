@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'role' => false,
-            'profile' => 'cat.jpg'
+            'profile' => null
         ]);
 
         // UMKM = true
@@ -28,10 +28,10 @@ class UserSeeder extends Seeder
             'email' => 'restomie@example.com',
             'password' => bcrypt('passworda'),
             'role' => true,
-            'profile' => 'cat.jpg'
+            'profile' => null
         ]);
 
-        // Pelamar = false
+        // Dummy Pelamar untuk rating
         User::create([
             'name' => 'Jolteon',
             'email' => 'jolteon@example.com',

@@ -57,12 +57,11 @@ Route::get('/home-umkm', [MainController::class, 'umkmHome'])
 Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
     ->name('profile.umkm');
 
-// Route::get('/edit-profile-umkm/{userId}', [UMKMProfileController::class, 'edit'])
-//     ->name('edit-profile.umkm');
+Route::get('/edit-profile-umkm/{userId}', [UMKMProfileController::class, 'edit'])
+    ->name('edit-profile.umkm');
 
-Route::get('/edit-profile-umkm', function () {
-    return view('edit-profile-umkm');
-})->name('edit-profile.umkm');
+Route::post('/save-profile-umkm/{userId}', [UMKMProfileController::class, 'update'])
+    ->name('save-profile.umkm');
 // --- JALUR UMKM (OWNER) ---
 
 // PROSES FORM (LOGIKA DUMMY)

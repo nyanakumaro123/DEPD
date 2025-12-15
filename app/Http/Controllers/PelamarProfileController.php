@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\PelamarProfile;
 use App\Models\Major;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class PelamarProfileController extends Controller
 {
@@ -70,11 +71,14 @@ class PelamarProfileController extends Controller
 
         // Handle profile photo upload (if present)
         if ($request->hasFile('profile_photo')) {
+
+            if ($user->profile && Storage::exists('public/profile_pictures/' . $user->profile)) {
+            Storage::delete('public/profile_pictures/' . $user->profile);
+        }
+
             $file = $request->file('profile_photo');
             $filename = time().'_'.$file->getClientOriginalName();
-            
-            // Save to storage/app/public/profile_pictures
-            $file->storeAs('public/profile_pictures', $filename);
+            $file->storeAs('public/profile_pictures', $filename); // Save to storage/app/public/profile_pictures
             
             // Update user profile
             $user->update(['profile' => $filename]);
@@ -83,6 +87,11 @@ class PelamarProfileController extends Controller
 
         // Handle PDF upload (if present)
         if ($request->hasFile('portfolio')) {
+            // Delete old portfolio if exists
+            if ($profile->portfolio && Storage::exists('public/portfolio/' . $profile->portfolio)) {
+                Storage::delete('public/portfolio/' . $profile->portfolio);
+            }
+
             $file = $request->file('portfolio');
             $filename = time().'_'.$file->getClientOriginalName();
             $file->storeAs('public/portfolio', $filename);
