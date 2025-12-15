@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UmkmProjectController;
 
 // --- 1. LANDING PAGE ---
 Route::get('/', function () {
@@ -63,6 +64,16 @@ Route::get('/profile-umkm', function () {
 Route::get('/edit-profile-umkm', function () {
     return view('edit-profile-umkm');
 })->name('edit-profile.umkm');
+
+Route::get('/project-umkm', function () {
+    return view('project-umkm');
+})->name('project.umkm');
+
+Route::get('/umkm/project/create', [UmkmProjectController::class, 'create'])
+    ->name('project.create.umkm');
+
+Route::post('/umkm/project/store', [UmkmProjectController::class, 'store'])
+    ->name('project.store.umkm');
 
 // PROSES FORM (LOGIKA DUMMY)
 // Ketika klik Login/Register UMKM -> Masuk ke Home UMKM
