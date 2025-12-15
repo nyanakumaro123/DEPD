@@ -75,6 +75,14 @@ Route::get('/umkm/project/create', [UmkmProjectController::class, 'create'])
 Route::post('/umkm/project/store', [UmkmProjectController::class, 'store'])
     ->name('project.store.umkm');
 
+Route::get('/request-umkm', function () {
+    return view('request-umkm');
+})->name('request.umkm');
+
+Route::get('/detail-request-umkm', function () {
+    return view('detail-request-umkm');
+})->name('detail.request.umkm');
+    
 // PROSES FORM (LOGIKA DUMMY)
 // Ketika klik Login/Register UMKM -> Masuk ke Home UMKM
 Route::post('/process-umkm', function () {
