@@ -30,5 +30,14 @@ class UserSeeder extends Seeder
             'role' => true,
             'profile' => 'cat.jpg'
         ]);
+
+        // Pelamar = false
+        User::create([
+            'name' => 'Jolteon',
+            'email' => 'jolteon@example.com',
+            'password' => bcrypt('passwordz'),
+            'role' => false,
+            'profile' => null
+        ]);
     }
 }

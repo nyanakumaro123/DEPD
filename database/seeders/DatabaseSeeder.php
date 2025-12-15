@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MajorSeeder::class,
             PelamarProfileSeeder::class,
+            UMKMProfileSeeder::class,
+            RatingSeeder::class,
         ]);
     }
 }

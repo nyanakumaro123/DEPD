@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-[#fff8f0] font-sans pb-20 relative">
 
-    @extends('layouts.navbar')
+    @include('layouts.navbar')
 
     <div class="max-w-7xl mx-auto p-6 pt-10">
         

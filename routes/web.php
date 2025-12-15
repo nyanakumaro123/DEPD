@@ -57,8 +57,8 @@ Route::get('/home-umkm', [MainController::class, 'umkmHome'])
 Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
     ->name('profile.umkm');
 
-// Route::get('/edit-profile-pelamar/{userId}', [PelamarProfileController::class, 'edit'])
-//     ->name('edit-profile.pelamar');
+// Route::get('/edit-profile-umkm/{userId}', [UMKMProfileController::class, 'edit'])
+//     ->name('edit-profile.umkm');
 
 Route::get('/edit-profile-umkm', function () {
     return view('edit-profile-umkm');

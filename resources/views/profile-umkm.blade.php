@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-[#fff8f0] font-sans pb-20 relative">
 
-    @extends('layouts.navbar')
+    @include('layouts.navbar')
 
     <div class="max-w-7xl mx-auto p-6 pt-10">
         
@@ -21,7 +21,7 @@
 
             <div class="lg:col-span-8 space-y-8">
                 
-                <h2 class="text-5xl font-bold text-[#355dad] mb-2 font-serif">Restomie</h2>
+                <h2 class="text-5xl font-bold text-[#355dad] mb-2 font-serif">{{ $profile->umkm_name }}</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
@@ -56,49 +56,48 @@
 
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-[#355dad]">
-                            Rating <span class="text-[#dcbfa6] text-lg">★3.5/5</span>
+                            Rating
+                            <span class="text-[#dcbfa6] text-lg">
+                                ★ {{ number_format($profile->ratings_avg_score ?? 0, 1) }}/5
+                                ({{ $profile->ratings_count }})
+                            </span>
                         </h3>
                         
-                        <div class="bg-[#d1fae5] border border-green-300 rounded-full px-4 py-2 flex justify-between items-center shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/150?img=5" class="h-8 w-8 rounded-full border border-green-400">
-                                <span class="text-green-800 font-bold text-sm">NamaSiswa</span>
-                            </div>
-                            <span class="text-green-800 font-bold text-sm">★ 4.5/5</span>
-                        </div>
+                        @forelse ($profile->ratings as $rating)
+                            @php
+                                $isGood = $rating->score >= 4;
+                            @endphp
 
-                        <div class="bg-[#fee2e2] border border-red-300 rounded-full px-4 py-2 flex justify-between items-center shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-8 w-8 rounded-full border border-red-400">
-                                <span class="text-red-800 font-bold text-sm">KucingMauMakan</span>
-                            </div>
-                            <span class="text-red-800 font-bold text-sm">★ 1/5</span>
-                        </div>
+                            <div class="rounded-full px-4 py-2 flex justify-between items-center shadow-sm
+                                {{ $isGood ? 'bg-[#d1fae5] border border-green-300' : 'bg-[#fee2e2] border border-red-300' }}">
 
-                        <div class="bg-[#d1fae5] border border-green-300 rounded-full px-4 py-2 flex justify-between items-center shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/150?img=12" class="h-8 w-8 rounded-full border border-green-400">
-                                <span class="text-green-800 font-bold text-sm">NamaMahasiswa</span>
-                            </div>
-                            <span class="text-green-800 font-bold text-sm">★ 4.5/5</span>
-                        </div>
+                                <div class="flex items-center gap-3">
+                                    <img src="{{ $rating->user->profile
+                                        ? asset('storage/profile_pictures/' . $rating->user->profile)
+                                        : 'https://i.pravatar.cc/150' }}"
+                                        class="h-8 w-8 rounded-full border
+                                        {{ $isGood ? 'border-green-400' : 'border-red-400' }}">
 
-                         <div class="bg-[#d1fae5] border border-green-300 rounded-full px-4 py-2 flex justify-between items-center shadow-sm">
-                            <div class="flex items-center gap-3">
-                                <img src="https://i.pravatar.cc/150?img=8" class="h-8 w-8 rounded-full border border-green-400">
-                                <span class="text-green-800 font-bold text-sm">NamaMahasiswa</span>
+                                    <span class="font-bold text-sm
+                                        {{ $isGood ? 'text-green-800' : 'text-red-800' }}">
+                                        {{ $rating->user->name }}
+                                    </span>
+                                </div>
+
+                                <span class="font-bold text-sm
+                                    {{ $isGood ? 'text-green-800' : 'text-red-800' }}">
+                                    ★ {{ $rating->score }}/5
+                                </span>
                             </div>
-                            <span class="text-green-800 font-bold text-sm">★ 4.5/5</span>
-                        </div>
-                    </div>
+                        @empty
+                            <p class="text-gray-500 text-sm">No ratings yet.</p>
+                        @endforelse
+
                 </div>
 
-                <div class="mt-8">
-                    <h3 class="text-xl font-bold text-[#355dad] mb-2">Deskripsi UMKM</h3>
-                    <p class="text-[#bcaaa4] font-medium leading-relaxed">
-                        Tulis disini deskripsideskripsideskripsideskripsideskripsid eskripsideskripsideskrdeskripsideskripsideskr ipsideskripsidekripsideskripsideskripsideskrdeskripsideskripsideskripsid eskripsideskripsideskripsideskripsideskrdeskripsideskripsideskripsideskr ipsideskripsideskripsideskripsideskrdeskripsideskripsideskripsi
-                    </p>
-                </div>
+                <p class="text-[#bcaaa4] font-medium leading-relaxed">
+                    {{ $umkm->description ?? 'No description available.' }}
+                </p>
 
             </div>
         </div>
