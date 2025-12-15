@@ -41,6 +41,10 @@ Route::post('/save-profile-pelamar', function () {
     return redirect()->route('profile.pelamar');
 })->name('save.profile.pelamar');
 
+Route::get('/request-pelamar', function () {
+    return view('request-pelamar');
+})->name('request.pelamar');
+
 
 // --- 3. JALUR UMKM (OWNER) ---
 // Halaman Login & Register
