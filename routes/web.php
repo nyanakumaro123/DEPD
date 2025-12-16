@@ -1,98 +1,116 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\UmkmApplicationController;
 use App\Http\Controllers\UmkmProjectController;
 
-// --- 1. LANDING PAGE ---
+/*
+|--------------------------------------------------------------------------
+| PUBLIC ROUTES (NO AUTH)
+|--------------------------------------------------------------------------
+*/
+
+// ================== LANDING ==================
 Route::get('/', function () {
-    return view('landing');
+    return view('welcome');
 });
 
-// --- 2. JALUR PELAMAR (JOB SEEKER) ---
-// Halaman Login & Register
-Route::get('/login-pelamar', function () {
-    return view('login-pelamar');
-})->name('login.pelamar');
+// ================== AUTH ==================
 
-Route::get('/register-pelamar', function () {
-    return view('register-pelamar');
-})->name('register.pelamar');
+// LOGIN
+Route::get('/login/pelamar', [AuthController::class, 'loginPelamar'])
+    ->name('login.pelamar');
 
-// Halaman Home & Profile
-Route::get('/home-pelamar', function () {
-    return view('home-pelamar');
-})->name('home.pelamar');
+Route::get('/login/umkm', [AuthController::class, 'loginUmkm'])
+    ->name('login.umkm');
 
-Route::get('/profile-pelamar', function () {
-    return view('profile-pelamar');
-})->name('profile.pelamar');
+// REGISTER
+Route::get('/register/pelamar', [AuthController::class, 'registerPelamar'])
+    ->name('register.pelamar');
 
-Route::get('/edit-profile-pelamar', function () {
-    return view('edit-profile-pelamar');
-})->name('edit-profile.pelamar');
+Route::get('/register/umkm', [AuthController::class, 'registerUmkm'])
+    ->name('register.umkm');
 
-// PROSES FORM (LOGIKA DUMMY)
-// Ketika klik Login/Register Pelamar -> Masuk ke Home Pelamar
-Route::post('/process-pelamar', function () {
-    return redirect()->route('home.pelamar');
-})->name('process.pelamar');
+// PROCESS LOGIN & REGISTER
+Route::post('/login/pelamar', [AuthController::class, 'processLoginPelamar'])
+    ->name('process.login.pelamar');
 
-Route::post('/save-profile-pelamar', function () {
-    return redirect()->route('profile.pelamar');
-})->name('save.profile.pelamar');
+Route::post('/login/umkm', [AuthController::class, 'processLoginUmkm'])
+    ->name('process.login.umkm');
 
-Route::get('/request-pelamar', function () {
-    return view('request-pelamar');
-})->name('request.pelamar');
+Route::post('/register/pelamar', [AuthController::class, 'processRegisterPelamar'])
+    ->name('process.pelamar');
+
+Route::post('/register/umkm', [AuthController::class, 'processRegisterUmkm'])
+    ->name('process.umkm');
+
+// LOGOUT
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->name('logout');
 
 
-// --- 3. JALUR UMKM (OWNER) ---
-// Halaman Login & Register
-Route::get('/login-umkm', function () {
-    return view('login-umkm');
-})->name('login.umkm');
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATED ROUTES
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/register-umkm', function () {
-    return view('register-umkm');
-})->name('register.umkm');
+Route::middleware(['auth'])->group(function () {
 
-// Halaman Home & Profile
-Route::get('/home-umkm', function () {
-    return view('home-umkm');
-})->name('home.umkm');
+    // ================== PELAMAR ==================
+    Route::middleware(['role:pelamar'])->group(function () {
 
-Route::get('/profile-umkm', function () {
-    return view('profile-umkm');
-})->name('profile.umkm');
+        // HOME
+        Route::get('/home/pelamar', function () {
+            return view('pelamar.home');
+        })->name('home.pelamar');
 
-Route::get('/edit-profile-umkm', function () {
-    return view('edit-profile-umkm');
-})->name('edit-profile.umkm');
+        // APPLY PROJECT
+        Route::post('/apply/{project}',
+            [ApplicationController::class, 'apply'])
+            ->name('apply.project');
 
-Route::get('/project-umkm', function () {
-    return view('project-umkm');
-})->name('project.umkm');
+        // LIST APPLICATIONS
+        Route::get('/pelamar/applications',
+            [ApplicationController::class, 'index'])
+            ->name('pelamar.applications');
+    });
 
-Route::get('/umkm/project/create', [UmkmProjectController::class, 'create'])
-    ->name('project.create.umkm');
 
-Route::post('/umkm/project/store', [UmkmProjectController::class, 'store'])
-    ->name('project.store.umkm');
+    // ================== UMKM ==================
+    Route::middleware(['role:umkm'])->group(function () {
 
-Route::get('/request-umkm', function () {
-    return view('request-umkm');
-})->name('request.umkm');
+        // HOME
+        Route::get('/home/umkm', function () {
+            return view('umkm.home');
+        })->name('home.umkm');
 
-Route::get('/detail-request-umkm', function () {
-    return view('detail-request-umkm');
-})->name('detail.request.umkm');
-    
-// PROSES FORM (LOGIKA DUMMY)
-// Ketika klik Login/Register UMKM -> Masuk ke Home UMKM
-Route::post('/process-umkm', function () {
-    return redirect()->route('home.umkm');
-})->name('process.umkm');
+        // ================== PROJECT ==================
+        Route::get('/umkm/projects',
+            [UmkmProjectController::class, 'index'])
+            ->name('umkm.project.index');
 
-Route::post('/save-profile-umkm', function () {
-    return redirect()->route('profile.umkm');
-})->name('save.profile.umkm');
+        Route::get('/umkm/projects/create',
+            [UmkmProjectController::class, 'create'])
+            ->name('umkm.project.create');
+
+        Route::post('/umkm/projects',
+            [UmkmProjectController::class, 'store'])
+            ->name('umkm.project.store');
+
+        // ================== APPLICATION ==================
+        Route::get('/umkm/applications',
+            [UmkmApplicationController::class, 'index'])
+            ->name('umkm.applications');
+
+        Route::post('/umkm/application/{application}/accept',
+            [UmkmApplicationController::class, 'accept'])
+            ->name('umkm.application.accept');
+
+        Route::post('/umkm/application/{application}/reject',
+            [UmkmApplicationController::class, 'reject'])
+            ->name('umkm.application.reject');
+    });
+});
