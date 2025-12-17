@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UmkmProjectController;
 
 // --- 1. LANDING PAGE ---
 Route::get('/', function () {
@@ -64,6 +65,10 @@ Route::post('/save-profile-pelamar', function () {
     return redirect()->route('profile.pelamar');
 })->name('save.profile.pelamar');
 
+Route::get('/request-pelamar', function () {
+    return view('request-pelamar');
+})->name('request.pelamar');
+
 
 // --- 3. JALUR UMKM (OWNER) ---
 // Halaman Login & Register
@@ -89,7 +94,24 @@ Route::get('/edit-profile-umkm', function () {
     return view('edit-profile-umkm');
 })->name('edit-profile.umkm');
 
+Route::get('/project-umkm', function () {
+    return view('project-umkm');
+})->name('project.umkm');
 
+Route::get('/umkm/project/create', [UmkmProjectController::class, 'create'])
+    ->name('project.create.umkm');
+
+Route::post('/umkm/project/store', [UmkmProjectController::class, 'store'])
+    ->name('project.store.umkm');
+
+Route::get('/request-umkm', function () {
+    return view('request-umkm');
+})->name('request.umkm');
+
+Route::get('/detail-request-umkm', function () {
+    return view('detail-request-umkm');
+})->name('detail.request.umkm');
+    
 // PROSES FORM (LOGIKA DUMMY)
 // Ketika klik Login/Register UMKM -> Masuk ke Home UMKM
 Route::post('/process-umkm', function () {
