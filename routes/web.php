@@ -7,6 +7,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
+
 // --- 2. JALUR PELAMAR (JOB SEEKER) ---
 // Halaman Login & Register
 Route::get('/login-pelamar', function () {
@@ -16,6 +17,7 @@ Route::get('/login-pelamar', function () {
 Route::get('/register-pelamar', function () {
     return view('register-pelamar');
 })->name('register.pelamar');
+
 
 // Halaman Home & Profile
 Route::get('/home-pelamar', function () {
@@ -29,6 +31,28 @@ Route::get('/profile-pelamar', function () {
 Route::get('/edit-profile-pelamar', function () {
     return view('edit-profile-pelamar');
 })->name('edit-profile.pelamar');
+
+
+// Halaman Explore, Detail Projek & Apply Projek
+Route::get('/explore', function () {
+    return view('explore');
+})->name('explore');
+
+Route::get('/detail-projek', function () {
+    return view('detail-projek');
+})->name('detail.projek');
+
+Route::get('/apply-projek', function () {
+    return view('apply-projek');
+})->name('apply.projek');
+
+
+// Halaman Notifikasi
+Route::get('/notifikasi', function () {
+    return view('notifikasi');
+})->name('notifikasi'); 
+
+
 
 // PROSES FORM (LOGIKA DUMMY)
 // Ketika klik Login/Register Pelamar -> Masuk ke Home Pelamar
@@ -51,6 +75,7 @@ Route::get('/register-umkm', function () {
     return view('register-umkm');
 })->name('register.umkm');
 
+
 // Halaman Home & Profile
 Route::get('/home-umkm', function () {
     return view('home-umkm');
@@ -63,6 +88,7 @@ Route::get('/profile-umkm', function () {
 Route::get('/edit-profile-umkm', function () {
     return view('edit-profile-umkm');
 })->name('edit-profile.umkm');
+
 
 // PROSES FORM (LOGIKA DUMMY)
 // Ketika klik Login/Register UMKM -> Masuk ke Home UMKM

@@ -16,7 +16,7 @@
                 
                 <a href="{{ route('profile.pelamar') }}" class="hover:text-yellow-400 transition">Profile</a>
                 
-                <a href="#" class="hover:text-yellow-400 transition">Explore</a>
+                <a href="{{ route('explore') }}" class="hover:text-yellow-400 transition">Explore</a>
                 <a href="#" class="hover:text-yellow-400 transition">Workspace</a>
                 <a href="#" class="hover:text-yellow-400 transition">Request</a>
             </div>

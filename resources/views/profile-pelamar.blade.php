@@ -14,7 +14,7 @@
             <div class="hidden md:flex space-x-8 text-white font-bold text-lg">
                 <a href="/home-pelamar" class="hover:text-yellow-400 transition">Home</a>
                 <a href="/profile-pelamar" class="text-white border-b-2 border-white hover:text-yellow-400 transition">Profile</a>
-                <a href="#" class="hover:text-yellow-400 transition">Explore</a>
+                <a href="/explore" class="hover:text-yellow-400 transition">Explore</a>
                 <a href="#" class="hover:text-yellow-400 transition">Workspace</a>
                 <a href="#" class="hover:text-yellow-400 transition">Request</a>
             </div>
