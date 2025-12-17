@@ -3,17 +3,13 @@
 @section('content')
 <div class="min-h-screen bg-[#fff8f0] font-sans">
 
-    {{-- Navigasi Bar --}}
-    <x-navbar-umkm />
+    @include('layouts.navbar')
 
-    {{-- Konten Utama (Grid) --}}
     <div class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {{-- Kolom Kiri: Lamaran --}}
         <div class="lg:col-span-4 space-y-4">
             <h2 class="text-2xl font-bold text-[#355dad] font-serif">Lamaran</h2>
             
-            {{-- Kartu Lamaran 1 (Accepted) --}}
             <div class="bg-[#d1fae5] border border-green-300 rounded-xl p-3 flex justify-between items-center shadow-sm hover:shadow-md transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <img src="https://i.pravatar.cc/150?img=5" alt="Employee" class="h-10 w-10 rounded-full object-cover border border-green-200">
@@ -22,7 +18,6 @@
                 <span class="text-green-700 font-bold text-sm">accepted</span>
             </div>
 
-            {{-- Kartu Lamaran 2 (Pending) --}}
             <div class="bg-[#e0e7ff] border border-blue-200 rounded-xl p-3 flex justify-between items-center shadow-sm hover:shadow-md transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <img src="https://i.pravatar.cc/150?img=9" alt="Diana" class="h-10 w-10 rounded-full object-cover border border-blue-200">
@@ -35,12 +30,10 @@
         </div>
 
 
-        {{-- Kolom Kanan: Project List --}}
         <div class="lg:col-span-8 space-y-6">
             
             <div class="flex items-center gap-3">
                 <h2 class="text-2xl font-bold text-[#355dad] font-serif">Project List</h2>
-                {{-- Tombol Edit/Pencil --}}
                 <button class="bg-[#355dad] text-white p-1.5 rounded-md hover:bg-[#2a4a8b] transition shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                         <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
@@ -48,7 +41,6 @@
                 </button>
             </div>
 
-            {{-- Kartu Proyek 1 --}}
             <div class="bg-[#f2e6d8] rounded-xl p-4 shadow-md flex flex-col md:flex-row gap-5 border border-[#e6d0b8] hover:shadow-lg transition">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" 
                      alt="Project Ramen" 
@@ -62,7 +54,6 @@
                 </div>
             </div>
 
-            {{-- Kartu Proyek 2 --}}
             <div class="bg-[#f2e6d8] rounded-xl p-4 shadow-md flex flex-col md:flex-row gap-5 border border-[#e6d0b8] hover:shadow-lg transition">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" 
                      alt="Project Ramen" 
@@ -76,7 +67,6 @@
                 </div>
             </div>
 
-            {{-- Kartu Proyek 3 --}}
              <div class="bg-[#f2e6d8] rounded-xl p-4 shadow-md flex flex-col md:flex-row gap-5 border border-[#e6d0b8] hover:shadow-lg transition">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" 
                      alt="Project Ramen" 

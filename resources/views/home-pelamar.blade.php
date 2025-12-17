@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-[#fff8f0] font-sans">
 
-    <x-navbar-pelamar />
+    @include('layouts.navbar')
 
     <div class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         

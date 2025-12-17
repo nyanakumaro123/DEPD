@@ -5,28 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UmkmProfile extends Model
+class PelamarProfile extends Model
 {
     use HasFactory;
 
-    protected $table = 'umkm_profiles';
+    protected $table = 'pelamar_profiles';
 
     protected $fillable = [
         'user_id',
-        'umkm_name',
-        'description',
+        'major_id',
+        'portfolio',
+        //'certificate'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-
-    public function ratings(): HasMany
+    public function major(): BelongsTo
     {
-        return $this->hasMany(Rating::class, 'umkm_profile_id');
+        return $this->belongsTo(Major::class, 'major_id');
     }
 
 }
+
+//php artisan make:seeder PelamarProfileSeeder
+
+//php artisan db:seed
+//php artisan migrate:fresh --seed
