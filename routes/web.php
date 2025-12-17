@@ -16,9 +16,7 @@ use App\Http\Controllers\UmkmProjectController;
 */
 
 // ================== LANDING ==================
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', [MainController::class, 'landing']);
 
 
 
@@ -77,10 +75,8 @@ Route::get('/apply-projek', function () {
 
 
 // Halaman Notifikasi
-Route::get('/notifikasi', function () {
-    return view('notifikasi');
-})->name('notifikasi'); 
-
+Route::get('/notifikasi', [MainController::class, 'notifikasi'])
+    ->name('notifikasi');
 
 
 // PROCESS LOGIN & REGISTER  (Route::POST)

@@ -10,10 +10,14 @@ class notification extends Model
 {
     use HasFactory;
 
-    protected $table = 'attendances';
-
     protected $fillable = [
         'user_id',
+        'title',
         'description',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

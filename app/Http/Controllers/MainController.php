@@ -16,7 +16,7 @@ class MainController extends Controller
 
     public function umkmHome()
     {
-        $user = User::find(2); //Auth::id();
+        $user = Auth::id();
         
         return view('home-umkm', [
             'headerTitle' => 'UMKM Dashboard - PathLoka',
@@ -26,10 +26,20 @@ class MainController extends Controller
 
     public function pelamarHome()
     {
-        $user = User::find(1); //Auth::id();
+        $user = Auth::id();
 
         return view('home-pelamar', [
             'headerTitle' => 'Pelamar Dashboard - PathLoka',
+            'user' => $user
+        ]);
+    }
+
+    public function notifikasi()
+    {
+        $user = Auth::id();
+
+        return view('notifikasi', [
+            'headerTitle' => 'Notifikasi',
             'user' => $user
         ]);
     }
