@@ -54,7 +54,7 @@ class PelamarProfileController extends Controller
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
             'profile_photo' => 'nullable|image|max:5120',
-            'portfolio' => 'nullable|file|mimes:pdf|max:5120', // optional PDF upload
+            'portfolio' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // optional PDF upload
         ]);
 
         $profile = PelamarProfile::where('user_id', $userId)->firstOrFail();
