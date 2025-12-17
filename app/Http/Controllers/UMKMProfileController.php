@@ -27,9 +27,9 @@ class UMKMProfileController extends Controller
 
     public function edit($userId)
     {
-        // if (Auth::id() != $userId) {
-        //     abort(403, 'Unauthorized');
-        // }
+        if (Auth::id() != $userId) {
+            abort(403, 'Unauthorized');
+        }
 
         $profile = UMKMProfile::with(['user'])
             ->where('user_id', $userId)
@@ -44,9 +44,9 @@ class UMKMProfileController extends Controller
 
     public function update(Request $request, $userId)
     {
-        // if (Auth::id() != $userId) {
-        //     abort(403, 'Unauthorized');
-        // }
+        if (Auth::id() != $userId) {
+            abort(403, 'Unauthorized');
+        }
         
         $request->validate([
             'umkm_name' => 'required|string|max:255',

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Major;
+use App\Models\PelamarProfile;
 use App\Models\User;
 use App\Models\UmkmProfile;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function registerPelamar(Request $request)
+    public function processRegisterPelamar(Request $request)
     {
         $data = $request->validate([
             'name'=>'required',
@@ -23,10 +25,16 @@ class AuthController extends Controller
             'role'=>'pelamar'
         ]);
 
+        PelamarProfile::create([
+            'user_id'=>User::where('email',$data['email'])->first()->id,
+            'major_id'=>Major::first()->id,
+            'portfolio'=>null
+        ]);
+
         return redirect()->back()->with('success','Pelamar berhasil register');
     }
 
-    public function registerUmkm(Request $request)
+    public function processRegisterUmkm(Request $request)
     {
         $data = $request->validate([
             'name'=>'required',

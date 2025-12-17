@@ -26,9 +26,9 @@ class PelamarProfileController extends Controller
 
     public function edit($userId)
     {
-        // if (Auth::id() != $userId) {
-        //     abort(403, 'Unauthorized');
-        // }
+        if (Auth::id() != $userId) {
+            abort(403, 'Unauthorized');
+        }
 
         $profile = PelamarProfile::with(['user', 'major'])
             ->where('user_id', $userId)
@@ -46,9 +46,9 @@ class PelamarProfileController extends Controller
 
     public function update(Request $request, $userId)
     {
-        // if (Auth::id() != $userId) {
-        //     abort(403, 'Unauthorized');
-        // }
+        if (Auth::id() != $userId) {
+            abort(403, 'Unauthorized');
+        }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',

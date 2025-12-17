@@ -14,6 +14,7 @@ class MajorSeeder extends Seeder
     public function run(): void
     {
         Major::insert([
+            ['name' => 'Not Specified'],
             ['name' => 'Computer Science'],
             ['name' => 'Visual Communication Design'],
             ['name' => 'Information Systems'],

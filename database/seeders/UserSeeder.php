@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'NamaMahasiswa',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
-            'role' => false,
+            'role' => 'pelamar',
             'profile' => null
         ]);
 
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'name' => 'Restomie',
             'email' => 'restomie@example.com',
             'password' => bcrypt('passworda'),
-            'role' => true,
+            'role' => 'umkm',
             'profile' => null
         ]);
 
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'name' => 'Jolteon',
             'email' => 'jolteon@example.com',
             'password' => bcrypt('passwordz'),
-            'role' => false,
+            'role' => 'pelamar',
             'profile' => null
         ]);
     }
