@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Project extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'umkm_id','title','category','rewards',
+        'time_start','time_end',
+        'salary_amount','salary_frequency','currency',
+        'description','syarat_path'
+    ];
+
+    protected $casts = [
+        'rewards' => 'array'
+    ];
+
+    public function umkm()
+    {
+        return $this->belongsTo(User::class, 'umkm_id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+}

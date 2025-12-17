@@ -2,53 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UmkmProjectController extends Controller
 {
-    // Fungsi untuk menampilkan form (Handler untuk route 'project.create.umkm')
-    public function create()
+    public function index()
     {
-        // Pastikan view ini ada di resources/views/umkm/project/create.blade.php
-        return view('umkm.project.create'); 
+        $projects = Project::where('umkm_id', Auth::id()) // ✅ FIX
+            ->get();
+
+        return view('umkm.project.index', compact('projects'));
     }
 
-    // Fungsi untuk menyimpan data (Handler untuk route 'project.store.umkm')
+    public function create()
+    {
+        return view('umkm.project.create');
+    }
+
     public function store(Request $request)
     {
-        // 1. Validasi Data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'category' => 'required|string',
-            'rewards' => 'nullable|array',
-            'time_start' => 'required|date_format:H:i',
-            'time_end' => 'required|date_format:H:i|after:time_start',
-            'salary_amount' => 'required|numeric|min:1000',
-            'salary_frequency' => 'required|in:per_hour,per_day,total',
-            'currency' => 'required|string|max:10',
-            'description' => 'required|string',
-            'syarat_file' => 'nullable|file|mimes:pdf,docx,zip|max:5120', // Max 5MB
+        $data = $request->validate([
+            'title'            => 'required',
+            'category'         => 'required',
+            'rewards'          => 'nullable|array',
+            'time_start'       => 'required',
+            'time_end'         => 'required|after:time_start',
+            'salary_amount'    => 'required|numeric',
+            'salary_frequency' => 'required',
+            'currency'         => 'required',
+            'description'      => 'required',
+            'syarat_file'      => 'nullable|file|max:5120'
         ]);
 
-        // 2. Upload File (Jika ada)
-        $filePath = null;
         if ($request->hasFile('syarat_file')) {
-            // Simpan file di storage/app/public/syarat_proyek
-            $filePath = $request->file('syarat_file')->store('syarat_proyek', 'public');
+            $data['syarat_path'] =
+                $request->file('syarat_file')->store('syarat', 'public');
         }
 
-        // 3. Logika Penyimpanan Data ke Database (Model Project)
-        // Anda perlu model Project untuk langkah ini:
-        /* Project::create([
-            'title' => $validatedData['title'],
-            // ... field lainnya ...
-            'syarat_path' => $filePath, 
-            // ...
-        ]);
-        */
+        $data['umkm_id'] = Auth::id(); // ✅ FIX
 
-        // 4. Redirect
-        return redirect()->route('home.umkm')->with('success', 'Proyek berhasil dibuat dan menunggu persetujuan!');
+        Project::create($data);
+
+        return redirect()
+            ->route('umkm.project.index')
+            ->with('success', 'Project berhasil dibuat');
     }
 }
