@@ -11,9 +11,7 @@
                 <span class="text-white drop-shadow-md" style="-webkit-text-stroke: 1px #888;">P</span><span class="text-gray-500">ath</span><span class="text-yellow-400 drop-shadow-sm" style="-webkit-text-stroke: 1px #b89200;">Loka</span>
             </h1>
             <h2 class="text-4xl lg:text-5xl font-extrabold text-[#2b4c8c] leading-tight">
-                A place <br>
-                to find your <br>
-                career path
+                A world or place <br> to find your <br> career path
             </h2>
         </div>
 
@@ -24,43 +22,39 @@
                     Register - <span class="text-yellow-400">UMKM</span>
                 </h3>
 
-                <form action="" class="space-y-4">
+                <form action="{{ route('process.umkm') }}" method="POST" class="space-y-4">
+                    @csrf
                     
                     <div>
                         <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Email</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-                                    <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
                             </div>
-                            <input type="email" placeholder="XXXX@yyy.com" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input type="email" name="email" placeholder="XXXX@yyy.com" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Name</label>
+                        <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Nama</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
                             </div>
-                            <input type="text" placeholder="Your Name" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input type="text" name="name" placeholder="Nama anda" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">UMKM Name</label>
+                        <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Nama UMKM</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
                                     <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
                                 </svg>
                             </div>
-                            <input type="text" placeholder="Your UMKM Name" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input type="text" name="umkm_name" placeholder="Nama UMKM Anda" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                         </div>
                     </div>
 
@@ -68,12 +62,10 @@
                         <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Password</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 relative transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
                             </div>
                             
-                            <input id="password" type="password" placeholder="Password" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input id="password" name="password" type="password" placeholder="Password" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                             
                             <button type="button" onclick="togglePassword('password', 'eye_open_pass', 'eye_slash_pass')" class="pr-3 text-gray-400 hover:text-[#355dad] focus:outline-none transition-colors">
                                 <svg id="eye_open_pass" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
@@ -91,12 +83,10 @@
                         <label class="block text-blue-100 text-sm font-semibold mb-1 ml-1">Confirm Password</label>
                         <div class="flex items-center bg-[#eef2ff] rounded-lg overflow-hidden h-12 focus-within:ring-2 focus-within:ring-yellow-400 relative transition-all duration-200">
                             <div class="pl-3 pr-2 text-[#355dad]">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                    <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
                             </div>
                             
-                            <input id="confirm_password" type="password" placeholder="Confirm Password" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full">
+                            <input id="confirm_password" name="password_confirmation" type="password" placeholder="Confirm Password" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
                             
                             <button type="button" onclick="togglePassword('confirm_password', 'eye_open_conf', 'eye_slash_conf')" class="pr-3 text-gray-400 hover:text-[#355dad] focus:outline-none transition-colors">
                                 <svg id="eye_open_conf" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
@@ -111,12 +101,11 @@
                     </div>
 
                     <div class="text-sm text-white pt-2">
-                        Already have an account? 
-                        <a href="/login-umkm" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Login</a>
+                        Sudah memiliki akun? <a href="{{ route('login.umkm') }}" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Login</a>
                     </div>
 
-                    <button type="button" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">
-                        Register
+                    <button type="submit" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">
+                        Daftar
                     </button>
                 </form>
 
@@ -142,4 +131,4 @@
         }
     }
 </script>
-@endsection 
+@endsection

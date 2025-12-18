@@ -8,17 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UmkmProjectController extends Controller
 {
-    public function index()
-    {
-        $projects = Project::where('umkm_id', Auth::id()) // ✅ FIX
-            ->get();
-
-        return view('umkm.project.index', compact('projects'));
-    }
 
     public function create()
     {
-        return view('umkm.project.create');
+        $projects = Project::where('umkm_id', Auth::id()) // ✅ FIX
+            ->get();
+        return view('Umkm.project-umkm', compact('projects'));
     }
 
     public function store(Request $request)
@@ -46,7 +41,7 @@ class UmkmProjectController extends Controller
         Project::create($data);
 
         return redirect()
-            ->route('umkm.project.index')
+            ->route('home.umkm')
             ->with('success', 'Project berhasil dibuat');
     }
 }

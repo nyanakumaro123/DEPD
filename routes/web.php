@@ -62,15 +62,15 @@ Route::post('/save-profile-umkm/{userId}', [UMKMProfileController::class, 'updat
 
 // Halaman Explore, Detail Projek & Apply Projek
 Route::get('/explore', function () {
-    return view('explore');
+    return view('Pelamar.explore-pelamar');
 })->name('explore');
 
 Route::get('/detail-projek', function () {
-    return view('detail-projek');
+    return view('Pelamar.detail-projek-pelamar');
 })->name('detail.projek');
 
 Route::get('/apply-projek', function () {
-    return view('apply-projek');
+    return view('Pelamar.apply-projek-pelamar');
 })->name('apply.projek');
 
 
@@ -135,10 +135,6 @@ Route::middleware(['role:umkm'])->group(function () {
     ->name('home.umkm');
 
     // ================== PROJECT ==================
-    Route::get('/umkm/projects',
-        [UmkmProjectController::class, 'index'])
-        ->name('umkm.project.index');
-
     Route::get('/umkm/projects/create',
         [UmkmProjectController::class, 'create'])
         ->name('umkm.project.create');

@@ -17,7 +17,7 @@ class PelamarProfileController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        return view('profile-pelamar', [
+        return view('Pelamar.profile-pelamar', [
             'profile' => $profile,
             'headerTitle' => $profile->user->name . " Profile",
             'user' => User::find($userId)
@@ -36,7 +36,7 @@ class PelamarProfileController extends Controller
 
         $majors = Major::orderBy('name')->get();
 
-        return view('edit-profile-pelamar', [
+        return view('Pelamar.edit-profile-pelamar', [
             'profile' => $profile,
             'majors' => $majors,
             'headerTitle' => 'Edit Profile',
