@@ -15,12 +15,12 @@
 
         {{-- Nav Links --}}
         <div class="hidden md:flex space-x-8 text-white font-bold text-lg">
-            <a href="{{ route($user->role == false ? 'home.pelamar' : 'home.umkm') }}"
+            <a href="{{ route($user->role == 'pelamar' ? 'home.pelamar' : 'home.umkm') }}"
                class="{{ request()->routeIs('home.*') ? $active : $inactive }}">
                 Home
             </a>
 
-            <a href="{{ route($user->role == false ? 'profile.pelamar' : 'profile.umkm', ['userId' => $user->id]) }}"
+            <a href="{{ route($user->role == 'pelamar' ? 'profile.pelamar' : 'profile.umkm', ['userId' => $user->id]) }}"
                class="{{ request()->routeIs('profile.*') ? $active : $inactive }}">
                 Profile
             </a>
@@ -55,7 +55,7 @@
             </button>
 
             {{-- Profile --}}
-            <a href="{{ route($user->role == false ? 'profile.pelamar' : 'profile.umkm', ['userId' => $user->id]) }}"
+            <a href="{{ route($user->role == 'pelamar' ? 'profile.pelamar' : 'profile.umkm', ['userId' => $user->id]) }}"
                class="h-10 w-10 rounded-full overflow-hidden border-2 border-white cursor-pointer hover:shadow-lg transition hover:border-yellow-400">
                 <img src="{{ $user->profile
                     ? asset('storage/profile_pictures/' . $user->profile)
