@@ -18,7 +18,7 @@ class MainController extends Controller
     {
         $user = User::find(2); //Auth::id();
         
-        return view('home-umkm', [
+        return view('Umkm.home-umkm', [
             'headerTitle' => 'UMKM Dashboard - PathLoka',
             'user' => $user
         ]);
@@ -28,7 +28,7 @@ class MainController extends Controller
     {
         $user = User::find(1); //Auth::id();
 
-        return view('home-pelamar', [
+        return view('Pelamar.home-pelamar', [
             'headerTitle' => 'Pelamar Dashboard - PathLoka',
             'user' => $user
         ]);

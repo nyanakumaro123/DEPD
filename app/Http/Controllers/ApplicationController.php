@@ -26,6 +26,6 @@ class ApplicationController extends Controller
             ->get()
             ->groupBy('status');
 
-        return view('pelamar.application.index', compact('apps'));
+        return view('explore-pelamar', compact('apps'));
     }
 }

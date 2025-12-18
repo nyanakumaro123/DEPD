@@ -18,7 +18,7 @@ class UMKMProfileController extends Controller
         ->where('user_id', $userId)
         ->firstOrFail();
 
-        return view('profile-umkm', [
+        return view('Umkm.profile-umkm', [
             'profile' => $profile,
             'headerTitle' => $profile->user->name . " Profile",
             'user' => User::find($userId)
@@ -35,7 +35,7 @@ class UMKMProfileController extends Controller
             ->where('user_id', $userId)
             ->firstOrFail();
 
-        return view('edit-profile-umkm', [
+        return view('Umkm.edit-profile-umkm', [
             'profile' => $profile,
             'headerTitle' => 'Edit Profile',
             'user' => User::find($userId)

@@ -16,7 +16,7 @@ class UmkmApplicationController extends Controller
             ->get()
             ->groupBy('status');
 
-        return view('umkm.application.index', compact('apps'));
+        return view('Umkm.request-umkm', compact('apps'));
     }
 
     public function accept(Application $application)
