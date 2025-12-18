@@ -2,115 +2,55 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\UmkmApplicationController;
 use App\Http\Controllers\UmkmProjectController;
 
-/*
-|--------------------------------------------------------------------------
-| PUBLIC ROUTES (NO AUTH)
-|--------------------------------------------------------------------------
-*/
+/* LANDING */
+Route::get('/', fn () => view('landing'));
 
-// ================== LANDING ==================
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// ================== AUTH ==================
-
-// LOGIN
-Route::get('/login/pelamar', [AuthController::class, 'loginPelamar'])
-    ->name('login.pelamar');
-
-Route::get('/login/umkm', [AuthController::class, 'loginUmkm'])
-    ->name('login.umkm');
-
-// REGISTER
-Route::get('/register/pelamar', [AuthController::class, 'registerPelamar'])
-    ->name('register.pelamar');
-
-Route::get('/register/umkm', [AuthController::class, 'registerUmkm'])
-    ->name('register.umkm');
-
-// PROCESS LOGIN & REGISTER
-Route::post('/login/pelamar', [AuthController::class, 'processLoginPelamar'])
+/* AUTH */
+Route::get('/login-pelamar', fn () => view('login-pelamar'))->name('login.pelamar');
+Route::post('/login-pelamar', [AuthController::class, 'loginPelamar'])
     ->name('process.login.pelamar');
 
-Route::post('/login/umkm', [AuthController::class, 'processLoginUmkm'])
+Route::get('/login-umkm', fn () => view('login-umkm'))->name('login.umkm');
+Route::post('/login-umkm', [AuthController::class, 'loginUmkm'])
     ->name('process.login.umkm');
 
-Route::post('/register/pelamar', [AuthController::class, 'processRegisterPelamar'])
-    ->name('process.pelamar');
+Route::get('/register-pelamar', fn () => view('register-pelamar'))->name('register.pelamar');
+Route::post('/register-pelamar', [AuthController::class, 'registerPelamar'])
+    ->name('process.register.pelamar');
 
-Route::post('/register/umkm', [AuthController::class, 'processRegisterUmkm'])
-    ->name('process.umkm');
+Route::get('/register-umkm', fn () => view('register-umkm'))->name('register.umkm');
+Route::post('/register-umkm', [AuthController::class, 'registerUmkm'])
+    ->name('process.register.umkm');
 
-// LOGOUT
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+/* PELAMAR */
+Route::middleware(['auth', 'role:pelamar'])->group(function () {
 
-/*
-|--------------------------------------------------------------------------
-| AUTHENTICATED ROUTES
-|--------------------------------------------------------------------------
-*/
+    Route::get('/home-pelamar', fn () => view('home-pelamar'))
+        ->name('home.pelamar');
 
-Route::middleware(['auth'])->group(function () {
+    Route::get('/profile-pelamar', fn () => view('profile-pelamar'))
+        ->name('profile.pelamar');
 
-    // ================== PELAMAR ==================
-    Route::middleware(['role:pelamar'])->group(function () {
-
-        // HOME
-        Route::get('/home/pelamar', function () {
-            return view('pelamar.home');
-        })->name('home.pelamar');
-
-        // APPLY PROJECT
-        Route::post('/apply/{project}',
-            [ApplicationController::class, 'apply'])
-            ->name('apply.project');
-
-        // LIST APPLICATIONS
-        Route::get('/pelamar/applications',
-            [ApplicationController::class, 'index'])
-            ->name('pelamar.applications');
-    });
-
-
-    // ================== UMKM ==================
-    Route::middleware(['role:umkm'])->group(function () {
-
-        // HOME
-        Route::get('/home/umkm', function () {
-            return view('umkm.home');
-        })->name('home.umkm');
-
-        // ================== PROJECT ==================
-        Route::get('/umkm/projects',
-            [UmkmProjectController::class, 'index'])
-            ->name('umkm.project.index');
-
-        Route::get('/umkm/projects/create',
-            [UmkmProjectController::class, 'create'])
-            ->name('umkm.project.create');
-
-        Route::post('/umkm/projects',
-            [UmkmProjectController::class, 'store'])
-            ->name('umkm.project.store');
-
-        // ================== APPLICATION ==================
-        Route::get('/umkm/applications',
-            [UmkmApplicationController::class, 'index'])
-            ->name('umkm.applications');
-
-        Route::post('/umkm/application/{application}/accept',
-            [UmkmApplicationController::class, 'accept'])
-            ->name('umkm.application.accept');
-
-        Route::post('/umkm/application/{application}/reject',
-            [UmkmApplicationController::class, 'reject'])
-            ->name('umkm.application.reject');
-    });
+    Route::get('/edit-profile-pelamar', fn () => view('edit-profile-pelamar'))
+        ->name('edit-profile.pelamar');
 });
+
+
+/* UMKM */
+Route::middleware(['auth', 'role:umkm'])->group(function () {
+
+    Route::get('/home-umkm', fn () => view('home-umkm'))
+        ->name('home.umkm');
+
+    Route::get('/profile-umkm', fn () => view('profile-umkm'))
+        ->name('profile.umkm');
+
+    Route::get('/edit-profile-umkm', fn () => view('edit-profile-umkm'))
+        ->name('edit-profile.umkm');
+
+});
+

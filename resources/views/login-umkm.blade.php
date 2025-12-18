@@ -22,7 +22,7 @@
                     Login - <span class="text-yellow-400">UMKM</span>
                 </h3>
 
-                <form action="{{ route('process.umkm') }}" method="POST" class="space-y-6">
+                <form action="{{ route('process.login.umkm') }}" method="POST" class="space-y-6">
                     @csrf
                     
                     <div>

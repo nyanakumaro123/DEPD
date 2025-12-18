@@ -22,7 +22,7 @@
                     Register - <span class="text-yellow-400">Job Seeker</span>
                 </h3>
 
-                <form action="{{ route('process.pelamar') }}" method="POST" class="space-y-4">
+                <form action="{{ route('process.register.pelamar') }}" method="POST" class="space-y-4">
                     @csrf
                     
                     <div>

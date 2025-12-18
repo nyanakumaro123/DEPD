@@ -1,79 +1,97 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#fff8f0] font-sans pb-10">
+<div class="min-h-screen bg-[#fff8f0] font-sans pb-12">
 
     <x-navbar-pelamar />
 
     <div class="max-w-6xl mx-auto p-6 pt-8">
-        
-        <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Edit Profile</h1>
 
-        <form action="{{ route('save.profile.pelamar') }}" method="POST" enctype="multipart/form-data"> @csrf
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                
-                <div class="lg:col-span-4 flex flex-col items-center">
-                    <div class="h-64 w-64 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white mb-6 relative group">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                             alt="Profile Picture" 
-                             class="h-full w-full object-cover group-hover:opacity-75 transition">
-                        
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                            <i class="fas fa-camera text-3xl text-[#355dad]"></i>
-                        </div>
+        <div class="flex items-center justify-between mb-10">
+            <h1 class="text-4xl font-bold text-[#355dad] font-serif">
+                My Profile
+            </h1>
+
+            <a href="{{ route('edit-profile.pelamar') }}"
+               class="bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold px-6 py-3 rounded-lg shadow transition">
+                Edit Profile
+            </a>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-10">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+                {{-- FOTO --}}
+                <div class="lg:col-span-4 flex flex-col items-center text-center">
+                    <div class="h-60 w-60 rounded-full overflow-hidden border-4 border-[#355dad] shadow-lg mb-6">
+                        <img
+                            src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80"
+                            class="w-full h-full object-cover"
+                            alt="Profile Photo">
                     </div>
 
-                    <button type="button" class="bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-2 px-6 rounded-lg shadow-md transition w-full max-w-[200px]">
-                        Edit Profile Photo
-                    </button>
+                    <h2 class="text-2xl font-bold text-[#355dad]">
+                        KucingMauMakan
+                    </h2>
+
+                    <p class="text-gray-500 font-semibold mt-1">
+                        VCD / DKV
+                    </p>
                 </div>
 
+                {{-- DATA --}}
                 <div class="lg:col-span-8 space-y-6">
-                    
-                    <div class="space-y-2">
-                        <label class="block text-[#355dad] font-bold text-xl">Name</label>
-                        <input type="text" value="KucingMauMakan" 
-                               class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad] placeholder-blue-300">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+                            <label class="text-[#355dad] font-bold block mb-1">
+                                Email
+                            </label>
+                            <div class="bg-[#e0e7ff] text-[#355dad] font-semibold px-4 py-3 rounded-lg">
+                                kucing@gmail.com
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[#355dad] font-bold block mb-1">
+                                Contact
+                            </label>
+                            <div class="bg-[#e0e7ff] text-[#355dad] font-semibold px-4 py-3 rounded-lg">
+                                08126523895
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="space-y-2">
-                            <label class="block text-[#355dad] font-bold text-xl">Major</label>
-                            <input type="text" value="VCD / DKV" 
-                                   class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="block text-[#355dad] font-bold text-xl">Contact</label>
-                            <input type="text" value="08126523895" 
-                                   class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="block text-[#355dad] font-bold text-xl">Email</label>
-                            <input type="email" value="Kucing@gmail.com" 
-                                   class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
-                        </div>
-                    </div>
-
-                    <div class="pt-4 flex items-center gap-4">
-                        <label class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6 rounded-lg shadow-md transition transform active:scale-95">
-                            Upload Portofolio (PDF)
-                            <input type="file" class="hidden" accept=".pdf">
+                    <div>
+                        <label class="text-[#355dad] font-bold block mb-1">
+                            Major
                         </label>
-                        
-                        <span class="text-[#c4a484] font-bold text-lg">Nkkkdendd.pdf</span>
+                        <div class="bg-[#e0e7ff] text-[#355dad] font-semibold px-4 py-3 rounded-lg">
+                            Visual Communication Design (DKV)
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[#355dad] font-bold block mb-2">
+                            Portfolio
+                        </label>
+
+                        <a href="#"
+                           class="inline-flex items-center gap-3 bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold px-6 py-3 rounded-lg shadow transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/>
+                            </svg>
+                            Download Portfolio (PDF)
+                        </a>
                     </div>
 
                 </div>
             </div>
+        </div>
 
-            <div class="mt-16">
-                <button type="submit" class="w-full bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold text-xl py-4 rounded-xl shadow-lg transition transform hover:scale-[1.01]">
-                    Done
-                </button>
-            </div>
-
-        </form>
     </div>
 </div>
 @endsection
