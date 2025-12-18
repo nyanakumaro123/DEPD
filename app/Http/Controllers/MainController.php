@@ -38,7 +38,7 @@ class MainController extends Controller
     {
         $user = Auth::id();
 
-        return view('notifikasi', [
+        return view('Pelamar.notifikasi-pelamar', [
             'headerTitle' => 'Notifikasi',
             'user' => $user
         ]);
