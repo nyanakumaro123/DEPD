@@ -57,4 +57,20 @@ class AuthController extends Controller
 
         return redirect()->back()->with('success','UMKM berhasil register');
     }
+
+    public function loginPelamar() {
+        return view('Pelamar.login-pelamar');
+    }
+    
+    public function loginUmkm() {
+        return view('Umkm.login-umkm');
+    }
+    
+    public function registerPelamar() {
+        return view('Pelamar.register-pelamar');
+    }
+    
+    public function registerUmkm() {
+        return view('Umkm.register-umkm');
+    }
 }

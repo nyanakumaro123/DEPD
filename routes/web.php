@@ -19,7 +19,6 @@ use App\Http\Controllers\UmkmProjectController;
 Route::get('/', [MainController::class, 'landing']);
 
 
-
 // ================== AUTH ==================
 
 // LOGIN  (Route::GET)
