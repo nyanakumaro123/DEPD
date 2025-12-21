@@ -3,7 +3,7 @@
 @section('content')
 <div class="w-full min-h-screen bg-[#FFF7ED] ">
 
-    <x-navbar-pelamar />
+    @include('layouts.navbar')
 
     <!-- Search Bar -->
     <div class="flex items-center gap-3 mb-6">

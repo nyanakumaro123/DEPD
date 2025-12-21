@@ -64,16 +64,32 @@
                     </div>
 
                     <div class="pt-4 flex items-center gap-4">
-                        <label class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6 rounded-lg shadow-md transition transform active:scale-95">
+                        <label
+                            class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6
+                                rounded-lg shadow-md transition transform active:scale-95
+                                shrink-0 w-[240px] text-center"
+                        >
                             Upload Portofolio (PDF)
                             <input type="file" name="portfolio" id="portfolioInput" class="hidden" accept=".pdf">
                         </label>
+
                         
                         <span id="portfolioName" class="text-[#c4a484] font-bold text-lg">No File Selected</span>
                     </div>
 
                 </div>
             </div>
+
+            <div class="pt-8 flex justify-end lg:pr-12">
+                <button
+                    type="submit"
+                    class="min-w-[240px] bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-8
+                        rounded-lg shadow-md transition transform active:scale-95"
+                >
+                    Save Profile
+                </button>
+            </div>
+
         </div>
 
     </div>

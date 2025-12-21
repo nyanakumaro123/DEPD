@@ -3,47 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gray-50">
     <!-- Navigation Bar -->
-    <nav class="bg-[#355dad] shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <h1 class="text-3xl font-bold font-serif tracking-wider">
-                        <span class="text-white drop-shadow-md" style="-webkit-text-stroke: 1px #888;">P</span>
-                        <span class="text-blue-200">ath</span>
-                        <span class="text-yellow-400 drop-shadow-sm" style="-webkit-text-stroke: 1px #b89200;">Loka</span>
-                    </h1>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-white hover:text-yellow-400 font-semibold transition">Home</a>
-                    <a href="#" class="text-white hover:text-yellow-400 font-semibold transition">Profile</a>
-                    <a href="#" class="text-white hover:text-yellow-400 font-semibold transition">Explore</a>
-                    <a href="#" class="text-white hover:text-yellow-400 font-semibold transition">Workspace</a>
-                    <a href="#" class="text-white hover:text-yellow-400 font-semibold transition">Request</a>
-                </div>
-
-                <!-- Right Side Icons -->
-                <div class="flex items-center space-x-4">
-                    <!-- Notification Bell -->
-                    <button class="relative text-white hover:text-yellow-400 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                        </svg>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
-                    </button>
-
-                    <!-- User Avatar -->
-                    <div class="relative">
-                        <button class="flex items-center space-x-2 focus:outline-none">
-                            <img src="https://ui-avatars.com/api/?name=User&background=fbbf24&color=fff" alt="User" class="w-10 h-10 rounded-full border-2 border-yellow-400">
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.navbar')
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

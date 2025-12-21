@@ -25,12 +25,12 @@
                 Profile
             </a>
 
-            <a href="#" class="{{ request()->routeIs('project.*') ? $active : $inactive }}">
-                Project
+            <a href="{{ route('explore') }}" class="{{ request()->routeIs('explore') ? $active : $inactive }}">
+                Explore
             </a>
 
-            <a href="#" class="{{ request()->routeIs('workspace.*') ? $active : $inactive }}">
-                Workspace
+            <a href="#" class="{{ request()->routeIs('project.*') ? $active : $inactive }}">
+                Project
             </a>
 
             <a href="#" class="{{ request()->routeIs('request.*') ? $active : $inactive }}">

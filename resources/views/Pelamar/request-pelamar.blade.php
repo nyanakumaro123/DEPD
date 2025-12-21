@@ -4,7 +4,7 @@
 <div class="min-h-screen bg-[#fff8f0] font-sans pb-10">
 
     {{-- NAVBAR --}}
-    <x-navbar-pelamar />
+    @include('layouts.navbar')
 
     {{-- CONTENT --}}
     <div class="max-w-5xl mx-auto px-6 py-8">

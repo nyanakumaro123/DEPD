@@ -3,7 +3,7 @@
 @section('content')
 <div class="bg-[#FFF7ED] min-h-screen pb-10">
 
-    <x-navbar-pelamar />
+    @include('layouts.navbar')
 
     <!-- Header Image -->
     <div class="w-full h-64 md:h-80 overflow-hidden">
