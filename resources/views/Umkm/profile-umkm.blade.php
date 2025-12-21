@@ -6,11 +6,11 @@
     @include('layouts.navbar')
 
     <div class="max-w-7xl mx-auto p-6 pt-10">
-        
-        <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Profile</h1>
+
+        <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Profile UMKM</h1>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            
+            {{-- PROFILE PICTURE --}}
             <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div class="h-64 w-64 lg:h-80 lg:w-80 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white">
                     <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('img/user_profile.webp') }}" 
@@ -19,41 +19,14 @@
                 </div>
             </div>
 
+            {{-- INFO --}}
             <div class="lg:col-span-8 space-y-8">
-                
                 <h2 class="text-5xl font-bold text-[#355dad] mb-2 font-serif">{{ $profile->umkm_name }}</h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-[#355dad]">Riwayat Proyek</h3>
-                        
-                        <div class="bg-[#e8d5c4] rounded-xl p-3 flex gap-3 shadow-sm border border-[#dcbfa6]">
-                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded-lg object-cover bg-gray-200">
-                            <div class="overflow-hidden">
-                                <h4 class="font-bold text-[#5c3d2e] text-lg leading-tight">Project Title</h4>
-                                <p class="text-xs font-bold text-[#8c5e45] mb-1">UMKMName</p>
-                                <p class="text-xs text-gray-600 truncate">descriptiondescriptiondescri...</p>
-                            </div>
-                        </div>
-                        <div class="bg-[#e8d5c4] rounded-xl p-3 flex gap-3 shadow-sm border border-[#dcbfa6]">
-                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded-lg object-cover bg-gray-200">
-                            <div class="overflow-hidden">
-                                <h4 class="font-bold text-[#5c3d2e] text-lg leading-tight">Project Title</h4>
-                                <p class="text-xs font-bold text-[#8c5e45] mb-1">UMKMName</p>
-                                <p class="text-xs text-gray-600 truncate">descriptiondescriptiondescri...</p>
-                            </div>
-                        </div>
-                         <div class="bg-[#e8d5c4] rounded-xl p-3 flex gap-3 shadow-sm border border-[#dcbfa6]">
-                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" class="h-16 w-16 rounded-lg object-cover bg-gray-200">
-                            <div class="overflow-hidden">
-                                <h4 class="font-bold text-[#5c3d2e] text-lg leading-tight">Project Title</h4>
-                                <p class="text-xs font-bold text-[#8c5e45] mb-1">UMKMName</p>
-                                <p class="text-xs text-gray-600 truncate">descriptiondescriptiondescri...</p>
-                            </div>
-                        </div>
-                    </div>
-
+                <h2 class="text-5xl font-bold text-[#355dad] font-serif">
+                    {{ Auth::user()->umkmProfile->umkm_name ?? Auth::user()->name }}
+                </h2>
+                {{-- RATING --}}    
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-[#355dad]">
                             Rating
@@ -92,10 +65,21 @@
                         @empty
                             <p class="text-gray-500 text-sm">No ratings yet.</p>
                         @endforelse
-
                 </div>
 
-                <div class="mt-8">
+                {{-- RATING --}}
+                <div>
+                    <h3 class="text-xl font-bold text-[#355dad] mb-3">
+                        Rating <span class="text-[#dcbfa6]">★ 0 / 5</span>
+                    </h3>
+
+                    <div class="bg-[#d1fae5] border border-green-300 rounded-xl p-4 font-bold text-green-800">
+                        Belum ada ulasan
+                    </div>
+                </div>
+
+                {{-- DESKRIPSI --}}
+                <div>
                     <h3 class="text-xl font-bold text-[#355dad] mb-2">Deskripsi UMKM</h3>
                     <p class="text-[#bcaaa4] font-medium leading-relaxed">
                         {{ $profile->description ?? 'No description available.' }}
@@ -106,6 +90,7 @@
         </div>
     </div>
 
+    {{-- EDIT BUTTON --}}
     {{-- @auth
         @if (auth()->id() === $profile->user->id) --}}
             <div class="fixed bottom-10 left-10">
@@ -119,6 +104,5 @@
             </div>
         {{-- @endif
     @endauth --}}
-
 </div>
 @endsection

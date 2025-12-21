@@ -22,7 +22,8 @@
                     Login - <span class="text-yellow-400">Job Seeker</span>
                 </h3>
 
-                <form action="{{ route('process.pelamar') }}" method="POST" class="space-y-6">
+                {{-- 🔥 PERBAIKAN DI SINI --}}
+                <form action="{{ route('process.login.pelamar') }}" method="POST" class="space-y-6">
                     @csrf
                     
                     <div>
@@ -31,7 +32,9 @@
                             <div class="pl-3 pr-2 text-[#355dad]">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" /><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" /></svg>
                             </div>
-                            <input type="email" name="email" placeholder="applicant@example.com" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
+                            <input type="email" name="email" placeholder="applicant@example.com"
+                                   class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full"
+                                   required>
                         </div>
                     </div>
 
@@ -42,7 +45,9 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
                             </div>
                             
-                            <input id="login_password" type="password" name="password" placeholder="Password" class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full" required>
+                            <input id="login_password" type="password" name="password" placeholder="Password"
+                                   class="w-full bg-transparent border-none focus:ring-0 text-gray-700 placeholder-gray-400 h-full"
+                                   required>
                             
                             <button type="button" onclick="togglePassword()" class="pr-3 text-gray-400 hover:text-[#355dad] focus:outline-none transition-colors">
                                 <svg id="eye_open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hidden">
@@ -50,15 +55,17 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                                 <svg id="eye_slash" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774" />
                                 </svg>
                             </button>
                         </div>
                     </div>
 
                     <div class="text-sm text-white pt-2">
-                        Don't have an account? 
-                        <a href="{{ route('register.pelamar') }}" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">Register</a>
+                        Don't have an account?
+                        <a href="{{ route('register.pelamar') }}" class="text-yellow-400 hover:text-yellow-300 font-bold hover:underline transition">
+                            Register
+                        </a>
                     </div>
 
                     <button type="submit" class="w-full bg-[#bfd3ff] hover:bg-blue-200 text-[#2b4c8c] font-bold py-3 rounded-xl transition duration-300 shadow-lg transform active:scale-95">
@@ -72,20 +79,20 @@
 </div>
 
 <script>
-    function togglePassword() {
-        const input = document.getElementById('login_password');
-        const eyeOpen = document.getElementById('eye_open');
-        const eyeSlash = document.getElementById('eye_slash');
+function togglePassword() {
+    const input = document.getElementById('login_password');
+    const eyeOpen = document.getElementById('eye_open');
+    const eyeSlash = document.getElementById('eye_slash');
 
-        if (input.type === "password") {
-            input.type = "text";
-            eyeOpen.classList.remove('hidden');
-            eyeSlash.classList.add('hidden');
-        } else {
-            input.type = "password";
-            eyeOpen.classList.add('hidden');
-            eyeSlash.classList.remove('hidden');
-        }
+    if (input.type === "password") {
+        input.type = "text";
+        eyeOpen.classList.remove('hidden');
+        eyeSlash.classList.add('hidden');
+    } else {
+        input.type = "password";
+        eyeOpen.classList.add('hidden');
+        eyeSlash.classList.remove('hidden');
     }
+}
 </script>
 @endsection

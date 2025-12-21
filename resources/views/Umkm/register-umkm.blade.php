@@ -22,7 +22,7 @@
                     Register - <span class="text-yellow-400">UMKM</span>
                 </h3>
 
-                <form action="{{ route('process.umkm') }}" method="POST" class="space-y-4">
+                <form action="{{ route('process.register.umkm') }}" method="POST" class="space-y-4">
                     @csrf
                     
                     <div>
