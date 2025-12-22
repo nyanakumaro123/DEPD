@@ -20,7 +20,7 @@ class PelamarProfileController extends Controller
         return view('Pelamar.profile-pelamar', [
             'profile' => $profile,
             'headerTitle' => $profile->user->name . " Profile",
-            'user' => User::find($userId)
+            'user' => Auth::user()
         ]);
     }
 
@@ -40,7 +40,7 @@ class PelamarProfileController extends Controller
             'profile' => $profile,
             'majors' => $majors,
             'headerTitle' => 'Edit Profile',
-            'user' => User::find($userId)
+            'user' => Auth::user()
         ]);
     }
 
@@ -73,11 +73,11 @@ class PelamarProfileController extends Controller
         if ($request->hasFile('profile_photo')) {
 
             if ($user->profile && Storage::exists('public/profile_pictures/' . $user->profile)) {
-            Storage::delete('public/profile_pictures/' . $user->profile);
-        }
+                Storage::delete('public/profile_pictures/' . $user->profile);
+            }
 
             $file = $request->file('profile_photo');
-            $filename = time().'_'.$file->getClientOriginalName();
+            $filename = time().'_';//.$file->getClientOriginalName();
             $file->storeAs('public/profile_pictures', $filename); // Save to storage/app/public/profile_pictures
             
             // Update user profile

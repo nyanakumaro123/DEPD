@@ -70,12 +70,18 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
             'role'     => 'pelamar',
         ]);
+
+        PelamarProfile::create([
+            'user_id' => $user->id,
+            'major_id' => Major::where('name', 'Not Specified')->value('id'),
+        ]);
+
         return redirect()->route('login.pelamar')
             ->with('success', 'Registrasi pelamar berhasil');
     }

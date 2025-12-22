@@ -13,7 +13,8 @@
             
             <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div class="h-64 w-64 lg:h-80 lg:w-80 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white">
-                    <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('img/user_profile.webp') }}" 
+                    <img src="{{ $profile->user->profile ? asset('storage/profile_pictures/' . $profile->user->profile)
+                    : asset('img/user_profile.webp') }}" 
                          alt="Profile Picture" 
                          class="h-full w-full object-cover">
                 </div>

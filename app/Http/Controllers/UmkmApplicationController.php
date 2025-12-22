@@ -16,7 +16,10 @@ class UmkmApplicationController extends Controller
             ->get()
             ->groupBy('status');
 
-        return view('Umkm.request-umkm', compact('apps'));
+        return view('Umkm.request-umkm', [
+            'headerTitle' => 'Daftar Lamaran - PathLoka',
+            'apps' => $apps
+        ]);
     }
 
     public function accept(Application $application)

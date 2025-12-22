@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PelamarProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UmkmApplicationController;
 use App\Http\Controllers\UMKMProfileController;
 use App\Http\Controllers\UmkmProjectController;
@@ -17,19 +18,23 @@ Route::get('/', [MainController::class, 'landing']);
 
 // ================== AUTH ==================
 // PROCESS LOGIN & REGISTER  (Route::POST)
-Route::get('/login-pelamar', fn () => view('pelamar.login-pelamar'))->name('login.pelamar');
+Route::get('/login-pelamar', [MainController::class, 'loginPelamar'])
+    ->name('login.pelamar');
 Route::post('/login-pelamar', [AuthController::class, 'loginPelamar'])
     ->name('process.login.pelamar');
 
-Route::get('/login-umkm', fn () => view('umkm.login-umkm'))->name('login.umkm');
+Route::get('/login-umkm', [MainController::class, 'loginUmkm'])
+    ->name('login.umkm');
 Route::post('/login-umkm', [AuthController::class, 'loginUmkm'])
     ->name('process.login.umkm');
 
-Route::get('/register-pelamar', fn () => view('pelamar.register-pelamar'))->name('register.pelamar');
+Route::get('/register-pelamar', [MainController::class, 'registerPelamar'])
+    ->name('register.pelamar');
 Route::post('/register-pelamar', [AuthController::class, 'registerPelamar'])
     ->name('process.register.pelamar');
 
-Route::get('/register-umkm', fn () => view('umkm.register-umkm'))->name('register.umkm');
+Route::get('/register-umkm', [MainController::class, 'registerUmkm'])
+    ->name('register.umkm');
 Route::post('/register-umkm', [AuthController::class, 'registerUmkm'])
     ->name('process.register.umkm');
 
@@ -51,13 +56,10 @@ Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
 Route::get('/explore', [ExploreController::class, 'explore'])
     ->name('explore');
 
-Route::get('/detail-projek', function () {
-    return view('Pelamar.detail-projek-pelamar');
-})->name('detail.projek');
-
-Route::get('/apply-projek', function () {
-    return view('Pelamar.apply-projek-pelamar');
-})->name('apply.projek');
+Route::get('/detail-projek', [ProjectController::class, 'detailProjek'])
+    ->name('detail.projek');
+Route::get('/apply-projek', [ProjectController::class, 'applyProjek'])
+    ->name('apply.projek.detail');
 
 
 // Halaman Notifikasi

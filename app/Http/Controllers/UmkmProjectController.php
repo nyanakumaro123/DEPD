@@ -11,9 +11,14 @@ class UmkmProjectController extends Controller
 
     public function create()
     {
-        $projects = Project::where('umkm_id', Auth::id()) // ✅ FIX
+        $projects = Project::where('umkm_id', Auth::id())
             ->get();
-        return view('Umkm.project-umkm', compact('projects'));
+        
+        return view('UMKM.create-project', [
+            'headerTitle' => 'Buat Project - PathLoka',
+            'projects'    => $projects,
+            'user'        => Auth::user()
+        ]);
     }
 
     public function store(Request $request)
@@ -36,7 +41,7 @@ class UmkmProjectController extends Controller
                 $request->file('syarat_file')->store('syarat', 'public');
         }
 
-        $data['umkm_id'] = Auth::id(); // ✅ FIX
+        $data['umkm_id'] = Auth::id();
 
         Project::create($data);
 
