@@ -8,6 +8,7 @@ use App\Models\PelamarProfile;
 use App\Models\Major;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PelamarProfileController extends Controller
 {
@@ -53,8 +54,8 @@ class PelamarProfileController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
-            'profile_photo' => 'nullable|image|max:5120',
-            'portfolio' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // optional PDF upload
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'portfolio' => 'nullable|mimes:pdf|max:5120', // optional PDF upload
         ]);
 
         $profile = PelamarProfile::where('user_id', $userId)->firstOrFail();
@@ -77,7 +78,7 @@ class PelamarProfileController extends Controller
             }
 
             $file = $request->file('profile_photo');
-            $filename = time().'_';//.$file->getClientOriginalName();
+            $filename = Str::uuid(). '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/profile_pictures', $filename); // Save to storage/app/public/profile_pictures
             
             // Update user profile
@@ -93,7 +94,11 @@ class PelamarProfileController extends Controller
             }
 
             $file = $request->file('portfolio');
-            $filename = time().'_'.$file->getClientOriginalName();
+            if ($file->getMimeType() !== 'application/pdf') {
+                abort(422, 'Invalid portfolio file');
+            }
+
+            $filename = Str::uuid(). '.' . $file->getClientOriginalExtension();
             $file->storeAs('public/portfolio', $filename);
             
             $profile->update(['portfolio' => $filename]);

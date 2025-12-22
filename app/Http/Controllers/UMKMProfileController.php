@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UMKMProfile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UMKMProfileController extends Controller
 {
@@ -79,12 +80,10 @@ class UMKMProfileController extends Controller
             }
 
             $file = $request->file('profile_photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('profile_pictures', $filename, 'public');
 
-            $user->update([
-                'profile' => $filename,
-            ]);
+            $user->update(['profile' => $filename,]);
         }
 
 

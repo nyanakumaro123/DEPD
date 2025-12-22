@@ -6,6 +6,7 @@
     @include('layouts.navbar')
 
     <div class="max-w-6xl mx-auto p-6 pt-8">
+
         <form action="{{ route('save-profile.pelamar', $profile->user->id) }}" method="POST" enctype="multipart/form-data"> @csrf
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
