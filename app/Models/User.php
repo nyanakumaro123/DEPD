@@ -10,7 +10,7 @@ class User extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name','email','password','role'
+        'name','email','password','role', 'profile' // Tambahkan 'profile'
     ];
 
     protected $hidden = [
@@ -20,6 +20,12 @@ class User extends Authenticatable
     public function umkmProfile()
     {
         return $this->hasOne(UmkmProfile::class);
+    }
+    
+    // Relasi baru dari Kumaro
+    public function pelamarProfile()
+    {
+        return $this->hasOne(PelamarProfile::class);
     }
 
     public function projects()

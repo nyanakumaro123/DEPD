@@ -9,25 +9,59 @@ class UmkmApplicationController extends Controller
 {
     public function index()
     {
-        $apps = Application::with(['pelamar', 'project'])
+        // Ambil semua lamaran yang masuk ke proyek milik UMKM ini
+        $apps = Application::with(['pelamar.user', 'project'])
             ->whereHas('project', function ($q) {
-                $q->where('umkm_id', Auth::id()); // ✅ FIX
+                $q->where('umkm_id', Auth::id());
             })
-            ->get()
-            ->groupBy('status');
+            ->latest()
+            ->get();
 
-        return view('umkm.application.index', compact('apps'));
+        // Grouping berdasarkan status untuk mempermudah view
+        $groupedApps = $apps->groupBy('status');
+
+        return view('request-umkm', [
+            'pending' => $groupedApps->get('pending', collect()),
+            'accepted' => $groupedApps->get('accepted', collect()),
+            'rejected' => $groupedApps->get('rejected', collect()),
+        ]);
     }
 
-    public function accept(Application $application)
+    public function show($id)
     {
+        // Pastikan aplikasi ini milik proyek user yang login
+        $application = Application::with(['pelamar.user', 'pelamar.major', 'project'])
+            ->whereHas('project', function ($q) {
+                $q->where('umkm_id', Auth::id());
+            })
+            ->findOrFail($id);
+
+        return view('detail-request-umkm', compact('application'));
+    }
+
+    public function accept($id)
+    {
+        $application = Application::findOrFail($id);
+        
+        // Security check (opsional tapi disarankan)
+        if($application->project->umkm_id != Auth::id()) {
+            abort(403);
+        }
+
         $application->update(['status' => 'accepted']);
-        return back()->with('success', 'Lamaran diterima');
+        return redirect()->route('umkm.applications')->with('success', 'Lamaran diterima');
     }
 
-    public function reject(Application $application)
+    public function reject($id)
     {
+        $application = Application::findOrFail($id);
+        
+        // Security check
+        if($application->project->umkm_id != Auth::id()) {
+            abort(403);
+        }
+
         $application->update(['status' => 'rejected']);
-        return back()->with('success', 'Lamaran ditolak');
+        return redirect()->route('umkm.applications')->with('success', 'Lamaran ditolak');
     }
 }
