@@ -15,8 +15,13 @@ class PelamarProfile extends Model
     protected $fillable = [
         'user_id',
         'major_id',
-        'portfolio',
-        //'certificate'
+        'full_name',
+        'education_level',
+        'phone',
+        'portfolio_type',
+        'portfolio_file',
+        'portfolio_link',
+        'about_me',
     ];
 
     public function user(): BelongsTo

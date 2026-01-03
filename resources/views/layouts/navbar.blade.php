@@ -1,3 +1,6 @@
+@php
+    $user = auth()->user();
+@endphp
 <nav class="bg-[#355dad] px-6 py-3 shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
 
@@ -41,14 +44,27 @@
         {{-- Right Side Actions --}}
         <div class="flex items-center gap-4">
             {{-- Notification Button --}}
-            <button class="relative text-white hover:text-yellow-400 transition">
+            <a href="{{ route('notifikasi') }}"
+            class="relative text-white hover:text-yellow-400 transition">
+
                 <div class="bg-[#5a7bc2] rounded-full p-2 hover:bg-[#6b8ed6] transition">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        stroke-width="2" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                     </svg>
                 </div>
+
+    {{-- UNREAD BADGE --}}
+    @if($user && $user->unreadNotifications->count())
+        <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs
+                     min-w-[18px] h-[18px] px-1 flex items-center justify-center
+                     rounded-full font-bold">
+            {{ $user->unreadNotifications->count() }}
+        </span>
+    @endif
+</a>
+
 
                 {{-- Notification dot (optional) --}}
                 {{-- <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span> --}}

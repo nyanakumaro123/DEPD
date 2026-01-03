@@ -16,7 +16,11 @@ class UmkmProfile extends Model
     protected $fillable = [
         'user_id',
         'umkm_name',
+        'industry',
         'description',
+        'address',
+        'website',
+        'logo',
     ];
 
     public function user(): BelongsTo

@@ -1,54 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#FFF7ED] ">
+<div class="max-w-4xl mx-auto py-8">
 
-    {{-- @include('layouts.navbar') --}}
+    <h1 class="text-3xl font-bold mb-6">Notifikasi</h1>
 
-    <!-- Page Title -->
-    <h1 class="text-4xl font-bold text-blue-700 mb-6">Notifikasi</h1>
+    @forelse($notifications as $notif)
+        <form action="{{ route('notifications.read', $notif->id) }}" method="POST">
+            @csrf
 
-    <div class="space-y-4 max-w-4xl">
+            <button class="w-full text-left mb-4">
+                <div class="p-4 rounded-lg shadow
+                    {{ $notif->read_at ? 'bg-gray-100' : 'bg-blue-100' }}">
 
-        {{-- @foreach([1,2,3,4,5,6] as $item) --}}
-        <div class="bg-blue-100 rounded-lg p-3 flex items-start gap-3 shadow-sm">
+                    <p class="font-semibold">
+                        {{ $notif->data['title'] ?? 'Notifikasi' }}
+                    </p>
 
-            <!-- Notification Image -->
-            <img 
-                src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80"
-                class="w-12 h-12 rounded-md object-cover"
-            />
+                    <p class="text-sm text-gray-700">
+                        {{ $notif->data['message'] ?? '' }}
+                    </p>
 
-            <!-- Message Content -->
-            <div class="flex-1 text-blue-900 text-sm">
-
-                <!-- Example of Short Message -->
-                {{-- @if($loop->index !== 2) --}}
-                    <p class="font-semibold">Selamat! Magang anda diterima di Restomie!</p>
-                {{-- @else --}}
-                <!-- Example of Long Expandable Message -->
-                    <details class="group">
-                        <summary class="font-semibold cursor-pointer select-none">
-                            Magang anda ditolak Restomie.
-                        </summary>
-
-                        <p class="mt-1 text-gray-700">
-                            "ABCIWAKDARIWAKoswoskJDWIJDJOQDNQNALLOEMBVFISHHCK{RYOP MAIACOJD JIJK
-                            SKKDNJWBJDJDJADJNASDANDDKKWPPWWWWWWWWWWWWWWWWWWWWWPPPPPPP..."
-                        </p>
-                    </details>
-                {{-- @endif --}}
-
-            </div>
-
-            <!-- Optional Dropdown Icon -->
-            <button class="text-blue-700 text-xl px-1">
-                ˅
+                    <span class="text-xs text-gray-500">
+                        {{ $notif->created_at->diffForHumans() }}
+                    </span>
+                </div>
             </button>
-
+        </form>
+    @empty
+        <div class="text-center text-gray-500">
+            Tidak ada notifikasi
         </div>
-        {{-- @endforeach --}}
+    @endforelse
 
+    <div class="mt-6">
+        {{ $notifications->links() }}
     </div>
 
 </div>

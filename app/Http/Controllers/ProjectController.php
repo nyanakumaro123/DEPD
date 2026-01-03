@@ -27,20 +27,23 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function apply(Request $request, $projectId)
+        public function apply(Project $project)
     {
-        // Logic to handle project application by pelamar
-        // You can access the authenticated pelamar using Auth::id()
-        
-        // For example, you might want to create an application record
-        // Application::create([
-        //     'pelamar_id' => Auth::id(),
-        //     'project_id' => $projectId,
-        //     // other fields...
-        // ]);
+        $user = Auth::user();
 
-        return redirect()
-            ->back()
-            ->with('success', 'Anda telah berhasil melamar pada projek ini.');
+        // Cegah double apply
+        if ($project->applications()
+            ->where('pelamar_id', $user->id)
+            ->exists()) {
+            return back()->withErrors('Kamu sudah melamar project ini');
+        }
+
+        $project->applications()->create([
+            'pelamar_id' => $user->id,
+            'status' => 'pending',
+        ]);
+
+        return back()->with('success', 'Lamaran berhasil dikirim');
     }
+
 }

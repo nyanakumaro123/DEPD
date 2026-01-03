@@ -10,11 +10,26 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'umkm_id','title','category','rewards',
-        'time_start','time_end',
-        'salary_amount','salary_frequency','currency',
-        'description','syarat_path'
+        'umkm_id',
+        'title',
+        'category',
+        'employment_type',
+        'work_system',
+        'working_days',
+        'time_start',
+        'time_end',
+        'salary_amount',
+        'salary_frequency',
+        'currency',
+        'salary_min',
+        'salary_max',
+        'description',
+        'benefits',
+        'application_deadline',
+        'status',
+        'syarat_path',
     ];
+
 
     protected $casts = [
         'rewards' => 'array'
@@ -28,5 +43,10 @@ class Project extends Model
     public function applications()
     {
         return $this->hasMany(Application::class);
+    }
+
+    public function isOpen(): bool
+    {
+        return $this->status === 'open';
     }
 }

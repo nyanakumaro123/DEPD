@@ -66,9 +66,17 @@ class MainController extends Controller
     {
         $user = Auth::user();
 
-        return view('Pelamar.notifikasi-pelamar', [
-            'headerTitle' => 'Notifikasi',
-            'user' => $user
-        ]);
+        $notifications = $user->notifications
+            ->latest()
+            ->paginate(10);
+
+        $unreadCount = $user->unreadNotifications->count();
+        $user->unreadNotifications->markAsRead();
+
+
+        return view('notifikasi', compact(
+            'notifications',
+            'unreadCount'
+        ));
     }
 }

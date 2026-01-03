@@ -26,22 +26,15 @@ class UMKMProfileController extends Controller
         ]);
     }
 
-    public function edit($userId)
+    public function edit()
     {
-        if (Auth::id() != $userId) {
-            abort(403, 'Unauthorized');
-        }
+        $user = Auth::user();
 
-        $profile = UMKMProfile::with(['user'])
-            ->where('user_id', $userId)
-            ->firstOrFail();
+        $profile = $user->umkmProfile;
 
-        return view('Umkm.edit-profile-umkm', [
-            'profile' => $profile,
-            'headerTitle' => 'Edit Profile',
-            'user' => User::find($userId)
-        ]);
+        return view('Umkm.edit-profile-umkm', compact('profile', 'user'));
     }
+
 
     public function update(Request $request, $userId)
     {
