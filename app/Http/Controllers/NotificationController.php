@@ -9,12 +9,11 @@ class NotificationController extends Controller
 {
     public function index()
     {
-         $notifications = Auth::user()
-        ->notifications()
-        ->latest()
-        ->paginate(10);
+        $notifications = DatabaseNotification::where('notifiable_id', Auth::id())
+            ->latest()
+            ->paginate(10);
 
-    return view('notifikasi', compact('notifications'));
+        return view('notifikasi', compact('notifications'));
     }
 
     public function read($id)

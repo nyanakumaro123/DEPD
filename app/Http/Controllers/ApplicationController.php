@@ -42,15 +42,12 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $apps = Application::with('project.umkm')
-            ->where('pelamar_id', Auth::id())
-            ->get()
-            ->groupBy('status');
+        $applications = Application::with('project')
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
 
-        return view('explore-pelamar', compact('apps'));
-        return view('explore-pelamar', [
-            'headerTitle' => 'Daftar Lamaran Saya - PathLoka',
-            'apps' => $apps
-        ]);
+        return view('pelamar.applications', compact('applications'));
     }
+
 }

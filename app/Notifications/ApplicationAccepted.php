@@ -11,20 +11,20 @@ class ApplicationAccepted extends Notification
 
     public function __construct(
         public string $projectTitle,
-        public string $umkmName
+        public string $umkmName,
+        public $project
     ) {}
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
-    public function toDatabase($notifiable)
+    public function toArray($notifiable)
     {
         return [
-            'title' => 'Lamaran Diterima',
-            'message' => "Selamat! Anda diterima di {$this->projectTitle} oleh {$this->umkmName}",
-            'type' => 'application_accepted'
+            'type' => 'accepted',
+            'project_title' => $this->project->title,
         ];
     }
 }

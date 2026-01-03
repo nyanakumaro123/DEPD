@@ -11,20 +11,20 @@ class ApplicationRejected extends Notification
 
     public function __construct(
         public string $projectTitle,
-        public string $umkmName
+        public string $umkmName,
+        public $project
     ) {}
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable)
     {
         return [
-            'title' => 'Lamaran Ditolak',
-            'message' => "Lamaran Anda untuk {$this->projectTitle} ditolak oleh {$this->umkmName}",
-            'type' => 'application_rejected'
+            'type' => 'rejected',
+            'project_title' => $this->project->title,
         ];
     }
 }

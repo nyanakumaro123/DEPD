@@ -10,22 +10,23 @@ class InvitationNotification extends Notification
     use Queueable;
 
     public function __construct(
-        public string $umkmName,
-        public int $projectId
+        public $project,
+        public $umkm
     ) {}
 
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toArray($notifiable)
     {
         return [
             'type' => 'invitation',
-            'title' => 'Undangan Kerja',
-            'message' => "UMKM {$this->umkmName} mengundang kamu untuk bekerja.",
-            'project_id' => $this->projectId,
+            'project_id' => $this->project->id,
+            'project_title' => $this->project->title,
+            'umkm_name' => $this->umkm->umkm_name,
         ];
     }
 }
+
