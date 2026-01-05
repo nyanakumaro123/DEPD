@@ -92,6 +92,28 @@
                     </svg>
                 </a>
             </div>
+            <div class="fixed bottom-10 left-32">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="bg-red-600 hover:bg-red-700 text-white p-5 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center"
+                        title="Logout">
+                        
+                        <!-- Logout Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke-width="2" 
+                            stroke="currentColor" 
+                            class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 12H9m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
         @endif
     @endauth
 
