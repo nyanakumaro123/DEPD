@@ -29,12 +29,13 @@ class UmkmApplicationController extends Controller
     {
         $application->update(['status' => 'accepted']);
 
-        $application->pelamar->user->notify(
-        new ApplicationAccepted(
-            $application->project->title,
-            Auth::user()->name
-        )
-    );
+        $application->pelamar->notify(
+    new ApplicationAccepted(
+        $application->project->title,
+        Auth::user()->name,
+        $application->project
+    )
+);
 
         return back()->with('success', 'Pelamar diterima');
     }
@@ -45,6 +46,7 @@ class UmkmApplicationController extends Controller
 
         $application->pelamar->user->notify(
         new ApplicationRejected(
+           projectId: $application->project->id,
             $application->project->title,
             Auth::user()->name
         )

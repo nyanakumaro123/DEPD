@@ -17,6 +17,11 @@ class Application extends Model
         'notes',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function project()
     {
         return $this->belongsTo(Project::class);

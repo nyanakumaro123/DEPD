@@ -7,12 +7,10 @@ use Illuminate\Notifications\Notification;
 
 class ApplicationRejected extends Notification
 {
-    use Queueable;
-
     public function __construct(
+        public int $projectId,
         public string $projectTitle,
-        public string $umkmName,
-        public $project
+        public string $umkmName
     ) {}
 
     public function via($notifiable)
@@ -20,11 +18,13 @@ class ApplicationRejected extends Notification
         return ['database', 'broadcast'];
     }
 
-    public function toDatabase($notifiable)
+    public function toArray($notifiable)
     {
         return [
             'type' => 'rejected',
-            'project_title' => $this->project->title,
+            'project_id' => $this->projectId,
+            'project_title' => $this->projectTitle,
+            'umkm_name' => $this->umkmName,
         ];
     }
 }
