@@ -1,6 +1,10 @@
 @php
     $user = auth()->user();
-    $unread = $user?->unreadNotifications()->count() ?? 0;
+    $unread = $user 
+        ? \App\Models\Notification::where('user_id', $user->id)
+            ->where('is_read', false)
+            ->count()
+        : 0;
 @endphp
 
 <nav class="bg-[#355dad] px-6 py-3 shadow-md sticky top-0 z-50">
@@ -24,7 +28,7 @@
 
             {{-- NOTIFICATION --}}
             @php
-                $unread = auth()->user()->unreadNotifications()->count();
+                $unread = auth()->user()?->unreadNotificationsCount() ?? 0;
             @endphp
 
             <a href="{{ route('notifikasi') }}" class="relative text-white">

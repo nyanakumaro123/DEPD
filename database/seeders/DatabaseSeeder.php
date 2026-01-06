@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Factories\NotificationFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Notifications\NotificationSender;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +24,8 @@ class DatabaseSeeder extends Seeder
             PelamarProfileSeeder::class,
             UMKMProfileSeeder::class,
             RatingSeeder::class,
+            ProjectSeeder::class,
+            NotificationSeeder::class,
         ]);
     }
 }
