@@ -13,6 +13,7 @@ class InvitationController extends Controller
     public function invite($pelamarId, $projectId)
     {
         $pelamar = \App\Models\User::findOrFail($pelamarId);
+        $project = \App\Models\Project::findOrFail($projectId);
 
         $pelamar->notify(
             new InvitationNotification(
