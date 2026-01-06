@@ -52,7 +52,7 @@ class ApplicationController extends Controller
 
     public function tracking()
 {
-    $applications = Application::with('project.umkmProfile')
+    $applications = Application::with('project.umkm.umkmProfile')
         ->where('pelamar_id', Auth::id())
         ->latest()
         ->get();

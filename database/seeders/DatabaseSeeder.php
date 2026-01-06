@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             PelamarProfileSeeder::class,
             UMKMProfileSeeder::class,
             RatingSeeder::class,
+            ProjectSeeder::class,
+            ApplicationSeeder::class,
         ]);
     }
 }
