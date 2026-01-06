@@ -24,7 +24,9 @@ class ApplicationAccepted extends Notification
     {
         return [
             'type' => 'accepted',
-            'project_title' => $this->project->title,
+            'project_id' => $this->projectId,
+            'project_title' => $this->projectTitle,
+            'umkm_name' => $this->umkmName,
         ];
     }
 }

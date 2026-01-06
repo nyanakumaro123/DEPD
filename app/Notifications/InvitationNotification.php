@@ -25,7 +25,7 @@ class InvitationNotification extends Notification
             'type' => 'invitation',
             'project_id' => $this->project->id,
             'project_title' => $this->project->title,
-            'umkm_name' => $this->umkm->umkm_name,
+            'umkm_name' => $this->umkm->umkm_name ?? $this->umkm->name,
         ];
     }
 }

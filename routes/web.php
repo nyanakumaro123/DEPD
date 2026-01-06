@@ -92,6 +92,10 @@ Route::middleware(['role:pelamar'])->group(function () {
     // SAVE PROFILE PELAMAR
     Route::post('/save-profile-pelamar', [PelamarProfileController::class, 'update'])
     ->name('save-profile.pelamar');
+
+    Route::get('/pelamar/lamaran', [ApplicationController::class, 'tracking'])
+    ->middleware('role:pelamar')
+    ->name('pelamar.tracking');
 });
 
 
@@ -161,4 +165,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifikasi/{id}/reject',
         [InvitationController::class, 'reject'])
         ->name('notifikasi.reject');
+
+        Route::get('/lamaran-saya', [ApplicationController::class, 'index'])
+        ->name('pelamar.applications');
+
+    // Invitation
+    Route::get('/invitation/{id}/accept', [InvitationController::class, 'accept'])
+        ->name('invitation.accept');
+
+    Route::get('/invitation/{id}/reject', [InvitationController::class, 'reject'])
+        ->name('invitation.reject');
 });

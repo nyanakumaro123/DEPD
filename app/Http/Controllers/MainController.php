@@ -61,22 +61,4 @@ class MainController extends Controller
             'user' => $user
         ]);
     }
-
-    public function notifikasi()
-    {
-        $user = Auth::user();
-
-        $notifications = $user->notifications
-            ->latest()
-            ->paginate(10);
-
-        $unreadCount = $user->unreadNotifications->count();
-        $user->unreadNotifications->markAsRead();
-
-
-        return view('notifikasi', compact(
-            'notifications',
-            'unreadCount'
-        ));
-    }
 }

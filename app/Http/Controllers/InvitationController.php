@@ -16,8 +16,8 @@ class InvitationController extends Controller
 
         $pelamar->notify(
             new InvitationNotification(
-                Auth::user()->name,
-                $projectId
+                $project,
+                Auth::user()->umkmProfile // atau Auth::user()
             )
         );
 
