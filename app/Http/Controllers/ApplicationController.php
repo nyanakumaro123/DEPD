@@ -51,14 +51,14 @@ class ApplicationController extends Controller
     }
 
     public function tracking()
-{
-    $applications = Application::with('project.umkm.umkmProfile')
-        ->where('pelamar_id', Auth::id())
-        ->latest()
-        ->get();
+    {
+        $applications = Application::with('project.umkm.umkmProfile')
+            ->where('pelamar_id', Auth::id())
+            ->latest()
+            ->get();
 
-    return view('Pelamar.tracking', compact('applications'));
-}
+        return view('Pelamar.tracking', compact('applications'));
+    }
 
 
 }

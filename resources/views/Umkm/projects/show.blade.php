@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 bg-[#FFF7ED] min-h-screen">
 
 @include('layouts.navbar')
+<div class="p-6 bg-[#FFF7ED] min-h-screen">
+
 <div class="p-6 max-w-6xl mx-auto">
 
     <h1 class="text-2xl font-bold mb-2">{{ $project->title }}</h1>
@@ -21,7 +22,7 @@
                     </p>
 
                     @if($app->pelamar->pelamarProfile->portfolio)
-                        <a href="{{ asset('storage/'.$app->pelamar->pelamarProfile->portfolio) }}"
+                        <a href="{{ asset('storage/portfolio/' . $app->pelamar->pelamarProfile->portfolio) }}"
                            target="_blank"
                            class="text-blue-600 text-sm">
                             📄 Lihat Portfolio

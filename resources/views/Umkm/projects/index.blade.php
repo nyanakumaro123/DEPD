@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 bg-[#FFF7ED] min-h-screen">
 
 @include('layouts.navbar')
+<div class="p-6 bg-[#FFF7ED] min-h-screen">
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Project Saya</h1>
 

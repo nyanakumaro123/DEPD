@@ -9,9 +9,24 @@ class MainController extends Controller
 {
     public function landing()
     {
-        return view('landing', [
-            'headerTitle' => 'PathLoka - Find Your Career Path'
-        ]);
+        $user = Auth::user();
+
+        if (!$user) {
+            return view('landing', [
+                'headerTitle' => 'PathLoka - Find Your Career Path'
+            ]);
+        }
+
+        // Redirect based on role
+        if ($user->role === 'umkm') {
+            return redirect()->route('home.umkm');
+        }
+        if ($user->role === 'pelamar') {
+            return redirect()->route('home.pelamar');
+        }
+
+        // fallback (unknown role)
+        abort(403, 'Unauthorized role');
     }
 
     // Login Views
