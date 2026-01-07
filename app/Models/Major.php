@@ -15,6 +15,6 @@ class Major extends Model
 
     public function pelamarProfiles()
     {
-        return $this->hasMany(PelamarProfile::class);
+        return $this->hasMany(PelamarProfile::class, 'major_id');
     }
 }

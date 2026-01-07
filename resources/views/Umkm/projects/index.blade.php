@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 bg-[#FFF7ED] min-h-screen">
 
 @include('layouts.navbar')
 <div class="p-6 max-w-6xl mx-auto">

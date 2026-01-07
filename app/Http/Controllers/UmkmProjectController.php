@@ -16,7 +16,7 @@ class UMKMProjectController extends Controller
             ->latest()
             ->get();
 
-        return view('umkm.projects.index', compact('projects'));
+        return view('Umkm.projects.index', compact('projects'));
     }
 
     public function create()
@@ -66,7 +66,7 @@ class UMKMProjectController extends Controller
             'applications.pelamar.pelamarProfile.major'
         ]);
 
-        return view('umkm.projects.show', compact('project'));
+        return view('Umkm.projects.show', compact('project'));
     }
 
     public function edit(Project $project)

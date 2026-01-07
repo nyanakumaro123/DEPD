@@ -13,7 +13,7 @@ class NotificationFactory extends Factory
 
     public function definition()
     {
-        $types = ['application_submitted', 'invitation', 'accepted', 'rejected'];
+        $types = ['application submitted', 'invitation', 'accepted', 'rejected'];
         $type = $this->faker->randomElement($types);
 
         $project = Project::inRandomOrder()->first(); // get random project
@@ -22,8 +22,8 @@ class NotificationFactory extends Factory
         return [
             'user_id' => $user->id ?? 1,
             'type' => $type,
-            'title' => $type === 'application_submitted' ? $this->faker->sentence(4) : null,
-            'message' => $type === 'application_submitted' ? $this->faker->sentence(8) : null,
+            'title' => $type === 'application submitted' ? $this->faker->sentence(4) : null,
+            'message' => $type === 'application submitted' ? $this->faker->sentence(8) : null,
             'project_id' => $project->id ?? null,
             'is_read' => $this->faker->boolean(10),
         ];

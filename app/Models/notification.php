@@ -12,10 +12,12 @@ class notification extends Model
 
     protected $fillable = [
         'user_id',
-        'type', // application_submitted, invitation || accepted, rejected
+        'type', // application submitted, invitation, application || accepted, rejected
         'title',
         'message',
         'project_id',
+        'invitation_id',
+        'application_id',
         'is_read'
     ];
 
@@ -27,5 +29,14 @@ class notification extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function invitation(): BelongsTo
+    {
+        return $this->belongsTo(Invitation::class);
+    }
+    public function application(): BelongsTo
+    {
+        return $this->belongsTo(Application::class);
     }
 }

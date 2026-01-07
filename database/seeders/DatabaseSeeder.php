@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             UMKMProfileSeeder::class,
             RatingSeeder::class,
             ProjectSeeder::class,
-            NotificationSeeder::class,
+            //NotificationSeeder::class,
             ApplicationSeeder::class,
         ]);
     }
