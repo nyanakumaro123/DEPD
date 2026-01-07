@@ -49,13 +49,17 @@ class UmkmApplicationController extends Controller
     {
         $application->update(['status' => 'rejected']);
 
-        $application->pelamar->user->notify(
-        new ApplicationRejected(
-        $application->project->id,
-        $application->project->title,
-        Auth::user()->name
-    )
-    );
+        // Message Notification
+        $projectTitle = $application->project->title;
+        $message = "Permohonan anda di {$projectTitle} telah ditolak";
+
+        Notification::create([
+            'user_id' => $application->pelamar_id,
+            'type' => 'rejected',
+            'title' => 'Permohonan Ditolak',
+            'message' => $message,
+            'project_id' => $application->project_id,
+        ]);
 
         return back()->with('success', 'Pelamar ditolak');
     }
