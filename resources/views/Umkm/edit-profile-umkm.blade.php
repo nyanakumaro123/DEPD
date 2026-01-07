@@ -52,6 +52,12 @@
                 </div>
             </div>
 
+            <div class="mt-16">
+                <button type="submit" class="w-full bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold text-xl py-4 rounded-xl shadow-lg transition transform hover:scale-[1.01]">
+                    Selesai
+                </button>
+            </div>
+
         </div>
     </div>
 </div>

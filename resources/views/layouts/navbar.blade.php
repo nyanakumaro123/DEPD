@@ -40,14 +40,11 @@
                 @endif
             </a>
 
-
-
             {{-- PROFILE --}}
             <a href="{{ route($user->role === 'pelamar' ? 'profile.pelamar' : 'profile.umkm', $user->id) }}"
                class="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
-                <img src="{{ $user->profile
-                    ? asset('storage/profile_pictures/'.$user->profile)
-                    : asset('img/user_profile.webp') }}"
+                <img src="{{ $user->profile ? asset('storage/profile_pictures/' . $user->profile)
+                : asset('img/user_profile.webp') }}"
                      class="w-full h-full object-cover">
             </a>
 

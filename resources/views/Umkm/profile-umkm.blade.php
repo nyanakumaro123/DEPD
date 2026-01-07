@@ -13,7 +13,8 @@
             {{-- PROFILE PICTURE --}}
             <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div class="h-64 w-64 lg:h-80 lg:w-80 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white">
-                    <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('img/user_profile.webp') }}" 
+                    <img src="{{ $profile->user->profile ? asset('storage/profile_pictures/' . $profile->user->profile)
+                    : asset('img/user_profile.webp') }}" 
                          alt="Profile Picture" 
                          class="h-full w-full object-cover">
                 </div>
@@ -22,10 +23,6 @@
             {{-- INFO --}}
             <div class="lg:col-span-8 space-y-8">
                 <h2 class="text-5xl font-bold text-[#355dad] mb-2 font-serif">{{ $profile->umkm_name }}</h2>
-
-                <h2 class="text-5xl font-bold text-[#355dad] font-serif">
-                    {{ Auth::user()->umkmProfile->umkm_name ?? Auth::user()->name }}
-                </h2>
                 {{-- RATING --}}    
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-[#355dad]">
@@ -65,17 +62,6 @@
                         @empty
                             <p class="text-gray-500 text-sm">No ratings yet.</p>
                         @endforelse
-                </div>
-
-                {{-- RATING --}}
-                <div>
-                    <h3 class="text-xl font-bold text-[#355dad] mb-3">
-                        Rating <span class="text-[#dcbfa6]">★ 0 / 5</span>
-                    </h3>
-
-                    <div class="bg-[#d1fae5] border border-green-300 rounded-xl p-4 font-bold text-green-800">
-                        Belum ada ulasan
-                    </div>
                 </div>
 
                 {{-- DESKRIPSI --}}
