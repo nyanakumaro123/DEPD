@@ -60,9 +60,14 @@
                     </p>
                 </div>
 
-                @if($notif->type === 'invitation' || $notif->type === 'application')
-                    <a href="{{-- route('invitation.detail', $notif->id) --}}"
-                       class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                @if($notif->type === 'invitation')
+                    <a href="{{ route('invitation.detail', {{-- $notif->invitation_id --}}) }}"
+                    class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                        Detail
+                    </a>
+                @elseif($notif->type === 'application')
+                    <a href="{{ route('umkm.applications', {{-- $notif->application_id --}}) }}"
+                    class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                         Detail
                     </a>
                 @else
