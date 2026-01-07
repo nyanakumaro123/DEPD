@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->count(5)->create([
+            'role' => 'umkm',
+        ]);
+
         // Untuk panggil seluruh seed
         $this->call([
             UserSeeder::class,

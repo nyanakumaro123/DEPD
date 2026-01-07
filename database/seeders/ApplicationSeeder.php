@@ -2,26 +2,31 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use App\Models\Application;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 
 class ApplicationSeeder extends Seeder
 {
     public function run(): void
     {
-        $projects = Project::all();
         $pelamars = User::where('role', 'pelamar')->get();
+        $projects = Project::all();
+
+        if ($pelamars->isEmpty() || $projects->isEmpty()) {
+            return;
+        }
 
         foreach ($pelamars as $pelamar) {
-            foreach ($projects->take(2) as $project) {
-                Application::create([
-                    'project_id' => $project->id,
+            $randomProjects = $projects->random(min(3, $projects->count()));
+
+            foreach ($randomProjects as $project) {
+                Application::firstOrCreate([
                     'pelamar_id' => $pelamar->id,
-                    'status' => collect(['pending', 'accepted', 'rejected'])->random(),
-                    'source' => 'apply',
-                    'notes' => 'Dummy application data',
+                    'project_id' => $project->id,
+                ], [
+                    'status' => collect(['pending','accepted','rejected'])->random(),
                 ]);
             }
         }

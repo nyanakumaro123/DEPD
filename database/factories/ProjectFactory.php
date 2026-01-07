@@ -2,36 +2,38 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
 {
     protected $model = Project::class;
 
-    public function definition()
+    public function definition(): array
     {
-        $salaryFrequencies = ['per_hour', 'per_day', 'total'];
-        $categories = ['Design', 'Development', 'Marketing', 'Research', 'Animation'];
+        $categories = [
+            'Branding','Design','Marketing','Content',
+            'Development','Photography','Videography',
+            'Social Media','Finance'
+        ];
 
         return [
-            'umkm_id' => User::inRandomOrder()->first()->id ?? 1,
-            'title' => $this->faker->catchPhrase,
+            'umkm_id' => User::where('role', 'umkm')->inRandomOrder()->first()?->id,
+            'title' => $this->faker->jobTitle(),
             'category' => $this->faker->randomElement($categories),
-            'rewards' => json_encode([
-                'bonus' => $this->faker->optional()->numberBetween(50, 500),
-                'gift' => $this->faker->optional()->word,
-            ]),
-            'time_start' => $this->faker->time('H:i:s'),
-            'time_end' => $this->faker->time('H:i:s'),
-            'salary_amount' => $this->faker->randomFloat(2, 10, 500),
-            'salary_frequency' => $this->faker->randomElement($salaryFrequencies),
-            'currency' => $this->faker->randomElement(['USD','IDR','EUR']),
-            'description' => $this->faker->paragraph(3),
-            'syarat_path' => $this->faker->optional()->filePath(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'employment_type' => $this->faker->randomElement(['Freelance', 'Part Time', 'Full Time']),
+            'work_system' => $this->faker->randomElement(['Remote', 'Onsite', 'Hybrid']),
+            'working_days' => $this->faker->randomElement(['Senin–Jumat', 'Senin–Sabtu']),
+            'time_start' => '08:00',
+            'time_end' => '17:00',
+            'salary_min' => 1000000,
+            'salary_max' => 3000000,
+            'currency' => 'IDR',
+            'description' => $this->faker->paragraph(4),
+            'benefits' => 'Sertifikat, Pengalaman kerja',
+            'application_deadline' => now()->addDays(rand(7, 30)),
+            'status' => 'open',
         ];
     }
 }
