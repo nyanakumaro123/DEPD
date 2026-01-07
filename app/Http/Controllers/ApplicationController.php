@@ -6,7 +6,6 @@ use App\Models\Application;
 use App\Models\Project;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Notification;
 
 use function Ramsey\Uuid\v1;
 
