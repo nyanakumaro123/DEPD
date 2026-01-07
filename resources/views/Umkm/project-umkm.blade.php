@@ -4,7 +4,7 @@
 <div class="min-h-screen bg-[#fff8f0] font-sans">
 
     {{-- NAVBAR --}}
-    <x-navbar-umkm />
+    @include('layouts.navbar')
 
     {{-- CONTENT --}}
     <div class="max-w-4xl mx-auto p-6">

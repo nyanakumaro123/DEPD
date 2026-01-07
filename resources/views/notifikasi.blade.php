@@ -1,55 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#FFF7ED] ">
+<div class="max-w-4xl mx-auto py-6">
 
-    {{-- @include('layouts.navbar') --}}
+    <h1 class="text-2xl font-bold mb-4">Notifikasi</h1>
 
-    <!-- Page Title -->
-    <h1 class="text-4xl font-bold text-blue-700 mb-6">Notifikasi</h1>
+    @forelse ($notifications as $notif)
+        <div class="bg-white shadow rounded-lg p-4 mb-3
+            {{ $notif->read_at ? 'opacity-70' : 'border-l-4 border-blue-500' }}">
 
-    <div class="space-y-4 max-w-4xl">
+            {{-- TYPE --}}
+            @php $data = $notif->data; @endphp
 
-        {{-- @foreach([1,2,3,4,5,6] as $item) --}}
-        <div class="bg-blue-100 rounded-lg p-3 flex items-start gap-3 shadow-sm">
+            {{-- Lamaran Masuk (UMKM) --}}
+            @if($data['type'] === 'application_submitted')
+                <p class="font-semibold">{{ $data['title'] }}</p>
+                <p class="text-sm text-gray-600">{{ $data['message'] }}</p>
 
-            <!-- Notification Image -->
-            <img 
-                src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80"
-                class="w-12 h-12 rounded-md object-cover"
-            />
+            {{-- Undangan --}}
+            @elseif($data['type'] === 'invitation')
+                <p class="font-semibold">Undangan Project</p>
+                <p class="text-sm">
+                    Kamu diundang ke project
+                    <b>{{ $data['project_title'] }}</b>
+                    oleh {{ $data['umkm_name'] }}
+                </p>
 
-            <!-- Message Content -->
-            <div class="flex-1 text-blue-900 text-sm">
+                <div class="mt-3 flex gap-2">
+                    <a href="{{ route('invitation.accept', $notif->id) }}"
+                       class="px-3 py-1 bg-green-600 text-white rounded text-sm">
+                        Accept
+                    </a>
+                    <a href="{{ route('invitation.reject', $notif->id) }}"
+                       class="px-3 py-1 bg-red-600 text-white rounded text-sm">
+                        Reject
+                    </a>
+                </div>
 
-                <!-- Example of Short Message -->
-                {{-- @if($loop->index !== 2) --}}
-                    <p class="font-semibold">Selamat! Magang anda diterima di Restomie!</p>
-                {{-- @else --}}
-                <!-- Example of Long Expandable Message -->
-                    <details class="group">
-                        <summary class="font-semibold cursor-pointer select-none">
-                            Magang anda ditolak Restomie.
-                        </summary>
+            {{-- Status Lamaran --}}
+            @elseif(in_array($data['type'], ['accepted','rejected']))
+                <p class="font-semibold">
+                    Lamaran {{ ucfirst($data['type']) }}
+                </p>
+                <p class="text-sm">
+                    Project: {{ $data['project_title'] }}
+                </p>
+            @endif
 
-                        <p class="mt-1 text-gray-700">
-                            "ABCIWAKDARIWAKoswoskJDWIJDJOQDNQNALLOEMBVFISHHCK{RYOP MAIACOJD JIJK
-                            SKKDNJWBJDJDJADJNASDANDDKKWPPWWWWWWWWWWWWWWWWWWWWWPPPPPPP..."
-                        </p>
-                    </details>
-                {{-- @endif --}}
-
-            </div>
-
-            <!-- Optional Dropdown Icon -->
-            <button class="text-blue-700 text-xl px-1">
-                ˅
-            </button>
-
+            <p class="text-xs text-gray-400 mt-2">
+                {{ $notif->created_at->diffForHumans() }}
+            </p>
         </div>
-        {{-- @endforeach --}}
+    @empty
+        <p class="text-gray-500">Tidak ada notifikasi</p>
+    @endforelse
 
+    <div class="mt-4">
+        {{ $notifications->links() }}
     </div>
-
 </div>
 @endsection

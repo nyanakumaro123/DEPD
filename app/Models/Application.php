@@ -10,8 +10,17 @@ class Application extends Model
     use HasFactory;
 
     protected $fillable = [
-        'project_id','pelamar_id','status'
+        'project_id',
+        'pelamar_id',
+        'status',
+        'source',
+        'notes',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function project()
     {
@@ -21,5 +30,15 @@ class Application extends Model
     public function pelamar()
     {
         return $this->belongsTo(User::class, 'pelamar_id');
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === 'pending';
+    }
+
+    public function isInvitation(): bool
+    {
+        return $this->source === 'invitation';
     }
 }

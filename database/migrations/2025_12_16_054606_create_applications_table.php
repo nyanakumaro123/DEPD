@@ -11,7 +11,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->foreignId('pelamar_id')->constrained('users')->cascadeOnDelete();
-            $table->enum('status', ['pending','accepted','rejected'])->default('pending');
+            $table->enum('status', [
+            'pending',
+            'accepted',
+            'rejected',
+            'invited'
+        ])->default('pending');
             $table->timestamps();
         });
     }

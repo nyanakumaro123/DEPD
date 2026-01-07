@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
     public function loginPelamar(Request $request)
     {
         $credentials = $request->validate([
@@ -67,11 +68,16 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        User::create([
+        $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
             'role'     => 'pelamar',
+        ]);
+
+        PelamarProfile::create([
+            'user_id' => $user->id,
+            'major_id' => Major::where('name', 'Not Specified')->value('id'),
         ]);
 
         return redirect()->route('login.pelamar')

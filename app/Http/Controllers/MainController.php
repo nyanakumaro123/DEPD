@@ -14,32 +14,50 @@ class MainController extends Controller
         ]);
     }
 
-    public function umkmHome()
+    // Login Views
+    public function loginPelamar()
     {
-        $user = Auth::id();
-        
-        return view('Umkm.home-umkm', [
-            'headerTitle' => 'UMKM Dashboard - PathLoka',
-            'user' => $user
+        return view('Pelamar.login-pelamar', [
+            'headerTitle' => 'Login Pelamar - PathLoka'
+        ]);
+    }
+    public function loginUmkm()
+    {
+        return view('Umkm.login-umkm', [
+            'headerTitle' => 'Login UMKM - PathLoka'
         ]);
     }
 
+    // Register Views
+    public function registerPelamar()
+    {
+        return view('Pelamar.register-pelamar', [
+            'headerTitle' => 'Register Pelamar - PathLoka'
+        ]);
+    }
+    public function registerUmkm()
+    {
+        return view('Umkm.register-umkm', [
+            'headerTitle' => 'Register UMKM - PathLoka'
+        ]);
+    }
+
+    // Home Views
     public function pelamarHome()
     {
-        $user = Auth::id();
+        $user = Auth::user();
 
         return view('Pelamar.home-pelamar', [
             'headerTitle' => 'Pelamar Dashboard - PathLoka',
             'user' => $user
         ]);
     }
-
-    public function notifikasi()
+    public function umkmHome()
     {
-        $user = Auth::id();
-
-        return view('Pelamar.notifikasi-pelamar', [
-            'headerTitle' => 'Notifikasi',
+        $user = Auth::user();
+        
+        return view('Umkm.home-umkm', [
+            'headerTitle' => 'UMKM Dashboard - PathLoka',
             'user' => $user
         ]);
     }

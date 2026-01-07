@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#fff8f0] font-sans pb-10">
+<div class="min-h-screen bg-[#fff8f0] font-sans pb-12">
 
     @include('layouts.navbar')
 
     <div class="max-w-6xl mx-auto p-6 pt-8">
-        
-        <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Edit Profile</h1>
 
         <form action="{{ route('save-profile.pelamar', $profile->user->id) }}" method="POST" enctype="multipart/form-data"> @csrf
             
@@ -31,6 +29,7 @@
 
                 </div>
 
+                {{-- DATA --}}
                 <div class="lg:col-span-8 space-y-6">
                     
                     <div class="space-y-2">
@@ -66,10 +65,15 @@
                     </div>
 
                     <div class="pt-4 flex items-center gap-4">
-                        <label class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6 rounded-lg shadow-md transition transform active:scale-95">
+                        <label
+                            class="cursor-pointer bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-6
+                                rounded-lg shadow-md transition transform active:scale-95
+                                shrink-0 w-[240px] text-center"
+                        >
                             Upload Portofolio (PDF)
                             <input type="file" name="portfolio" id="portfolioInput" class="hidden" accept=".pdf">
                         </label>
+
                         
                         <span id="portfolioName" class="text-[#c4a484] font-bold text-lg">No File Selected</span>
                     </div>
@@ -77,13 +81,18 @@
                 </div>
             </div>
 
-            <div class="mt-16">
-                <button type="submit" class="w-full bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold text-xl py-4 rounded-xl shadow-lg transition transform hover:scale-[1.01]">
-                    Done
+            <div class="pt-8 flex justify-end lg:pr-12">
+                <button
+                    type="submit"
+                    class="min-w-[240px] bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold py-3 px-8
+                        rounded-lg shadow-md transition transform active:scale-95"
+                >
+                    Save Profile
                 </button>
             </div>
 
-        </form>
+        </div>
+
     </div>
 </div>
 

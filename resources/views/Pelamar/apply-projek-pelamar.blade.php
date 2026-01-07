@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-[#FFF7ED] ">
 
-    <x-navbar-pelamar />
+    @include('layouts.navbar')
 
     <!-- Page Title -->
     <h1 class="text-3xl font-bold text-blue-700 mb-6">

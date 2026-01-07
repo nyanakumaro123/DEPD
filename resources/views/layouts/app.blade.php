@@ -19,3 +19,9 @@
 
 </body>
 </html>
+
+@if ($errors->any())
+    <script>
+        alert(`{{ implode('\n', $errors->all()) }}`);
+    </script>
+@endif

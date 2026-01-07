@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\UMKMProfile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UMKMProfileController extends Controller
 {
@@ -25,22 +26,15 @@ class UMKMProfileController extends Controller
         ]);
     }
 
-    public function edit($userId)
+    public function edit()
     {
-        if (Auth::id() != $userId) {
-            abort(403, 'Unauthorized');
-        }
+        $user = Auth::user();
 
-        $profile = UMKMProfile::with(['user'])
-            ->where('user_id', $userId)
-            ->firstOrFail();
+        $profile = $user->umkmProfile;
 
-        return view('Umkm.edit-profile-umkm', [
-            'profile' => $profile,
-            'headerTitle' => 'Edit Profile',
-            'user' => User::find($userId)
-        ]);
+        return view('Umkm.edit-profile-umkm', compact('profile', 'user'));
     }
+
 
     public function update(Request $request, $userId)
     {
@@ -79,12 +73,10 @@ class UMKMProfileController extends Controller
             }
 
             $file = $request->file('profile_photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('profile_pictures', $filename, 'public');
 
-            $user->update([
-                'profile' => $filename,
-            ]);
+            $user->update(['profile' => $filename,]);
         }
 
 

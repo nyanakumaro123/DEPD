@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-[#fff8f0] font-sans pb-10">
+<div class="min-h-screen bg-[#fff8f0] font-sans pb-12">
 
     @include('layouts.navbar')
 
     <div class="max-w-6xl mx-auto p-6 pt-8">
-        
-        <h1 class="text-4xl font-bold text-[#355dad] mb-8 font-serif">Profile</h1>
-
         <form action="{{ route('save-profile.umkm', $profile->user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             
@@ -55,13 +52,7 @@
                 </div>
             </div>
 
-            <div class="mt-16">
-                <button type="submit" class="w-full bg-[#355dad] hover:bg-[#2a4a8b] text-white font-bold text-xl py-4 rounded-xl shadow-lg transition transform hover:scale-[1.01]">
-                    Selesai
-                </button>
-            </div>
-
-        </form>
+        </div>
     </div>
 </div>
 
