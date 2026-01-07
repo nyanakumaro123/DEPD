@@ -6,7 +6,7 @@ use App\Models\Application;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ApplicationSubmitted;
-
+use App\Models\Notification;
 
 use function Ramsey\Uuid\v1;
 
@@ -24,18 +24,25 @@ class ApplicationController extends Controller
             return back()->withErrors('Kamu sudah melamar lowongan ini');
         }
 
-        Application::create([
+        $application = Application::create([
             'project_id' => $project->id,
             'pelamar_id' => $user->id,
             'status' => 'pending',
         ]);
 
-        $project->umkm->notify(
-        new ApplicationSubmitted(
-            Auth::user()->name,
-            $project->title
-        )
-    );
+        // Message Notification
+        $pelamarName = Auth::user()->name;
+        $projectTitle = Project::find($project->id)->title;
+        $message = "{$pelamarName} mengajukan permohonan bergabung dalam proyek {$projectTitle}";
+
+        Notification::create([
+            'user_id' => $project->umkm->id,
+            'type' => 'application',
+            'title' => 'Permohonan Bergabung Proyek',
+            'message' => $message,
+            'project_id' => $project->project_id,
+            'application_id' => $application->id,
+        ]);
 
         return back()->with('success', 'Lamaran berhasil dikirim');
     }

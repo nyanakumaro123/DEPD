@@ -36,7 +36,7 @@
                         $textColor = 'text-[#355dad]';
                         $statusColor = 'bg-white text-[#355dad]';
                         break;
-                    case 'application_submitted':
+                    case 'application submitted':
                         $bgColor = 'bg-[#fff4e6]';
                         $borderColor = 'border-yellow-300';
                         $textColor = 'text-[#b45309]';
@@ -56,17 +56,11 @@
                         {{ $notif->user->name }}
                     </h3>
                     <p class="text-gray-700 text-sm">
-                        @if($notif->type === 'invitation')
-                            You are invited to project <b>{{ $notif->project->title ?? 'Unnamed Project' }}</b>
-                        @elseif($notif->type === 'application_submitted')
-                            {{ $notif->title }} — {{ $notif->message }}
-                        @elseif(in_array($notif->type, ['accepted','rejected']))
-                            Your application for <b>{{ $notif->project->title ?? 'Unnamed Project' }}</b> was {{ $notif->type }}
-                        @endif
+                        {{ $notif->title }} — {{ $notif->message }}
                     </p>
                 </div>
 
-                @if($notif->type === 'invitation')
+                @if($notif->type === 'invitation' || $notif->type === 'application')
                     <a href="{{-- route('invitation.detail', $notif->id) --}}"
                        class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                         Detail

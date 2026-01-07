@@ -9,6 +9,7 @@ use App\Notifications\StatusNotification;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class InvitationController extends Controller
 {
@@ -53,10 +54,24 @@ class InvitationController extends Controller
             'project_id' => 'required|exists:projects,id',
         ]);
 
-        Invitation::create([
+        $invitation = Invitation::create([
             'umkm_id' => Auth::id(),
             'pelamar_id' => $request->pelamar_id,
             'project_id' => $request->project_id,
+        ]);
+
+        // Message Notification
+        $umkmName = Auth::user()->umkmProfile->name;
+        $projectTitle = Project::find($request->project_id)->title;
+        $message = "Anda diundang oleh {$umkmName} untuk bergabung dalam proyek {$projectTitle}";
+
+        Notification::create([
+            'user_id' => $request->pelamar_id,
+            'type' => 'invitation',
+            'title' => 'Undangan Bergabung Proyek',
+            'message' => $message,
+            'project_id' => $request->project_id,
+            'invitation_id' => $invitation->id,
         ]);
 
         return back()->with('success', 'Undangan berhasil dikirim');
