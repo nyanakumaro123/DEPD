@@ -110,7 +110,7 @@ class ProjectSeeder extends Seeder
 
         foreach ($projects as $project) {
             Project::create(array_merge($project, [
-                'umkm_id' => 2,
+                'umkm_id' => 7,
             ]));
         }
     }
