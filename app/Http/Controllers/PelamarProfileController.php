@@ -14,12 +14,14 @@ class PelamarProfileController extends Controller
 {
     public function show($userId)
     {
-        $profile = PelamarProfile::with(['user', 'major'])
+        $profile = PelamarProfile::with('user', 'major')
             ->where('user_id', $userId)
             ->firstOrFail();
 
         return view('Pelamar.profile-pelamar', [
             'profile' => $profile,
+            'major' => $profile->major->name,
+            'phone' => $profile->phone,
             'headerTitle' => $profile->user->name . " Profile",
             'user' => Auth::user()
         ]);
@@ -31,7 +33,7 @@ class PelamarProfileController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        $profile = PelamarProfile::with(['user', 'major'])
+        $profile = PelamarProfile::with('user', 'major')
             ->where('user_id', $userId)
             ->firstOrFail();
 
@@ -40,6 +42,7 @@ class PelamarProfileController extends Controller
         return view('Pelamar.edit-profile-pelamar', [
             'profile' => $profile,
             'majors' => $majors,
+            'phone' => $profile->phone,
             'headerTitle' => 'Edit Profile',
             'user' => Auth::user()
         ]);
@@ -55,8 +58,7 @@ class PelamarProfileController extends Controller
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'phone' => 'nullable|string|max:20',
-            'portfolio' => 'nullable|mimes:pdf|max:5120', // optional PDF upload
+            'phone' => 'nullable|string|max:20'
         ]);
 
         $profile = PelamarProfile::where('user_id', $userId)->firstOrFail();
