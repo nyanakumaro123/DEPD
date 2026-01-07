@@ -55,6 +55,7 @@ class PelamarProfileController extends Controller
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'phone' => 'nullable|string|max:20',
             'portfolio' => 'nullable|mimes:pdf|max:5120', // optional PDF upload
         ]);
 
@@ -64,11 +65,13 @@ class PelamarProfileController extends Controller
         // Update user table
         $user->update([
             'name' => $request->name,
-            'email' => $request->email, // optional
+            'email' => $request->email,
         ]);
 
         // Update major_id
         $profile->update(['major_id' => $validated['major_id'] ?? $profile->major_id]);
+        // Update phone
+        $profile->update(['phone' => $validated['phone'] ?? $profile->phone]);
 
         // Handle profile photo upload (if present)
         if ($request->hasFile('profile_photo')) {

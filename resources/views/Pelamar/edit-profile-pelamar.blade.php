@@ -54,8 +54,10 @@
                         </div>
                         <div class="space-y-2">
                             <label class="block text-[#355dad] font-bold text-xl">Contact</label>
-                            <input type="text" name="contact" value="08126523895" 
-                                   class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]">
+                            <input type="text" name="phone" value="{{ $profile->phone }}"
+                                    class="w-full bg-[#e0e7ff] text-[#355dad] font-semibold text-lg py-3 px-4 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-[#355dad]"
+                                    placeholder="Enter contact number"
+                            >
                         </div>
                         <div class="space-y-2">
                             <label class="block text-[#355dad] font-bold text-xl">Email</label>
