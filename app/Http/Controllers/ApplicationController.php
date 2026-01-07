@@ -30,7 +30,7 @@ class ApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        $project->umkm->user->notify(
+        $project->umkm->notify(
         new ApplicationSubmitted(
             Auth::user()->name,
             $project->title
