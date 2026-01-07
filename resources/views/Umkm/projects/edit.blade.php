@@ -25,10 +25,26 @@
             </div>
 
             <!-- Kategori -->
-            <div class="mb-5">
-                <label class="block text-blue-200 font-medium mb-2">Kategori</label>
-                <input type="text" name="category" value="{{ old('category', $project->category) }}" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white placeholder-blue-300/70 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Contoh: Desain Grafis, Marketing" required>
-                @error('category') <span class="text-red-400 text-sm mt-1 block">{{ $message }}</span> @enderror
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2">Kategori</label>
+                <select name="category" class="w-full border rounded-lg p-2" required>
+                    @foreach ([
+                        'Branding',
+                        'Design',
+                        'Marketing',
+                        'Content',
+                        'Development',
+                        'Photography',
+                        'Videography',
+                        'Social Media',
+                        'Finance'
+                    ] as $cat)
+                        <option value="{{ $cat }}"
+                            {{ old('category', $project->category) == $cat ? 'selected' : '' }}>
+                            {{ $cat }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Deskripsi -->

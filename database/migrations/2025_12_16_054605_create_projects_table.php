@@ -11,7 +11,17 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('umkm_id')->constrained('users')->cascadeOnDelete();
             $table->string('title');
-            $table->string('category');
+            $table->enum('category', [
+                'Branding',
+                'Design',
+                'Marketing',
+                'Content',
+                'Development',
+                'Photography',
+                'Videography',
+                'Social Media',
+                'Finance'
+            ]);
             $table->json('rewards')->nullable();
             $table->time('time_start');
             $table->time('time_end');

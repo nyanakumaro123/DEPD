@@ -26,7 +26,13 @@ class PelamarProfileSeeder extends Seeder
         ]);
 
         PelamarProfile::create([
-            'user_id' => 8,
+            'user_id' => 7,
+            'major_id' => $major->id,
+            'portfolio' => 'Portfolio_Design_Templatee.pdf',
+        ]);
+
+        PelamarProfile::create([
+            'user_id' => 10,
             'major_id' => $major->id,
             'portfolio' => 'Portfolio_Design_Templatee.pdf',
         ]);

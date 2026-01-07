@@ -57,4 +57,8 @@ class User extends Authenticatable
                     ->count();
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(\App\Models\Notification::class);
+    }
 }
