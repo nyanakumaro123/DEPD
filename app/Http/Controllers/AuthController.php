@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Major;
+use App\Models\PelamarProfile;
 use App\Models\User;
 use App\Models\UmkmProfile;
 use Illuminate\Http\Request;
