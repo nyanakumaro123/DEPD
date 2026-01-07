@@ -78,6 +78,19 @@
                     </div>
                 </div>
 
+                {{-- Logout Button --}}
+                @auth
+                    <div class="flex justify-end">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" 
+                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                @endauth
+
             </div>
         </div>
     </div>

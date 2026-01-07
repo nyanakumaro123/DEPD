@@ -124,6 +124,21 @@ Route::middleware(['role:umkm'])->group(function () {
     Route::get('/umkm/projects', [UMKMProjectController::class, 'index'])
         ->name('umkm.projects.index');
 
+    Route::get('/umkm/projects/create', [UMKMProjectController::class, 'create'])
+        ->name('umkm.projects.create');
+
+    Route::post('/umkm/projects', [UMKMProjectController::class, 'store'])
+        ->name('umkm.projects.store');
+
+    Route::get('/umkm/projects/{project}/edit', [UMKMProjectController::class, 'edit'])
+        ->name('umkm.projects.edit');
+
+    Route::put('/umkm/projects/{project}', [UMKMProjectController::class, 'update'])
+        ->name('umkm.projects.update');
+
+    Route::delete('/umkm/projects/{project}', [UMKMProjectController::class, 'destroy'])
+        ->name('umkm.projects.destroy');
+
     Route::get('/umkm/projects/{project}', [UMKMProjectController::class, 'show'])
         ->name('umkm.projects.show');
 
