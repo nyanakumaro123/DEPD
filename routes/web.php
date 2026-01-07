@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PelamarProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApplicationController;
@@ -12,12 +13,16 @@ use App\Http\Controllers\UMKMProfileController;
 use App\Http\Controllers\UmkmProjectController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\InvitationController;
-
+use App\Http\Controllers\PelamarController;
 
 // ================== LANDING ==================
 Route::get('/', [MainController::class, 'landing']);
 
 
+/* AUTH */
+Route::get('/login-pelamar', fn() => view('Pelamar.login-pelamar'))->name('login.pelamar');
+Route::post('/login-pelamar', [AuthController::class, 'loginPelamar'])
+    ->name('process.login.pelamar');
 
 // ================== AUTH ==================
 // PROCESS LOGIN & REGISTER  (Route::POST)
@@ -56,11 +61,8 @@ Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
 
 // ================== PROJECT ==================
 // Halaman Explore, Detail Projek & Apply Projek
-Route::get('/explore', [ExploreController::class, 'explore'])
-    ->name('explore');
-
-Route::get('/projects/{project}', [ProjectController::class, 'detailProjek'])
-    ->name('projects.show');
+Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
+    Route::get('/explore/{project}', [ExploreController::class, 'show'])->name('explore.show');
 
 
 // Halaman Notifikasi
@@ -116,13 +118,15 @@ Route::middleware(['role:umkm'])->group(function () {
     ->name('save-profile.umkm');
 
     // ================== PROJECT ==================
-    Route::get('/umkm/projects/create',
-        [UmkmProjectController::class, 'create'])
-        ->name('umkm.project.create');
+    Route::get('/umkm/projects', [UMKMProjectController::class, 'index'])
+        ->name('umkm.projects.index');
 
-    Route::post('/umkm/projects',
-        [UmkmProjectController::class, 'store'])
-        ->name('umkm.project.store');
+    Route::get('/umkm/projects/{project}', [UMKMProjectController::class, 'show'])
+        ->name('umkm.projects.show');
+
+    // PELAMAR
+    Route::get('/pelamar/applied-projects', [PelamarProjectController::class, 'index'])
+        ->name('pelamar.projects.applied');
 
     // ================== APPLICATION ==================
     Route::get('/umkm/applications',
@@ -136,6 +140,15 @@ Route::middleware(['role:umkm'])->group(function () {
     Route::post('/umkm/application/{application}/reject',
         [UmkmApplicationController::class, 'reject'])
         ->name('umkm.application.reject');
+
+        Route::get('/umkm/pelamar', [PelamarController::class, 'index'])
+        ->name('umkm.pelamar.index');
+
+        Route::get('/umkm/pelamar/{user}', [PelamarController::class, 'show'])
+            ->name('umkm.pelamar.show');
+
+        Route::post('/umkm/invite', [InvitationController::class, 'store'])
+            ->name('umkm.invite');
 });
 
 // ================== NOTIFIKASI ==================

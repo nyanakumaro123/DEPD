@@ -33,7 +33,7 @@ class UmkmApplicationController extends Controller
     new ApplicationAccepted(
         $application->project->title,
         Auth::user()->name,
-        $application->project
+        $application->project->id
     )
 );
 
@@ -46,10 +46,10 @@ class UmkmApplicationController extends Controller
 
         $application->pelamar->user->notify(
         new ApplicationRejected(
-           projectId: $application->project->id,
-            $application->project->title,
-            Auth::user()->name
-        )
+        $application->project->id,
+        $application->project->title,
+        Auth::user()->name
+    )
     );
 
         return back()->with('success', 'Pelamar ditolak');

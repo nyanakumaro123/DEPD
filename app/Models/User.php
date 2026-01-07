@@ -49,4 +49,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Application::class, 'pelamar_id');
     }
+
+    public function unreadNotificationsCount()
+    {
+        return $this->hasMany(\App\Models\Notification::class)
+                    ->where('is_read', false)
+                    ->count();
+    }
+
 }

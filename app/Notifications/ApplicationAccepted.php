@@ -12,7 +12,7 @@ class ApplicationAccepted extends Notification
     public function __construct(
         public string $projectTitle,
         public string $umkmName,
-        public $project
+        public int $projectId
     ) {}
 
     public function via($notifiable)

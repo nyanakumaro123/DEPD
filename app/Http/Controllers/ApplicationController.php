@@ -30,7 +30,7 @@ class ApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        $project->umkm->user->notify(
+        $project->umkm->notify(
         new ApplicationSubmitted(
             Auth::user()->name,
             $project->title
@@ -52,7 +52,7 @@ class ApplicationController extends Controller
 
     public function tracking()
 {
-    $applications = Application::with('project.umkmProfile')
+    $applications = Application::with('project.umkm.umkmProfile')
         ->where('pelamar_id', Auth::id())
         ->latest()
         ->get();

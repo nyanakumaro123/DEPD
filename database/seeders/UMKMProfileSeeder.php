@@ -10,9 +10,8 @@ class UMKMProfileSeeder extends Seeder
 {
     public function run(): void
     {
-
         UMKMProfile::create([
-            'user_id' => 2,
+            'user_id' => 7,
             'umkm_name' => 'Toko Maju Jaya',
             'description' => 'Toko Maju Jaya adalah toko retail yang menyediakan berbagai kebutuhan sehari-hari dengan harga terjangkau.',
         ]);

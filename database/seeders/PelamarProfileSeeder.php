@@ -20,7 +20,13 @@ class PelamarProfileSeeder extends Seeder
         $major = Major::where('name', 'Visual Communication Design')->first();
 
         PelamarProfile::create([
-            'user_id' => 1,
+            'user_id' => 6,
+            'major_id' => $major->id,
+            'portfolio' => 'Portfolio_Design_Templatee.pdf',
+        ]);
+
+        PelamarProfile::create([
+            'user_id' => 8,
             'major_id' => $major->id,
             'portfolio' => 'Portfolio_Design_Templatee.pdf',
         ]);
