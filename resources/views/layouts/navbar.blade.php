@@ -14,41 +14,45 @@
 
         {{-- MENU --}}
         <div class="hidden md:flex gap-8 text-white font-bold">
-
-            {{-- HOME --}}
             @auth
+                {{-- HOME --}}
                 <a href="{{ route($user->role === 'pelamar' ? 'home.pelamar' : 'home.umkm') }}">
                     Home
                 </a>
-            @endauth
 
-            {{-- PROFILE --}}
-            @auth
+                {{-- PROFILE --}}
                 <a href="{{ route(
                     $user->role === 'pelamar' ? 'profile.pelamar' : 'profile.umkm',
                     $user->id
                 ) }}">
                     Profile
                 </a>
+
+                {{-- EXPLORE (HANYA PELAMAR) --}}
+                @if($user->role === 'pelamar')
+                    <a href="{{ route('explore.index') }}">
+                        Explore
+                    </a>
+                @endif
+
+                {{-- MENU KHUSUS UMKM --}}
+                @if($user->role === 'umkm')
+                    <a href="{{ route('umkm.pelamar.index') }}">
+                        Pelamar
+                    </a>
+                @endif
+
+                @if($user->role === 'umkm')
+                    <a href="{{ route('umkm.projects.index') }}">Project</a>
+                @endif
+
             @endauth
-
-            {{-- EXPLORE (SEMUA ROLE BOLEH) --}}
-            <a href="{{ route('explore.index') }}">Explore</a>
-
-            {{-- MENU KHUSUS UMKM --}}
-            @auth
-                @if($user && $user->role === 'umkm')
-                <a href="{{ route('umkm.pelamar.index') }}">Pelamar</a>
-            @endif
-            @endauth
-
         </div>
 
         {{-- RIGHT --}}
         <div class="flex items-center gap-4">
-
-            {{-- NOTIFICATION --}}
             @auth
+                {{-- NOTIFICATION --}}
                 <a href="{{ route('notifikasi') }}" class="relative text-white">
                     🔔
                     @if($unread > 0)
@@ -57,10 +61,8 @@
                         </span>
                     @endif
                 </a>
-            @endauth
 
-            {{-- PROFILE PICTURE --}}
-            @auth
+                {{-- PROFILE PICTURE --}}
                 <a href="{{ route(
                     $user->role === 'pelamar' ? 'profile.pelamar' : 'profile.umkm',
                     $user->id
@@ -74,7 +76,7 @@
                         class="w-full h-full object-cover">
                 </a>
             @endauth
-
         </div>
+
     </div>
 </nav>

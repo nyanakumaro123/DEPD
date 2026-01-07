@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PelamarProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApplicationController;
@@ -112,13 +113,15 @@ Route::middleware(['role:umkm'])->group(function () {
     ->name('save-profile.umkm');
 
     // ================== PROJECT ==================
-    Route::get('/umkm/projects/create',
-        [UmkmProjectController::class, 'create'])
-        ->name('umkm.project.create');
+    Route::get('/umkm/projects', [UMKMProjectController::class, 'index'])
+        ->name('umkm.projects.index');
 
-    Route::post('/umkm/projects',
-        [UmkmProjectController::class, 'store'])
-        ->name('umkm.project.store');
+    Route::get('/umkm/projects/{project}', [UMKMProjectController::class, 'show'])
+        ->name('umkm.projects.show');
+
+    // PELAMAR
+    Route::get('/pelamar/applied-projects', [PelamarProjectController::class, 'index'])
+        ->name('pelamar.projects.applied');
 
     // ================== APPLICATION ==================
     Route::get('/umkm/applications',
