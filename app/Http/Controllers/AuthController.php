@@ -86,7 +86,7 @@ class AuthController extends Controller
             ->with('success', 'Registrasi pelamar berhasil');
     }
 
-    public function processRegisterUmkm(Request $request)
+    public function registerUmkm(Request $request)
     {
         $data = $request->validate([
             'name'      => 'required',

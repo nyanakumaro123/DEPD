@@ -61,14 +61,4 @@ class MainController extends Controller
             'user' => $user
         ]);
     }
-
-    public function notifikasi()
-    {
-        $user = Auth::user();
-
-        return view('Pelamar.notifikasi-pelamar', [
-            'headerTitle' => 'Notifikasi',
-            'user' => $user
-        ]);
-    }
 }

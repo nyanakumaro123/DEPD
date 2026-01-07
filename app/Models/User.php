@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'name','email','password','role', 'profile'
@@ -16,6 +19,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+     public function isPelamar(): bool
+    {
+        return $this->role === 'pelamar';
+    }
+
+    public function isUmkm(): bool
+    {
+        return $this->role === 'umkm';
+    }
+
+    public function pelamarProfile(): HasOne
+    {
+        return $this->hasOne(PelamarProfile::class);
+    }
 
     public function umkmProfile()
     {

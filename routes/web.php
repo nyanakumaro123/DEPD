@@ -10,6 +10,9 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UmkmApplicationController;
 use App\Http\Controllers\UMKMProfileController;
 use App\Http\Controllers\UmkmProjectController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\PelamarController;
 
 // ================== LANDING ==================
 Route::get('/', [MainController::class, 'landing']);
@@ -53,18 +56,12 @@ Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
 
 // ================== PROJECT ==================
 // Halaman Explore, Detail Projek & Apply Projek
-Route::get('/explore', [ExploreController::class, 'explore'])
-    ->name('explore');
-
-Route::get('/detail-projek', [ProjectController::class, 'detailProjek'])
-    ->name('detail.projek');
-Route::get('/apply-projek', [ProjectController::class, 'applyProjek'])
-    ->name('apply.projek.detail');
+Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
+    Route::get('/explore/{project}', [ExploreController::class, 'show'])->name('explore.show');
 
 
 // Halaman Notifikasi
-Route::get('/notifikasi', [MainController::class, 'notifikasi'])
-    ->name('notifikasi');
+
 
 
 // ================== PELAMAR ==================
@@ -85,12 +82,16 @@ Route::middleware(['role:pelamar'])->group(function () {
         ->name('pelamar.applications');
     
     // EDIT PROFILE PELAMAR
-    Route::get('/edit-profile-pelamar/{userId}', [PelamarProfileController::class, 'edit'])
-    ->name('edit-profile.pelamar');
+    Route::get('/edit-profile-pelamar', [PelamarProfileController::class, 'edit'])
+    ->middleware('role:pelamar');
 
     // SAVE PROFILE PELAMAR
-    Route::post('/save-profile-pelamar/{userId}', [PelamarProfileController::class, 'update'])
+    Route::post('/save-profile-pelamar', [PelamarProfileController::class, 'update'])
     ->name('save-profile.pelamar');
+
+    Route::get('/pelamar/lamaran', [ApplicationController::class, 'tracking'])
+    ->middleware('role:pelamar')
+    ->name('pelamar.tracking');
 });
 
 
@@ -131,4 +132,52 @@ Route::middleware(['role:umkm'])->group(function () {
     Route::post('/umkm/application/{application}/reject',
         [UmkmApplicationController::class, 'reject'])
         ->name('umkm.application.reject');
+
+        Route::get('/umkm/pelamar', [PelamarController::class, 'index'])
+        ->name('umkm.pelamar.index');
+
+        Route::get('/umkm/pelamar/{user}', [PelamarController::class, 'show'])
+            ->name('umkm.pelamar.show');
+
+        Route::post('/umkm/invite', [InvitationController::class, 'store'])
+            ->name('umkm.invite');
+});
+
+// ================== NOTIFIKASI ==================
+Route::middleware('auth')->group(function () {
+
+    // halaman list notifikasi
+    Route::get('/notifikasi',
+        [NotificationController::class, 'index'])
+        ->name('notifikasi');
+
+    // tandai notifikasi sudah dibaca
+    Route::post('/notifikasi/{id}/read',
+        [NotificationController::class, 'read'])
+        ->name('notifikasi.read');
+
+    // undangan dari UMKM ke pelamar
+    Route::post('/notifikasi/invite/{pelamar}/{project}',
+        [InvitationController::class, 'invite'])
+        ->name('notifikasi.invite');
+
+    // pelamar menerima undangan
+    Route::post('/notifikasi/{id}/accept',
+        [InvitationController::class, 'accept'])
+        ->name('notifikasi.accept');
+
+    // pelamar menolak undangan
+    Route::post('/notifikasi/{id}/reject',
+        [InvitationController::class, 'reject'])
+        ->name('notifikasi.reject');
+
+        Route::get('/lamaran-saya', [ApplicationController::class, 'index'])
+        ->name('pelamar.applications');
+
+    // Invitation
+    Route::get('/invitation/{id}/accept', [InvitationController::class, 'accept'])
+        ->name('invitation.accept');
+
+    Route::get('/invitation/{id}/reject', [InvitationController::class, 'reject'])
+        ->name('invitation.reject');
 });

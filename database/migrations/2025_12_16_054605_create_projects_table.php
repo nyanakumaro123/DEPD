@@ -16,7 +16,14 @@ return new class extends Migration {
             $table->time('time_start');
             $table->time('time_end');
             $table->decimal('salary_amount', 12, 2);
-            $table->enum('salary_frequency', ['per_hour','per_day','total']);
+            $table->enum('salary_frequency', [
+                'per_hour',
+                'per_day',
+                'per_week',
+                'per_month',
+                'total'
+            ]);
+
             $table->string('currency', 10);
             $table->text('description');
             $table->string('syarat_path')->nullable();
