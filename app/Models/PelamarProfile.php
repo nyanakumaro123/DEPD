@@ -18,6 +18,7 @@ class PelamarProfile extends Model
         'full_name',
         'education_level',
         'phone',
+        'portfolio',
         'portfolio_type',
         'portfolio_file',
         'portfolio_link',

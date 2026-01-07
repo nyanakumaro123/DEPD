@@ -18,6 +18,9 @@ use App\Http\Controllers\PelamarController;
 // ================== LANDING ==================
 Route::get('/', [MainController::class, 'landing']);
 
+Route::get('/php-info', function () {
+    phpinfo();
+});
 
 
 // ================== AUTH ==================
@@ -83,12 +86,12 @@ Route::middleware(['role:pelamar'])->group(function () {
         ->name('pelamar.applications');
     
     // EDIT PROFILE PELAMAR
-    Route::get('/edit-profile-pelamar', [PelamarProfileController::class, 'edit'])
+    Route::get('/edit-profile-pelamar/{userId}', [PelamarProfileController::class, 'edit'])
     ->name('edit-profile.pelamar')
     ->middleware('role:pelamar');
 
     // SAVE PROFILE PELAMAR
-    Route::post('/save-profile-pelamar', [PelamarProfileController::class, 'update'])
+    Route::post('/save-profile-pelamar/{userId}', [PelamarProfileController::class, 'update'])
     ->name('save-profile.pelamar');
 
     Route::get('/pelamar/lamaran', [ApplicationController::class, 'tracking'])
