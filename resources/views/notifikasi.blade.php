@@ -46,27 +46,23 @@
             @endphp
 
             <div class="{{ $bgColor }} border {{ $borderColor }} rounded-xl p-6 shadow-md hover:shadow-lg transition flex flex-col md:flex-row items-center gap-5">
-                
-                <img src="https://i.pravatar.cc/150?img={{ $notif->user_id }}" 
-                     alt="{{ $notif->user->name }}" 
-                     class="h-16 w-16 rounded-full object-cover border border-gray-300">
 
                 <div class="flex-1 space-y-1 text-center md:text-left">
                     <h3 class="font-bold text-xl {{ $textColor }}">
-                        {{ $notif->user->name }}
+                        {{ $notif->title }}
                     </h3>
                     <p class="text-gray-700 text-sm">
-                        {{ $notif->title }} — {{ $notif->message }}
+                        {{ $notif->message }}
                     </p>
                 </div>
 
                 @if($notif->type === 'invitation')
-                    <a href="{{ route('invitation.detail', {{-- $notif->invitation_id --}}) }}"
+                    <a href="{{-- route('invitation.detail', $notif->invitation_id) --}}"
                     class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                         Detail
                     </a>
                 @elseif($notif->type === 'application')
-                    <a href="{{ route('umkm.applications', {{-- $notif->application_id --}}) }}"
+                    <a href="{{ route('umkm.applications') }}"
                     class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                         Detail
                     </a>

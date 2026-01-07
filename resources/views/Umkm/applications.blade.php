@@ -75,7 +75,7 @@
                                 @if ($application->status === 'pending')
                                     <div class="flex justify-center gap-2">
 
-                                        <form method="POST" action="#">
+                                        <form method="POST" action="{{ route('umkm.application.accept', $application->id) }}">
                                             @csrf
                                             <button
                                                 class="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700">
@@ -83,7 +83,7 @@
                                             </button>
                                         </form>
 
-                                        <form method="POST" action="#">
+                                        <form method="POST" action="{{ route('umkm.application.reject', $application->id) }}">
                                             @csrf
                                             <button
                                                 class="px-3 py-1 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700">

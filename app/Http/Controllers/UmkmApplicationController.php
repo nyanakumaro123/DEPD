@@ -6,6 +6,7 @@ use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ApplicationAccepted;
 use App\Notifications\ApplicationRejected;
+use App\Models\Notification;
 
 class UmkmApplicationController extends Controller
 {
@@ -29,13 +30,17 @@ class UmkmApplicationController extends Controller
     {
         $application->update(['status' => 'accepted']);
 
-        $application->pelamar->notify(
-    new ApplicationAccepted(
-        $application->project->title,
-        Auth::user()->name,
-        $application->project->id
-    )
-);
+        // Message Notification
+        $projectTitle = $application->project->title;
+        $message = "Permohonan anda di {$projectTitle} telah diterima";
+
+        Notification::create([
+            'user_id' => $application->pelamar_id,
+            'type' => 'accepted',
+            'title' => 'Permohonan Diterima',
+            'message' => $message,
+            'project_id' => $application->project_id,
+        ]);
 
         return back()->with('success', 'Pelamar diterima');
     }
