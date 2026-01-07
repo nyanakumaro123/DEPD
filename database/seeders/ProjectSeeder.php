@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Project;
-use Database\Factories\ProjectFactory;
 
 use App\Models\User;
 use Carbon\Carbon;
@@ -117,8 +116,7 @@ class ProjectSeeder extends Seeder
     }
 }
 
-// class ProjectSeeder extends Seeder
-// {
+//     --- IGNORE ---
 //     public function run()
 //     {
 //         Project::factory()->count(2)->create();
