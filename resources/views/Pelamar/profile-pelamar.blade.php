@@ -36,10 +36,11 @@
 
                         <div>
                             <label class="text-[#355dad] font-bold">Contact</label>
-                            <div class="bg-[#e0e7ff] p-3 rounded-lg font-semibold text-[#355dad]">
-                                {{ Auth::user()->phone ?? '-' }}
+                            <div class="bg-[#e0e7ff] text-[#355dad] font-semibold py-3 px-4 rounded-lg shadow-sm border border-blue-100">
+                                {{ $profile->phone ?? '-' }}
                             </div>
                         </div>
+
                         <div class="space-y-1">
                             <label class="text-[#355dad] font-bold text-lg">Email</label>
                             <div class="bg-[#e0e7ff] text-[#355dad] font-semibold py-3 px-4 rounded-lg shadow-sm border border-blue-100 truncate">

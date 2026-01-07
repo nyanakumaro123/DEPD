@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('message')->nullable();
             $table->foreignId('project_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('invitation_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
         });

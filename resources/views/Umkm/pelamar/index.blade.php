@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 bg-[#FFF7ED] min-h-screen">
-
 @include('layouts.navbar')
+<div class="p-6 bg-[#FFF7ED] min-h-screen">
 
 {{-- FILTER --}}
 <form method="GET" class="bg-white p-4 rounded-xl shadow mb-6">
