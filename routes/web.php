@@ -83,6 +83,7 @@ Route::middleware(['role:pelamar'])->group(function () {
     
     // EDIT PROFILE PELAMAR
     Route::get('/edit-profile-pelamar', [PelamarProfileController::class, 'edit'])
+    ->name('edit-profile.pelamar')
     ->middleware('role:pelamar');
 
     // SAVE PROFILE PELAMAR

@@ -1,6 +1,10 @@
 @php
     $user = auth()->user();
-    $unread = $user?->unreadNotifications()->count() ?? 0;
+    $unread = $user 
+        ? \App\Models\Notification::where('user_id', $user->id)
+            ->where('is_read', false)
+            ->count()
+        : 0;
 @endphp
 
 <nav class="bg-[#355dad] px-6 py-3 shadow-md sticky top-0 z-50">
@@ -60,20 +64,14 @@
             @endauth
 
             {{-- PROFILE PICTURE --}}
-            @auth
                 <a href="{{ route(
                     $user->role === 'pelamar' ? 'profile.pelamar' : 'profile.umkm',
                     $user->id
                 ) }}"
                 class="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
-
-                    <img
-                        src="{{ $user->profile
-                            ? asset('storage/profile_pictures/'.$user->profile)
-                            : asset('img/user_profile.webp') }}"
+                    <img src="{{ $user->profile ? asset('storage/profile_pictures/' . $user->profile) : asset('img/user_profile.webp') }}"
                         class="w-full h-full object-cover">
                 </a>
-            @endauth
 
         </div>
     </div>

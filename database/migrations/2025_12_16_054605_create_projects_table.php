@@ -23,7 +23,6 @@ return new class extends Migration {
                 'per_month',
                 'total'
             ]);
-
             $table->string('currency', 10);
             $table->text('description');
             $table->string('syarat_path')->nullable();

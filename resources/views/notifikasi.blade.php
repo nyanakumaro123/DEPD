@@ -1,62 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto py-6">
+<div class="min-h-screen bg-[#fff8f0] font-sans">
 
-    <h1 class="text-2xl font-bold mb-4">Notifikasi</h1>
+    @include('layouts.navbar')
 
-    @forelse ($notifications as $notif)
-        <div class="bg-white shadow rounded-lg p-4 mb-3
-            {{ $notif->read_at ? 'opacity-70' : 'border-l-4 border-blue-500' }}">
+    <div class="max-w-3xl mx-auto p-6 space-y-6">
 
-            {{-- TYPE --}}
-            @php $data = $notif->data; @endphp
+        <h2 class="text-3xl font-bold text-[#355dad] text-center mb-6">Notifications</h2>
 
-            {{-- Lamaran Masuk (UMKM) --}}
-            @if($data['type'] === 'application_submitted')
-                <p class="font-semibold">{{ $data['title'] }}</p>
-                <p class="text-sm text-gray-600">{{ $data['message'] }}</p>
+        @forelse ($notifications as $notif)
+            @php
+                // Color coding based on type
+                $bgColor = 'bg-white';
+                $borderColor = 'border-gray-300';
+                $textColor = 'text-gray-800';
+                $statusColor = 'bg-gray-100 text-gray-700';
 
-            {{-- Undangan --}}
-            @elseif($data['type'] === 'invitation')
-                <p class="font-semibold">Undangan Project</p>
-                <p class="text-sm">
-                    Kamu diundang ke project
-                    <b>{{ $data['project_title'] }}</b>
-                    oleh {{ $data['umkm_name'] }}
-                </p>
+                switch($notif->type) {
+                    case 'accepted':
+                        $bgColor = 'bg-[#d1fae5]';
+                        $borderColor = 'border-green-300';
+                        $textColor = 'text-green-900';
+                        $statusColor = 'bg-white text-green-700';
+                        break;
+                    case 'rejected':
+                        $bgColor = 'bg-[#fee2e2]';
+                        $borderColor = 'border-red-300';
+                        $textColor = 'text-red-900';
+                        $statusColor = 'bg-white text-red-700';
+                        break;
+                    case 'invitation':
+                        $bgColor = 'bg-[#e0e7ff]';
+                        $borderColor = 'border-blue-200';
+                        $textColor = 'text-[#355dad]';
+                        $statusColor = 'bg-white text-[#355dad]';
+                        break;
+                    case 'application_submitted':
+                        $bgColor = 'bg-[#fff4e6]';
+                        $borderColor = 'border-yellow-300';
+                        $textColor = 'text-[#b45309]';
+                        $statusColor = 'bg-white text-[#b45309]';
+                        break;
+                }
+            @endphp
 
-                <div class="mt-3 flex gap-2">
-                    <a href="{{ route('invitation.accept', $notif->id) }}"
-                       class="px-3 py-1 bg-green-600 text-white rounded text-sm">
-                        Accept
-                    </a>
-                    <a href="{{ route('invitation.reject', $notif->id) }}"
-                       class="px-3 py-1 bg-red-600 text-white rounded text-sm">
-                        Reject
-                    </a>
+            <div class="{{ $bgColor }} border {{ $borderColor }} rounded-xl p-6 shadow-md hover:shadow-lg transition flex flex-col md:flex-row items-center gap-5">
+                
+                <img src="https://i.pravatar.cc/150?img={{ $notif->user_id }}" 
+                     alt="{{ $notif->user->name }}" 
+                     class="h-16 w-16 rounded-full object-cover border border-gray-300">
+
+                <div class="flex-1 space-y-1 text-center md:text-left">
+                    <h3 class="font-bold text-xl {{ $textColor }}">
+                        {{ $notif->user->name }}
+                    </h3>
+                    <p class="text-gray-700 text-sm">
+                        @if($notif->type === 'invitation')
+                            You are invited to project <b>{{ $notif->project->title ?? 'Unnamed Project' }}</b>
+                        @elseif($notif->type === 'application_submitted')
+                            {{ $notif->title }} — {{ $notif->message }}
+                        @elseif(in_array($notif->type, ['accepted','rejected']))
+                            Your application for <b>{{ $notif->project->title ?? 'Unnamed Project' }}</b> was {{ $notif->type }}
+                        @endif
+                    </p>
                 </div>
 
-            {{-- Status Lamaran --}}
-            @elseif(in_array($data['type'], ['accepted','rejected']))
-                <p class="font-semibold">
-                    Lamaran {{ ucfirst($data['type']) }}
-                </p>
-                <p class="text-sm">
-                    Project: {{ $data['project_title'] }}
-                </p>
-            @endif
+                @if($notif->type === 'invitation')
+                    <a href="{{-- route('invitation.detail', $notif->id) --}}"
+                       class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                        Detail
+                    </a>
+                @else
+                    <span class="font-bold {{ $statusColor }} px-4 py-1 rounded-full text-sm uppercase">
+                        {{ $notif->type }}
+                    </span>
+                @endif
 
-            <p class="text-xs text-gray-400 mt-2">
-                {{ $notif->created_at->diffForHumans() }}
-            </p>
+            </div>
+        @empty
+            <p class="text-gray-500 text-center">No notifications available</p>
+        @endforelse
+
+        <div class="mt-4 text-center">
+            {{ $notifications->links() }}
         </div>
-    @empty
-        <p class="text-gray-500">Tidak ada notifikasi</p>
-    @endforelse
 
-    <div class="mt-4">
-        {{ $notifications->links() }}
     </div>
 </div>
 @endsection

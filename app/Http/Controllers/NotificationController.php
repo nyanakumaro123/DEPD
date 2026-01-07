@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\DatabaseNotification;
+use App\Models\Notification;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = DatabaseNotification::where('notifiable_id', Auth::id())
+        $notifications = Notification::where('user_id', Auth::id())
             ->latest()
             ->paginate(10);
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Project;
+
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -109,8 +110,14 @@ class ProjectSeeder extends Seeder
 
         foreach ($projects as $project) {
             Project::create(array_merge($project, [
-                'umkm_id' => $umkm->id,
+                'umkm_id' => 2,
             ]));
         }
     }
 }
+
+//     --- IGNORE ---
+//     public function run()
+//     {
+//         Project::factory()->count(2)->create();
+//     }

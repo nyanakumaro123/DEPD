@@ -13,7 +13,8 @@
             {{-- PROFILE PICTURE --}}
             <div class="lg:col-span-4 flex flex-col items-center lg:items-start">
                 <div class="h-64 w-64 lg:h-80 lg:w-80 rounded-full border-4 border-[#355dad] overflow-hidden shadow-lg bg-white">
-                    <img src="{{ asset('storage/profile_pictures/' . $profile->user->profile) ?? asset('img/user_profile.webp') }}" 
+                    <img src="{{ $profile->user->profile ? asset('storage/profile_pictures/' . $profile->user->profile)
+                    : asset('img/user_profile.webp') }}" 
                          alt="Profile Picture" 
                          class="h-full w-full object-cover">
                 </div>
@@ -22,10 +23,6 @@
             {{-- INFO --}}
             <div class="lg:col-span-8 space-y-8">
                 <h2 class="text-5xl font-bold text-[#355dad] mb-2 font-serif">{{ $profile->umkm_name }}</h2>
-
-                <h2 class="text-5xl font-bold text-[#355dad] font-serif">
-                    {{ Auth::user()->umkmProfile->umkm_name ?? Auth::user()->name }}
-                </h2>
                 {{-- RATING --}}    
                     <div class="space-y-4">
                         <h3 class="text-xl font-bold text-[#355dad]">
@@ -67,17 +64,6 @@
                         @endforelse
                 </div>
 
-                {{-- RATING --}}
-                <div>
-                    <h3 class="text-xl font-bold text-[#355dad] mb-3">
-                        Rating <span class="text-[#dcbfa6]">★ 0 / 5</span>
-                    </h3>
-
-                    <div class="bg-[#d1fae5] border border-green-300 rounded-xl p-4 font-bold text-green-800">
-                        Belum ada ulasan
-                    </div>
-                </div>
-
                 {{-- DESKRIPSI --}}
                 <div>
                     <h3 class="text-xl font-bold text-[#355dad] mb-2">Deskripsi UMKM</h3>
@@ -91,8 +77,8 @@
     </div>
 
     {{-- EDIT BUTTON --}}
-    {{-- @auth
-        @if (auth()->id() === $profile->user->id) --}}
+    @auth
+        @if (auth()->id() === $profile->user->id)
             <div class="fixed bottom-10 left-10">
                 <a href="{{ route('edit-profile.umkm', $profile->user->id) }}"
                 class="bg-[#355dad] hover:bg-[#2a4a8b] text-white p-5 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center">
@@ -102,7 +88,29 @@
                     </svg>
                 </a>
             </div>
-        {{-- @endif
-    @endauth --}}
+            <div class="fixed bottom-10 left-32">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="bg-red-600 hover:bg-red-700 text-white p-5 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center"
+                        title="Logout">
+                        
+                        <!-- Logout Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke-width="2" 
+                            stroke="currentColor" 
+                            class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 12H9m0 0l3-3m-3 3l3 3" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        @endif
+    @endauth
 </div>
 @endsection
