@@ -14,7 +14,7 @@ class PelamarProjectController extends Controller
             ->latest()
             ->get();
 
-        return view('pelamar.projects.applied', compact('applications'));
+        return view('Pelamar.apply-projek-pelamar', compact('applications'));
     }
 }
 

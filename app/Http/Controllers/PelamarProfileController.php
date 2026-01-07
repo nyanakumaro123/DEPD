@@ -21,7 +21,6 @@ class PelamarProfileController extends Controller
         return view('Pelamar.profile-pelamar', [
             'profile' => $profile,
             'major' => $profile->major->name,
-            'phone' => $profile->phone,
             'headerTitle' => $profile->user->name . " Profile",
             'user' => Auth::user()
         ]);
@@ -42,7 +41,6 @@ class PelamarProfileController extends Controller
         return view('Pelamar.edit-profile-pelamar', [
             'profile' => $profile,
             'majors' => $majors,
-            'phone' => $profile->phone,
             'headerTitle' => 'Edit Profile',
             'user' => Auth::user()
         ]);

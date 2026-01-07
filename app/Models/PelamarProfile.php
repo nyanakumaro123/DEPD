@@ -17,7 +17,6 @@ class PelamarProfile extends Model
         'major_id',
         'full_name',
         'education_level',
-        'phone',
         'portfolio',
         'portfolio_type',
         'portfolio_file',
