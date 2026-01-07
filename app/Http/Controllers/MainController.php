@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Application; // Import ini
+use App\Models\Project;     // Import ini
 
 class MainController extends Controller
 {
@@ -60,12 +62,24 @@ class MainController extends Controller
     // Home Views
     public function pelamarHome()
     {
-        $user = Auth::user();
+        $userId = Auth::id();
 
-        return view('Pelamar.home-pelamar', [
-            'headerTitle' => 'Pelamar Dashboard - PathLoka',
-            'user' => $user
-        ]);
+        // 1. Ambil Status Lamaran (Apply Status)
+        // Mengambil 5 lamaran terakhir user ini beserta data project dan umkm-nya
+        $applications = Application::where('pelamar_id', $userId)
+            ->with(['project.umkm.umkmProfile']) 
+            ->latest()
+            ->take(5)
+            ->get();
+
+        // 2. Ambil Project Terbaru (Ongoing/Latest Projects)
+        // Mengambil project yang statusnya masih buka (jika ada kolom status) atau terbaru
+        $projects = Project::with(['umkm.umkmProfile'])
+            ->latest()
+            ->take(10) // Tampilkan 10 project terbaru di feed
+            ->get();
+
+        return view('pelamar.home-pelamar', compact('applications', 'projects'));
     }
     public function umkmHome()
     {
