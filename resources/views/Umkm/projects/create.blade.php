@@ -20,7 +20,24 @@
             <!-- Kategori -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                <input type="text" name="category" value="{{ old('category') }}" class="w-full border rounded-lg p-2" placeholder="Contoh: Desain Grafis, Marketing" required>
+                <select name="category" class="w-full border rounded-lg p-2" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    @foreach ([
+                        'Branding',
+                        'Design',
+                        'Marketing',
+                        'Content',
+                        'Development',
+                        'Photography',
+                        'Videography',
+                        'Social Media',
+                        'Finance'
+                    ] as $cat)
+                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>
+                            {{ $cat }}
+                        </option>
+                    @endforeach
+                </select>
                 @error('category') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
 

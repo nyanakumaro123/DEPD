@@ -22,11 +22,27 @@ class UserSeeder extends Seeder
             'profile' => null
         ]);
 
+        User::create([
+            'name' => 'test',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('testtt'),
+            'role' => 'pelamar',
+            'profile' => null
+        ]);
+
         // UMKM = true
         User::create([
             'name' => 'Restomie',
             'email' => 'restomie@example.com',
             'password' => bcrypt('passworda'),
+            'role' => 'umkm',
+            'profile' => null
+        ]);
+
+        User::create([
+            'name' => 'test',
+            'email' => 'test2@gmail.com',
+            'password' => bcrypt('testtt'),
             'role' => 'umkm',
             'profile' => null
         ]);

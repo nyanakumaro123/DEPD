@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Notifications\DatabaseNotification;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
@@ -17,13 +16,13 @@ class NotificationController extends Controller
         return view('notifikasi', compact('notifications'));
     }
 
-    public function read($id)
+        public function read($id)
     {
-        $notif = DatabaseNotification::where('id', $id)
-            ->where('notifiable_id', Auth::id())
+        $notif = Notification::where('id', $id)
+            ->where('user_id', Auth::id())
             ->firstOrFail();
 
-        $notif->markAsRead();
+        $notif->update(['is_read' => true]);
 
         return back();
     }

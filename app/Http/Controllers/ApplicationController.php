@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Project;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\ApplicationSubmitted;
 
 
 use function Ramsey\Uuid\v1;
@@ -30,12 +30,14 @@ class ApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        $project->umkm->notify(
-        new ApplicationSubmitted(
-            Auth::user()->name,
-            $project->title
-        )
-    );
+        Notification::create([
+            'user_id' => $project->umkm->id,
+            'type' => 'application_submitted',
+            'title' => 'Lamaran Baru',
+            'message' => Auth::user()->name . ' melamar project ' . $project->title,
+            'project_id' => $project->id,
+            'is_read' => false,
+        ]);
 
         return back()->with('success', 'Lamaran berhasil dikirim');
     }

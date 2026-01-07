@@ -20,7 +20,24 @@
             <!-- Kategori -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                <input type="text" name="category" value="{{ old('category', $project->category) }}" class="w-full border rounded-lg p-2" required>
+                <select name="category" class="w-full border rounded-lg p-2" required>
+                    @foreach ([
+                        'Branding',
+                        'Design',
+                        'Marketing',
+                        'Content',
+                        'Development',
+                        'Photography',
+                        'Videography',
+                        'Social Media',
+                        'Finance'
+                    ] as $cat)
+                        <option value="{{ $cat }}"
+                            {{ old('category', $project->category) == $cat ? 'selected' : '' }}>
+                            {{ $cat }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Deskripsi -->

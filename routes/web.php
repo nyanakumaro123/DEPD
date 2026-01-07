@@ -62,7 +62,7 @@ Route::get('/profile-umkm/{userId}', [UMKMProfileController::class, 'show'])
 // ================== PROJECT ==================
 // Halaman Explore, Detail Projek & Apply Projek
 Route::get('/explore', [ExploreController::class, 'index'])->name('explore.index');
-    Route::get('/explore/{project}', [ExploreController::class, 'show'])->name('explore.show');
+Route::get('/explore/{project}', [ExploreController::class, 'show'])->name('explore.show');
 
 
 // Halaman Notifikasi
