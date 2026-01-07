@@ -37,9 +37,4 @@ class Project extends Model
     {
         return $this->hasMany(Application::class);
     }
-
-    public function isOpen(): bool
-    {
-        return $this->status === 'open';
-    }
 }

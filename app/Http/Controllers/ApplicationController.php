@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Project;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\ApplicationSubmitted;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 
 use function Ramsey\Uuid\v1;
 

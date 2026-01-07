@@ -13,27 +13,42 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         $categories = [
-            'Branding','Design','Marketing','Content',
-            'Development','Photography','Videography',
-            'Social Media','Finance'
+            'Branding',
+            'Design',
+            'Marketing',
+            'Content',
+            'Development',
+            'Photography',
+            'Videography',
+            'Social Media',
+            'Finance',
         ];
 
         return [
-            'umkm_id' => User::where('role', 'umkm')->inRandomOrder()->first()?->id,
-            'title' => $this->faker->jobTitle(),
+            'umkm_id' => User::where('role', 'umkm')->inRandomOrder()->value('id'),
+            'title' => $this->faker->sentence(3),
             'category' => $this->faker->randomElement($categories),
-            'employment_type' => $this->faker->randomElement(['Freelance', 'Part Time', 'Full Time']),
-            'work_system' => $this->faker->randomElement(['Remote', 'Onsite', 'Hybrid']),
-            'working_days' => $this->faker->randomElement(['Senin–Jumat', 'Senin–Sabtu']),
-            'time_start' => '08:00',
-            'time_end' => '17:00',
-            'salary_min' => 1000000,
-            'salary_max' => 3000000,
-            'currency' => 'IDR',
             'description' => $this->faker->paragraph(4),
-            'benefits' => 'Sertifikat, Pengalaman kerja',
-            'application_deadline' => now()->addDays(rand(7, 30)),
-            'status' => 'open',
+
+            'time_start' => '09:00',
+            'time_end' => '17:00',
+
+            'salary_amount' => $this->faker->numberBetween(500000, 5000000),
+            'salary_frequency' => $this->faker->randomElement([
+                'per_hour',
+                'per_day',
+                'per_week',
+                'per_month',
+                'total',
+            ]),
+            'currency' => 'IDR',
+
+            'rewards' => [
+                'Sertifikat',
+                'Pengalaman kerja',
+            ],
+
+            'syarat_path' => null,
         ];
     }
 }

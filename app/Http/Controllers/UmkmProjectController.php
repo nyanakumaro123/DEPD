@@ -28,7 +28,7 @@ class UMKMProjectController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category' => 'required|in:Branding,Design,Marketing,Content,Development,Photography,Videography,Social Media,Finance',
             'description' => 'required|string',
             'rewards' => 'nullable|string', // Input berupa text, nanti di-explode
             'time_start' => 'required',
@@ -81,7 +81,7 @@ class UMKMProjectController extends Controller
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category' => 'required|in:Branding,Design,Marketing,Content,Development,Photography,Videography,Social Media,Finance',
             'description' => 'required|string',
             'rewards' => 'nullable|string',
             'time_start' => 'required',
