@@ -67,7 +67,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'name'     => 'required',
             'email'    => 'required|email|unique:users',
-            'phone'    => 'nullable|integer|max:20',
+            'phone'    => 'nullable|string|max:20',
             'password' => 'required|confirmed|min:6',
         ]);
 
@@ -92,7 +92,7 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'name'      => 'required',
-            'phone'     => 'nullable|integer|max:20',
+            'phone'     => 'nullable|string|max:20',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|confirmed|min:6',
             'umkm_name' => 'required',
