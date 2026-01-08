@@ -79,6 +79,10 @@ class MainController extends Controller
             ->take(10) // Tampilkan 10 project terbaru di feed
             ->get();
 
+        $appliedProjectIds = Auth::user()->applications()
+        ->pluck('project_id')
+        ->toArray();
+
         return view('pelamar.home-pelamar', compact('applications', 'projects'));
     }
     public function umkmHome()
