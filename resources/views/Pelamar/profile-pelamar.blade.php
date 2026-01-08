@@ -44,7 +44,7 @@
                         <div>
                             <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Contact</label>
                             <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-3 rounded-lg font-semibold text-white">
-                                {{ Auth::user()->phone ?? '-' }}
+                                {{ $user->phone ?? '-' }}
                             </div>
                         </div>
 

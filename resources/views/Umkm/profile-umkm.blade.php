@@ -30,45 +30,63 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white text-5xl mr-3">Profile</span>
                     <span class="flex-1">{{ $profile->umkm_name ?? 'Nama UMKM' }}</span>
                 </h2>
+                
+                {{-- CONTACT INFO SECTION --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Contact</label>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-3 rounded-lg font-semibold text-white">
+                            {{ $profile->user->phone ?? '-' }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Email</label>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-3 rounded-lg font-semibold text-white truncate">
+                            {{ $profile->user->email ?? 'No Email' }}
+                        </div>
+                    </div>
+                </div>
+
                 {{-- RATING --}}    
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-blue-200">
-                            Rating
-                            <span class="text-blue-300 text-lg">
-                                ★ {{ number_format($profile->ratings_avg_score ?? 0, 1) }}/5
-                                ({{ $profile->ratings_count }})
-                            </span>
-                        </h3>
-                        
-                        @forelse ($profile->ratings as $rating)
-                            @php
-                                $isGood = $rating->score >= 4;
-                            @endphp
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-blue-200">
+                        Rating
+                        <span class="text-blue-300 text-lg">
+                            ★ {{ number_format($profile->ratings_avg_score ?? 0, 1) }}/5
+                            ({{ $profile->ratings_count }})
+                        </span>
+                    </h3>
+                    
+                    @forelse ($profile->ratings as $rating)
+                        @php
+                            $isGood = $rating->score >= 4;
+                        @endphp
 
-                            <div class="rounded-full px-4 py-2 flex justify-between items-center shadow-sm
-                                {{ $isGood ? 'bg-green-900/30 border border-green-500' : 'bg-red-900/30 border border-red-500' }} backdrop-blur-sm">
+                        <div class="rounded-full px-4 py-2 flex justify-between items-center shadow-sm
+                            {{ $isGood ? 'bg-green-900/30 border border-green-500' : 'bg-red-900/30 border border-red-500' }} backdrop-blur-sm">
 
-                                <div class="flex items-center gap-3">
-                                    <img src="{{ $rating->user->profile
-                                        ? asset('storage/profile_pictures/' . $rating->user->profile)
-                                        : asset('img/user_profile.webp') }}"
-                                        class="h-8 w-8 rounded-full border
-                                        {{ $isGood ? 'border-green-500' : 'border-red-500' }}">
-
-                                    <span class="font-bold text-sm
-                                        {{ $isGood ? 'text-green-300' : 'text-red-300' }}">
-                                        {{ $rating->user->name }}
-                                    </span>
-                                </div>
+                            <div class="flex items-center gap-3">
+                                <img src="{{ $rating->user->profile
+                                    ? asset('storage/profile_pictures/' . $rating->user->profile)
+                                    : asset('img/user_profile.webp') }}"
+                                    class="h-8 w-8 rounded-full border
+                                    {{ $isGood ? 'border-green-500' : 'border-red-500' }}">
 
                                 <span class="font-bold text-sm
                                     {{ $isGood ? 'text-green-300' : 'text-red-300' }}">
-                                    ★ {{ $rating->score }}/5
+                                    {{ $rating->user->name }}
                                 </span>
                             </div>
-                        @empty
-                            <p class="text-blue-300/80 text-sm">No ratings yet.</p>
-                        @endforelse
+
+                            <span class="font-bold text-sm
+                                {{ $isGood ? 'text-green-300' : 'text-red-300' }}">
+                                ★ {{ $rating->score }}/5
+                            </span>
+                        </div>
+                    @empty
+                        <p class="text-blue-300/80 text-sm">No ratings yet.</p>
+                    @endforelse
                 </div>
 
                 {{-- DESKRIPSI --}}
@@ -78,10 +96,6 @@
                         {{ $profile->description ?? 'No description available.' }}
                     </p>
                 </div>
-
-                {{-- Logout Button --}}
-                @auth
-                @endauth
 
             </div>
         </div>

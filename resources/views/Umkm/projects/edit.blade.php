@@ -25,9 +25,9 @@
             </div>
 
             <!-- Kategori -->
-            <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                <select name="category" class="w-full border rounded-lg p-2" required>
+            <div class="mb-5">
+                <label class="block text-blue-200 font-medium mb-2">Kategori</label>
+                <select name="category" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900" required>
                     @foreach ([
                         'Branding',
                         'Design',
@@ -72,7 +72,7 @@
             <div class="grid grid-cols-3 gap-4 mb-5">
                 <div>
                     <label class="block text-blue-200 font-medium mb-2">Mata Uang</label>
-                    <select name="currency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar [&>option]:bg-slate-900 appearance-none cursor-pointer" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2393c5fd%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.2em;">
+                    <select name="currency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900">
                         <option value="IDR" {{ $project->currency == 'IDR' ? 'selected' : '' }} class="bg-slate-900">IDR (Rp)</option>
                         <option value="USD" {{ $project->currency == 'USD' ? 'selected' : '' }} class="bg-slate-900">USD ($)</option>
                     </select>
@@ -93,7 +93,7 @@
                 </div>
                 <div>
                     <label class="block text-blue-200 font-medium mb-2">Frekuensi</label>
-                    <select name="salary_frequency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar [&>option]:bg-slate-900">
+                    <select name="salary_frequency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900">
                         <option value="per_hour" {{ $project->salary_frequency == 'per_hour' ? 'selected' : '' }} class="bg-slate-900">Per Jam</option>
                         <option value="per_day" {{ $project->salary_frequency == 'per_day' ? 'selected' : '' }} class="bg-slate-900">Per Hari</option>
                         <option value="per_week" {{ $project->salary_frequency == 'per_week' ? 'selected' : '' }} class="bg-slate-900">Per Minggu</option>
@@ -180,6 +180,15 @@
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: rgba(147, 197, 253, 0.5);
+    }
+
+    /* Custom Select Arrow */
+    .custom-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2393c5fd%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.2em;
     }
 
     /* Style for the time picker icon */

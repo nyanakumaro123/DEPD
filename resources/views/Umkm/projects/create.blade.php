@@ -24,10 +24,10 @@
             </div>
 
             <!-- Kategori -->
-            <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                <select name="category" class="w-full border rounded-lg p-2" required>
-                    <option value="">-- Pilih Kategori --</option>
+            <div class="mb-5">
+                <label class="block text-blue-200 font-medium mb-2">Kategori</label>
+                <select name="category" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900" required>
+                    <option value="" class="bg-slate-900">-- Pilih Kategori --</option>
                     @foreach ([
                         'Branding',
                         'Design',
@@ -39,12 +39,12 @@
                         'Social Media',
                         'Finance'
                     ] as $cat)
-                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>
+                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }} class="bg-slate-900">
                             {{ $cat }}
                         </option>
                     @endforeach
                 </select>
-                @error('category') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                @error('category') <span class="text-red-400 text-sm mt-1 block">{{ $message }}</span> @enderror
             </div>
 
             <!-- Deskripsi -->
@@ -72,7 +72,7 @@
             <div class="grid grid-cols-3 gap-4 mb-5">
                 <div>
                     <label class="block text-blue-200 font-medium mb-2">Mata Uang</label>
-                    <select name="currency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar [&>option]:bg-slate-900">
+                    <select name="currency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900">
                         <option value="IDR" class="bg-slate-900">IDR (Rp)</option>
                         <option value="USD" class="bg-slate-900">USD ($)</option>
                     </select>
@@ -80,12 +80,21 @@
                 </div>
                 <div>
                     <label class="block text-blue-200 font-medium mb-2">Nominal Gaji</label>
-                    <input type="number" name="salary_amount" value="{{ old('salary_amount') }}" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white placeholder-blue-300/70 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar" required>
+                    <div class="relative flex items-center group">
+                        <button type="button" onclick="this.parentNode.querySelector('input').stepDown()" class="absolute left-1 p-2 text-blue-400 hover:text-blue-200 hover:bg-white/10 rounded-md transition z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" /></svg>
+                        </button>
+                        <input type="number" name="salary_amount" value="{{ old('salary_amount') }}" min="0" max="999999999"
+                            class="no-spinner w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-center text-white placeholder-blue-300/70 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Maks. 999.999.999" required>
+                        <button type="button" onclick="this.parentNode.querySelector('input').stepUp()" class="absolute right-1 p-2 text-blue-400 hover:text-blue-200 hover:bg-white/10 rounded-md transition z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        </button>
+                    </div>
                     @error('salary_amount') <span class="text-red-400 text-sm mt-1 block">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-blue-200 font-medium mb-2">Frekuensi</label>
-                    <select name="salary_frequency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar [&>option]:bg-slate-900">
+                    <select name="salary_frequency" class="w-full bg-white/5 border border-blue-400/50 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition custom-scrollbar custom-select cursor-pointer [&>option]:bg-slate-900">
                         <option value="total" class="bg-slate-900">Total Project</option>
                         <option value="per_hour" class="bg-slate-900">Per Jam</option>
                         <option value="per_day" class="bg-slate-900">Per Hari</option>
@@ -172,6 +181,25 @@
     input[type="time"]::-webkit-calendar-picker-indicator {
         filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(190deg) brightness(118%) contrast(119%);
         cursor: pointer;
+    }
+
+    /* Custom Select Arrow */
+    .custom-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2393c5fd%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.2em;
+    }
+
+    /* Hide default number arrows */
+    .no-spinner::-webkit-inner-spin-button,
+    .no-spinner::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .no-spinner {
+        -moz-appearance: textfield;
     }
 </style>
 @endsection
