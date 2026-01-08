@@ -47,16 +47,23 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="space-y-2">
                             <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Major</label>
-                            <select name="major_id"
-                                    class="w-full bg-white/10 backdrop-blur-lg border border-white/10 text-white font-semibold text-lg py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                                <option value="">-- Select Major --</option>
-                                @foreach ($majors as $major)
-                                    <option value="{{ $major->id }}"
-                                        {{ $profile->major_id == $major->id ? 'selected' : '' }}>
-                                        {{ $major->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="relative">
+                                <select name="major_id"
+                                        class="w-full bg-white/10 backdrop-blur-lg border border-white/10 text-white font-semibold text-lg py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 appearance-none cursor-pointer [&>option]:bg-slate-800">
+                                    <option value="">-- Select Major --</option>
+                                    @foreach ($majors as $major)
+                                        <option value="{{ $major->id }}"
+                                            {{ $profile->major_id == $major->id ? 'selected' : '' }}>
+                                            {{ $major->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                                    <svg class="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                         <div class="space-y-2">
                             <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Contact</label>
