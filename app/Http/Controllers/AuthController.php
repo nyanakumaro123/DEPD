@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UmkmProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -119,4 +120,58 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function destroy()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+
+        DB::transaction(function () use ($user) {
+
+            // ===== PELAMAR =====
+            if ($user->isPelamar()) {
+                $user->applications()->delete();
+                $user->pelamarProfile()?->delete();
+            }
+
+            // ===== UMKM =====
+            if ($user->isUmkm()) {
+                // delete projects (and their relations via cascade or manually)
+                foreach ($user->projects as $project) {
+                    $project->applications()?->delete();
+                    $project->delete();
+                }
+
+                $user->umkmProfile()?->delete();
+            }
+
+            // ===== COMMON =====
+            $user->notifications()->delete();
+
+            // finally delete user
+            $user->delete();
+        });
+
+        Auth::logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/')
+            ->with('success', 'Akun berhasil dihapus');
+    }
+
+//     <form action="{{ route('account.destroy') }}"
+//       method="POST"
+//       onsubmit="return confirm('Yakin ingin menghapus akun? Tindakan ini tidak bisa dibatalkan.')">
+//     @csrf
+//     @method('DELETE')
+
+//     <button class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg">
+//         Hapus Akun
+//     </button>
+// </form>
+
+
 }

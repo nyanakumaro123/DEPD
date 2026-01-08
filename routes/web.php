@@ -50,6 +50,9 @@ Route::post('/register-umkm', [AuthController::class, 'registerUmkm'])
     ->name('process.register.umkm');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::delete('/account', [AuthController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('account.destroy');
     
 
 // ================== PROFILE ==================

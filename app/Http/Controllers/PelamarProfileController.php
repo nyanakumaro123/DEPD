@@ -66,12 +66,13 @@ class PelamarProfileController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
         // Update major_id
         $profile->update(['major_id' => $validated['major_id'] ?? $profile->major_id]);
-        // Update phone
-        $profile->update(['phone' => $validated['phone'] ?? $profile->phone]);
+        // // Update phone
+        // $profile->update(['phone' => $validated['phone'] ?? $profile->phone]);
 
         // Handle profile photo upload (if present)
         if ($request->hasFile('profile_photo')) {
