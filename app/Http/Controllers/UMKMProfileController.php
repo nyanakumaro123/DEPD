@@ -71,6 +71,9 @@ class UMKMProfileController extends Controller
             ]
         );
 
+        $user->update([
+            'phone' => $request->phone,
+        ]);
 
         // Update UMKM data
         $profile->update([
