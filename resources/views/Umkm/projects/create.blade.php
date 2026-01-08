@@ -25,9 +25,9 @@
 
             <!-- Kategori -->
             <div class="mb-4">
-                <label class="block text-gray-700 font-medium mb-2">Kategori</label>
-                <select name="category" class="w-full border rounded-lg p-2" required>
-                    <option value="">-- Pilih Kategori --</option>
+                <label class="block text-blue-200 font-medium mb-2">Kategori</label>
+                <select name="category" class="w-full border rounded-lg p-2 border-blue-400/50 placeholder-blue-300/70 focus:ring-blue-500 text-white" required>
+                    <option value="" class="bg-slate-900">-- Pilih Kategori --</option>
                     @foreach ([
                         'Branding',
                         'Design',
@@ -39,7 +39,7 @@
                         'Social Media',
                         'Finance'
                     ] as $cat)
-                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }}>
+                        <option value="{{ $cat }}" {{ old('category') == $cat ? 'selected' : '' }} class="bg-slate-900">
                             {{ $cat }}
                         </option>
                     @endforeach

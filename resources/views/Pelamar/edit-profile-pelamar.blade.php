@@ -60,7 +60,7 @@
                         </div>
                         <div class="space-y-2">
                             <label class="block text-blue-200 text-sm font-semibold mb-2 ml-1">Contact</label>
-                            <input type="text" name="contact" value="08126523895" 
+                            <input type="text" name="phone" value="{{ $profile->user->phone }}" 
                                    class="w-full bg-white/10 backdrop-blur-lg border border-white/10 text-white font-semibold text-lg py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                         </div>
                         <div class="space-y-2">

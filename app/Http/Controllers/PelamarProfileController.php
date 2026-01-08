@@ -56,7 +56,7 @@ class PelamarProfileController extends Controller
             'name' => 'required|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'phone' => 'nullable|string|max:20'
+            'phone' => 'nullable|integer|max:20'
         ]);
 
         $profile = PelamarProfile::where('user_id', $userId)->firstOrFail();
@@ -66,6 +66,7 @@ class PelamarProfileController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
         // Update major_id
