@@ -7,7 +7,7 @@ use Illuminate\Http\Request; // Jangan lupa import ini
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; // Import Storage untuk file
 
-class UMKMProjectController extends Controller
+class UmkmProjectController extends Controller
 {
     public function index()
     {
